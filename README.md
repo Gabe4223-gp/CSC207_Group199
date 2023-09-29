@@ -39,3 +39,4 @@ The ultimate goal of this integrated notetaking and drawing application is to pr
 ![image](https://github.com/FionaYYX/CSC207_Group199/assets/69075231/dcf7352c-827c-40b8-8c8d-4307ce0643c8)
 
 -Output in java
+![image](https://github.com/FionaYYX/CSC207_Group199/assets/69075231/c78bb9f7-a8e5-4dc9-8ec3-8e760a3c637a)

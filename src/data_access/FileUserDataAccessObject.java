@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class FileUserDataAccessObject implements LoginDataAccessInterface {
 
-    private final File csvFile;
+//    private final File csvFile;
 
     private final Map<String, Integer> headers = new LinkedHashMap<>();
 

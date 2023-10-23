@@ -1,7 +1,6 @@
-package use_case.SaveNote;
+package use_case.save_note;
 
 import java.time.LocalDateTime;
-import java.util.SplittableRandom;
 
 public class SaveNoteInputData {
 

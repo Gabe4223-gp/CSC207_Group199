@@ -2,7 +2,7 @@ Whole Group Plan
 - Complete Login Use Case
 
 
-Fiona: Complete 
+Fiona: Complete DataAccessInterface + DataAccessObject
 Reeshav:
 Gabe: 
 Shujian: 

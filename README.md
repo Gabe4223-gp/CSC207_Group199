@@ -10,7 +10,7 @@ Key Features and Focus Areas:
 1. Synchronized Notetaking and Drawing Interface:
 The application provides a seamless and uninterrupte­d workflow by offering users a harmonious environment to effortlessly transition between taking textual notes and creating drawings.
 
-2. User. Intuitive Interface;
+2. Intuitive User Interface;
 
 The focus of the application will be, on providing a design that's easy to navigate and understand making it simple for users to create, edit and organize their notes and drawings.
 
@@ -39,3 +39,5 @@ The ultimate goal of this integrated notetaking and drawing application is to pr
 ![image](https://github.com/FionaYYX/CSC207_Group199/assets/69075231/dcf7352c-827c-40b8-8c8d-4307ce0643c8)
 
 -Output in java
+![image](https://github.com/FionaYYX/CSC207_Group199/assets/69075231/b6bff36f-ed2d-4057-a94d-8562c42171c2)
+

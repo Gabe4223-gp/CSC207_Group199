@@ -4,6 +4,6 @@ Whole Group Plan
 
 Fiona: Complete DataAccessInterface <br>
 Reeshav: <br>
-Gabe: <br>
+Gabe: Complete Login Controller <br>
 Shujian: <br>
 Frank: <br>

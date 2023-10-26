@@ -18,3 +18,4 @@ public class LoggedInState {
         this.username = username;
     }
 }
+

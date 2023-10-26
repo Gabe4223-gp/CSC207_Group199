@@ -8,12 +8,6 @@ import java.beans.PropertyChangeSupport;
 
 public class LoggedInViewModel extends ViewModel{
 
-    private static final String TITLE_LABEL = "Select your note";
-
-    private static final String TEXT_NOTE_LABEL = "Text Note";
-
-    private static final String DRAW_NOTE_LABEL = "Draw Note";
-
     private  LoggedInState loggedInState = new LoggedInState();
 
     public LoggedInViewModel() {

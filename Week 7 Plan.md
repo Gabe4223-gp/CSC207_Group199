@@ -6,4 +6,4 @@ Fiona: Finish setting up repo for group collaboration, Complete User, Complete D
 Reeshav: Login View, Login ViewModel<br> 
 Gabe: Complete Login Controller <br>
 Shujian: Complete LoginInputData, SignupInputData <br>
-Frank: Login Presenter, Login OutputBoundary, LoggedInState, LoggedInViewModel <br>
+Frank: <br>

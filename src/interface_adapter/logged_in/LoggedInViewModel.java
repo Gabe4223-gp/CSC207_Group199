@@ -10,6 +10,10 @@ public class LoggedInViewModel extends ViewModel{
 
     private  LoggedInState loggedInState = new LoggedInState();
 
+    private final static String TITLE_LABEL = "Select your note";
+    private final static String TEXT_NOTE_LABEL = "Text Note";
+    private final static String DRAW_NOTE_LABEL = "Draw Note";
+
     public LoggedInViewModel() {
         super(("Select your note"));
     }

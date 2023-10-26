@@ -5,5 +5,5 @@ Whole Group Plan
 Fiona: Finish setting up repo for group collaboration, Complete User, Complete DataAccessInterface <br>
 Reeshav: Login View, Login ViewModel<br> 
 Gabe: Complete Login Controller <br>
-Shujian: Complete LoginInputData, LoginInputBoundary, LoginOutputBoundary <br>
+Shujian: Complete LoginInputData, SignupInputData <br>
 Frank: <br>

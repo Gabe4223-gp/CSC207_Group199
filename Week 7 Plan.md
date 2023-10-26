@@ -3,7 +3,7 @@ Whole Group Plan
 
 
 Fiona: Complete DataAccessInterface <br>
-Reeshav: <br> Login View, Login ViewModel
+Reeshav: Login View, Login ViewModel<br> 
 Gabe: Complete Login Controller <br>
 Shujian: <br>
 Frank: <br>

@@ -15,6 +15,11 @@ import java.beans.PropertyChangeListener;
 
 public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "sign up";
+
+    public SignupView(){
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 

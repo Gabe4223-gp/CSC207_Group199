@@ -2,6 +2,7 @@ package app;
 
 import data_access.LoginUserDAO;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.draw_note.DrawNoteViewModel;
 import interface_adapter.logged_in.LoggedInController;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
@@ -32,6 +33,8 @@ public class Main {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
         NoteViewModel noteViewModel = new NoteViewModel();
+        DrawNoteViewModel drawNoteViewModel = new DrawNoteViewModel();
+
 
 
         //Data Access objects
@@ -51,7 +54,8 @@ public class Main {
         SignupView signupView = new SignupView();
         views.add(signupView, signupView.viewName);
 
-        LoggedInView loggedInView = new LoggedInView(loggedInViewModel, new LoggedInController());
+
+        LoggedInView loggedInView = LoginUseCaseFactory.createLoggedInView(loggedInViewModel,viewManagerModel,drawNoteViewModel,noteViewModel);
         views.add(loggedInView, loggedInView.viewName);
 
         NoteView noteView = new NoteView(noteViewModel, new NoteController());

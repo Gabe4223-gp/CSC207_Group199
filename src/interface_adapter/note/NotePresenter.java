@@ -14,6 +14,15 @@ public class NotePresenter implements SaveNoteOutputBoundary{
 
     @Override
     public void prepareSuccessView(SaveNoteOutputData saveNoteOutputData) {
-        NoteState noteState =
+        NoteState noteState = noteViewModel.getNoteState();
+        noteState.setFilename(saveNoteOutputData.getFilename());
+        noteState.setFile_txt(saveNoteOutputData.getFile_txt());
+        noteState.setUserFiles(saveNoteOutputData.getUserFiles());
+        noteState.setUsername(saveNoteOutputData.getUsername());
+        this.noteViewModel.setNoteState(noteState);
+        this.noteViewModel.firePropertyChange();
+
+        this.viewManagerModel.setActiveView(NoteViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 }

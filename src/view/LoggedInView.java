@@ -38,14 +38,15 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println("note btn clicked");
-                    }
+                        loggedInController.text_note_execute();
+                        System.out.println("note btn clicked");}
                 }
         );
         drawBtn.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        loggedInController.draw_note_execute();
                         System.out.println("draw btn clicked");
                     }
                 }

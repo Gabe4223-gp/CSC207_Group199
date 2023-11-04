@@ -1,7 +1,10 @@
-package interface_adapter.save_note;
+package interface_adapter.note;
 
 import use_case.save_note.SaveNoteInputData;
-import use_case.save_note.SaveNoteBoundary;
+import use_case.save_note.SaveNoteInputBoundary;
+
+import java.time.LocalDateTime;
+
 public class SaveNoteController {
     final SaveNoteInputBoundary saveNoteInteractor;
     public SaveNoteController(SaveNoteInputBoundary saveNoteInteractor) {
@@ -9,7 +12,7 @@ public class SaveNoteController {
     }
 
     public void execute(String username, String noteData, String fileName, LocalDateTime createdTime) {
-        SaveNoteInputData saveNoteInputData = new SaveNoteInputeData(username, noteData, fileName, createdTime);
-        saveNoteInteractor.execute(saveNoteInputData);
+        SaveNoteInputData saveNoteInputData = new SaveNoteInputData(username, noteData, fileName, createdTime);
+        saveNoteInteractor.saveFile(saveNoteInputData);
     }
 }

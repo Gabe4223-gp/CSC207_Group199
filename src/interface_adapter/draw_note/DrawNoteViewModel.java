@@ -1,31 +1,39 @@
 package interface_adapter.draw_note;
 
 import interface_adapter.ViewModel;
-import interface_adapter.logged_in.LoggedInState;
 
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class DrawNoteViewModel extends ViewModel {
 
-    public final String TITLE_LABEL = "Draw Note";
+    public final String TITLE = "Draw Notes";
 
-    public final String SAVE_LABEL = "Save";
+    public final String FILENAME_LBL = "Filename";
 
-    private DrawNoteState drawNoteState;
+    public final String USER_FILES_LBL = "All files";
+
+    public final String SAVE_BTN_LBL = "Save";
+
+    public final String NEW_BTN_LBL = "New";
+
+    private DrawNoteState drawNoteState = new DrawNoteState();
+
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public DrawNoteViewModel() {super("Draw Note");}
 
     @Override
     public void firePropertyChange() {
-
+        support.firePropertyChange("state", null, this.drawNoteState);
     }
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-
+        support.addPropertyChangeListener(listener);
     }
-    public void setState(DrawNoteState drawNoteState){this.drawNoteState = drawNoteState;}
+    public void setDrawState(DrawNoteState drawNoteState){this.drawNoteState = drawNoteState;}
 
-    public DrawNoteState getState(){
+    public DrawNoteState getDrawState(){
         return drawNoteState;
     }
 }

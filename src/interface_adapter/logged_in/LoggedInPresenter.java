@@ -35,8 +35,8 @@ public class LoggedInPresenter implements LoggedInOutputBoundary {
 
     @Override
     public void prepareDrawNoteView() {
-        DrawNoteState drawNoteState = drawNoteViewModel.getState();
-        this.drawNoteViewModel.setState(drawNoteState);
+        DrawNoteState drawNoteState = drawNoteViewModel.getDrawState();
+        this.drawNoteViewModel.setDrawState(drawNoteState);
         this.drawNoteViewModel.firePropertyChange();
 
         this.viewManagerModel.setActiveView(drawNoteViewModel.getViewName());

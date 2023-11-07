@@ -3,16 +3,16 @@ import use_case.logged_in.LoggedInInputBoundary;
 
 public class LoggedInController {
 
-    final LoggedInInputBoundary loggedInInputBoundary;
-    public LoggedInController(LoggedInInputBoundary loggedInInputBoundary){
-        this.loggedInInputBoundary = loggedInInputBoundary;
+    final LoggedInInputBoundary loggedInInteractor;
+    public LoggedInController(LoggedInInputBoundary loggedInInteractor){
+        this.loggedInInteractor = loggedInInteractor;
     }
 
-    public void text_note_execute(){
-        loggedInInputBoundary.text_note_execute();
+    public void text_note_execute(String username){
+        loggedInInteractor.text_note_execute(username);
     }
 
     public void draw_note_execute(){
-        loggedInInputBoundary.draw_note_execute();
+        loggedInInteractor.draw_note_execute();
     }
 }

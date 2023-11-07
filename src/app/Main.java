@@ -55,11 +55,14 @@ public class Main {
         views.add(signupView, signupView.viewName);
 
 
-        LoggedInView loggedInView = LoginUseCaseFactory.createLoggedInView(loggedInViewModel,viewManagerModel,drawNoteViewModel,noteViewModel);
+        LoggedInView loggedInView = LoginUseCaseFactory.createLoggedInView(loggedInViewModel,
+                viewManagerModel,
+                drawNoteViewModel,
+                noteViewModel);
         views.add(loggedInView, loggedInView.viewName);
 
         NoteView noteView = new NoteView(noteViewModel, new NoteController());
-        views.add(noteView);
+        views.add(noteView, noteView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);
         viewManagerModel.firePropertyChanged();

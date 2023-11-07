@@ -14,7 +14,7 @@ public class NoteViewModel extends ViewModel {
     public final String NEW_BTN_LBL = "New";
     private NoteState noteState = new NoteState();
     public NoteViewModel() {
-        super("Notes");
+        super("notes");
     }
 
     public void setNoteState(NoteState noteState){

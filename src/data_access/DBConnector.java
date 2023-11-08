@@ -1,10 +1,7 @@
 package data_access;
-import com.mysql.cj.xdevapi.JsonArray;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.sql.*;
-import java.time.*;
 
 public class DBConnector {
     private Connection connection;

@@ -29,7 +29,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     public LoginView(LoginViewModel loginViewModel, LoginController controller) {
         this.loginViewModel = loginViewModel;
         this.loginController = controller;
-
+        loginViewModel.addPropertyChangeListener(this);
         JLabel title = new JLabel(loginViewModel.TITLE);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         LabelTextPanel usernameInfo = new LabelTextPanel(
@@ -91,7 +91,15 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         LoginState state = (LoginState) evt.getNewValue();
-        usernameErrorField.setText(state.getUsername());
+        if(state.getUsernameError() != null){
+            JOptionPane.showMessageDialog(this,
+                    state.getUsernameError(),"Username Error", JOptionPane.ERROR_MESSAGE);
+        }
+        if (state.getPasswordError() != null){
+            JOptionPane.showMessageDialog(this,
+                    state.getPasswordError(),"Password Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     private boolean checkUsername(){

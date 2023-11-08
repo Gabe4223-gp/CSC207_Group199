@@ -1,5 +1,6 @@
 package app;
 
+import data_access.DBConnector;
 import data_access.LoginUserDAO;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.draw_note.DrawNoteViewModel;
@@ -37,13 +38,14 @@ public class Main {
         DrawNoteViewModel drawNoteViewModel = new DrawNoteViewModel();
 
 
+        DBConnector dbConnector = new DBConnector();
 
         //Data Access objects
-        LoginUserDAO loginUserDAO = new LoginUserDAO();
+        LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
+
         /*
          *TODO: create data access objects
          */
-
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel,
                 loginViewModel,
                 loggedInViewModel,

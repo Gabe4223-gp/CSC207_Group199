@@ -17,6 +17,7 @@ import java.awt.*;
 public class Main {
     public static void main(String[] args) {
 
+
         JFrame noDrawApp = new JFrame("NoDraw");
         noDrawApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 

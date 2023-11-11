@@ -26,4 +26,9 @@ public class LoginInteractor implements LoginInputBoundary {
             }
         }
     }
+
+    @Override
+    public void go_to_signup() {
+        loginPresenter.prepareSignupView();
+    }
 }

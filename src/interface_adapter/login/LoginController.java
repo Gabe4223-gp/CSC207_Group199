@@ -15,4 +15,7 @@ public class LoginController {
         LoginInputData loginInputData = new LoginInputData(username, password);
         loginInteractor.execute(loginInputData);
     }
+    public void signup_view(){
+        loginInteractor.go_to_signup();
+    }
 }

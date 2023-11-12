@@ -2,6 +2,7 @@ package app;
 
 import data_access.DBConnector;
 import data_access.LoginUserDAO;
+import data_access.SignupUserDAO;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.draw_note.DrawNoteViewModel;
 import interface_adapter.logged_in.LoggedInController;
@@ -43,18 +44,24 @@ public class Main {
         //Data Access objects
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
 
+        SignupUserDAO signupUserDAO = new SignupUserDAO();
+
         /*
          *TODO: create data access objects
          */
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel,
                 loginViewModel,
                 loggedInViewModel,
+                signupViewModel,
                 loginUserDAO);
         views.add(loginView, loginView.viewName);
 
 
 
-        SignupView signupView = new SignupView();
+        SignupView signupView = LoginUseCaseFactory.create(viewManagerModel,
+                signupViewModel,
+                loginViewModel,
+                signupUserDAO);
         views.add(signupView, signupView.viewName);
 
 

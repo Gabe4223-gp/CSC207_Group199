@@ -4,5 +4,8 @@ public interface LoginOutputBoundary {
     void prepareSuccessView(LoginOutputData user);
 
     void prepareUsernameFailView(String error);
+
     void preparePasswordFailView(String error);
+
+    void prepareSignupView();
 }

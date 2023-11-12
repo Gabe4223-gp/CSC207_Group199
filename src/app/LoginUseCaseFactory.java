@@ -1,6 +1,7 @@
 package app;
 
 import data_access.LoginUserDAO;
+import data_access.SignupUserDAO;
 import entity.Note;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.draw_note.DrawNoteViewModel;
@@ -11,29 +12,65 @@ import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.note.NoteViewModel;
+import interface_adapter.signup.SignupController;
+import interface_adapter.signup.SignupPresenter;
+import interface_adapter.signup.SignupViewModel;
 import use_case.logged_in.LoggedInInputBoundary;
 import use_case.logged_in.LoggedInInteractor;
 import use_case.logged_in.LoggedInOutputBoundary;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
+import use_case.signup.SignupDataAccessInterface;
+import use_case.signup.SignupInputBoundary;
+import use_case.signup.SignupInteractor;
+import use_case.signup.SignupOutputBoundary;
 import view.LoggedInView;
 import view.LoginView;
 import view.NoteView;
+import view.SignupView;
 
 public class LoginUseCaseFactory {
     private LoginUseCaseFactory(){}
+
+    public static SignupView create(ViewManagerModel viewManagerModel,
+                                    SignupViewModel signupViewModel,
+                                    LoginViewModel loginViewModel,
+                                    SignupUserDAO signupDataAccessInterface){
+        SignupController signupController = createSignupUseCase(
+                viewManagerModel,
+                signupViewModel,
+                loginViewModel,
+                signupDataAccessInterface
+        );
+        return new SignupView(signupController,signupViewModel);
+    }
+
+    private static SignupController createSignupUseCase(ViewManagerModel viewManagerModel,
+                                                        SignupViewModel signupViewModel,
+                                                        LoginViewModel loginViewModel,
+                                                        SignupUserDAO signupDataAccessInterface){
+        SignupOutputBoundary signupOutputBoundary = new SignupPresenter(
+                viewManagerModel,signupViewModel,loginViewModel
+        );
+        SignupInputBoundary signupInterator = new SignupInteractor(
+                signupDataAccessInterface,signupOutputBoundary
+        );
+        return new SignupController(signupInterator);
+    }
 
     public static LoginView create(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
             LoggedInViewModel loggedInViewModel,
+            SignupViewModel signupViewModel,
             LoginUserDAO loginUserDAO
     ){
         LoginController loginController = createLoginUseCase(
                 viewManagerModel,
                 loginViewModel,
                 loggedInViewModel,
+                signupViewModel,
                 loginUserDAO
         );
         return new LoginView(loginViewModel, loginController);
@@ -43,10 +80,11 @@ public class LoginUseCaseFactory {
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
             LoggedInViewModel loggedInViewModel,
+            SignupViewModel signupViewModel,
             LoginUserDAO loginUserDAO
     ){
         LoginOutputBoundary loginOutputBoundary = new LoginPresenter(
-                loggedInViewModel, loginViewModel,viewManagerModel
+                loggedInViewModel, loginViewModel,signupViewModel,viewManagerModel
         );
         LoginInputBoundary loginInteractor = new LoginInteractor(
                 loginUserDAO, loginOutputBoundary

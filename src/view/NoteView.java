@@ -1,6 +1,7 @@
 package view;
 
 import interface_adapter.note.NoteController;
+import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.events.MouseEvent;
@@ -22,12 +23,14 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private JTextArea textArea;
     final JButton save;
     final JButton newBtn;
+    final JButton deleteBtn;
     private final NoteController noteController;
 
     public NoteView(NoteViewModel noteViewModel, NoteController noteController) {
         this.noteViewModel = noteViewModel;
         this.noteController = noteController;
 
+        noteViewModel.addPropertyChangeListener(this);
         JLabel title = new JLabel(noteViewModel.TITLE);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         LabelTextPanel filenameInfo = new LabelTextPanel(
@@ -36,12 +39,33 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         JPanel buttons = new JPanel();
         save = new JButton(noteViewModel.SAVE_BTN_LBL);
         newBtn = new JButton(noteViewModel.NEW_BTN_LBL);
+        deleteBtn = new JButton(noteViewModel.DELETE_BTN_LBL);
+
+        /*
+        * Bind action listeners to the buttons
+        * */
+        save.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(e.getSource().equals(save)){
+                            NoteState currentNoteState = noteViewModel.getNoteState();
+                            currentNoteState.setFilename(filenameInput.getText());
+                            currentNoteState.setFile_txt(textArea.getText());
+                            //TODO: Continue here
+                        }
+                    }
+                }
+        );
+
+
         buttons.add(save);
         buttons.add(newBtn);
+        buttons.add(deleteBtn);
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
         JPanel panel2 = new JPanel();
-        JPanel fileList = getBtnLst();
+        JPanel fileList = getBtnLst(noteViewModel.getNoteState().getUserFiles());
 
         textArea = new JTextArea("Your Text Here");
         panel2.add(fileList);
@@ -55,7 +79,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     @NotNull
-    private static JPanel getBtnLst() {
+    private static JPanel getBtnLst(ArrayList<String> files) {
         ArrayList<String> fileList = new ArrayList<>();
         fileList.add("asf");
         fileList.add("hello");

@@ -24,11 +24,13 @@ public class LoggedInPresenter implements LoggedInOutputBoundary {
     }
 
     @Override
-    public void prepareTextNoteView() {
+    public void prepareTextNoteView(String username, String currentFilename, String filetxt) {
         NoteState textNoteState = textNoteViewModel.getNoteState();
+        textNoteState.setUsername(username);
+        textNoteState.setUsername(currentFilename);
+        textNoteState.setFile_txt(filetxt);
         this.textNoteViewModel.setNoteState(textNoteState);
         this.textNoteViewModel.firePropertyChange();
-
         this.viewManagerModel.setActiveView(textNoteViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }

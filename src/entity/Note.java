@@ -3,32 +3,25 @@ package entity;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
-public abstract class Note {
+public class Note {
 
     private String fileName;
 
     private LocalDateTime createdTime;
 
-    private User createdUser;
+    private String username;
 
-    public Note(String fileName, LocalDateTime createdTime, User createdUser) {
-
+    public Note(String fileName, LocalDateTime createdTime, String createdBy){
         this.fileName = fileName;
         this.createdTime = createdTime;
-        this. createdUser = createdUser;
-
+        this.username = createdBy;
     }
-
     public void setFileName(String newFileName) {
-        fileName = newFileName;
+        this.fileName = newFileName;
     }
 
     public void setCreatedTime(LocalDateTime newCreatedTime) {
-        createdTime = newCreatedTime;
-    }
-
-    public void setCreatedUser(User newCreatedUser) {
-        createdUser = newCreatedUser;
+        this.createdTime = newCreatedTime;
     }
 
     public String getFileName() {
@@ -39,8 +32,8 @@ public abstract class Note {
         return this.createdTime;
     }
 
-    public User getCreatedUser() {
-        return this.createdUser;
+    public String getCreatedUser() {
+        return this.username;
     }
 
 }

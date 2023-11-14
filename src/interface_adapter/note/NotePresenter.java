@@ -13,7 +13,7 @@ public class NotePresenter implements SaveNoteOutputBoundary{
     }
 
     @Override
-    public void prepareSuccessView(SaveNoteOutputData saveNoteOutputData) {
+    public void prepareSaveNoteSuccessView(SaveNoteOutputData saveNoteOutputData) {
         NoteState noteState = noteViewModel.getNoteState();
         noteState.setFilename(saveNoteOutputData.getFileName());
         noteState.setFile_txt(saveNoteOutputData.getFile_txt());
@@ -27,7 +27,7 @@ public class NotePresenter implements SaveNoteOutputBoundary{
     }
 
     @Override
-    public void prepareFailView(String error) {
+    public void prepareSaveNoteFailView(String error) {
 
     }
 }

@@ -33,7 +33,7 @@ import view.SignupView;
 public class LoginUseCaseFactory {
     private LoginUseCaseFactory(){}
 
-    public static SignupView create(ViewManagerModel viewManagerModel,
+    public static SignupView createSignupView(ViewManagerModel viewManagerModel,
                                     SignupViewModel signupViewModel,
                                     LoginViewModel loginViewModel,
                                     SignupUserDAO signupDataAccessInterface){
@@ -59,7 +59,7 @@ public class LoginUseCaseFactory {
         return new SignupController(signupInterator);
     }
 
-    public static LoginView create(
+    public static LoginView createLoginView(
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
             LoggedInViewModel loggedInViewModel,

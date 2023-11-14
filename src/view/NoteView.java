@@ -1,20 +1,17 @@
 package view;
 
-import interface_adapter.note.NoteController;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
+import interface_adapter.note.SaveNoteController;
 import org.jetbrains.annotations.NotNull;
-import org.w3c.dom.events.MouseEvent;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class NoteView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "notes";
@@ -24,15 +21,16 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     final JButton save;
     final JButton newBtn;
     final JButton deleteBtn;
-    private final NoteController noteController;
+    private final SaveNoteController noteController;
 
-    public NoteView(NoteViewModel noteViewModel, NoteController noteController) {
+    public NoteView(NoteViewModel noteViewModel, SaveNoteController noteController) {
         this.noteViewModel = noteViewModel;
         this.noteController = noteController;
 
         noteViewModel.addPropertyChangeListener(this);
         JLabel title = new JLabel(noteViewModel.TITLE);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        filenameInput.setText(noteViewModel.getNoteState().getFilename());
         LabelTextPanel filenameInfo = new LabelTextPanel(
                 new JLabel(noteViewModel.FILENAME_LBL), filenameInput
         );
@@ -52,7 +50,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             NoteState currentNoteState = noteViewModel.getNoteState();
                             currentNoteState.setFilename(filenameInput.getText());
                             currentNoteState.setFile_txt(textArea.getText());
-                            //TODO: Continue here
+
                         }
                     }
                 }
@@ -67,7 +65,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         JPanel panel2 = new JPanel();
         JPanel fileList = getBtnLst(noteViewModel.getNoteState().getUserFiles());
 
-        textArea = new JTextArea("Your Text Here");
+        textArea = new JTextArea(noteViewModel.getNoteState().getFile_txt());
         panel2.add(fileList);
         panel2.add(textArea);
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
@@ -75,7 +73,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         this.add(filenameInfo);
         this.add(buttons);
         this.add(panel2);
-
     }
 
     @NotNull

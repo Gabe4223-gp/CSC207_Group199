@@ -10,7 +10,10 @@ public class LoggedInInteractor implements LoggedInInputBoundary{
 
     @Override
     public void text_note_execute(String username) {
-        loggedInPresenter.prepareTextNoteView();
+        String filename = "";
+        String fileTxt = "";
+        //TODO: Get filename and file txt to give to the presenter
+        loggedInPresenter.prepareTextNoteView(username,filename,fileTxt);
     }
 
     @Override

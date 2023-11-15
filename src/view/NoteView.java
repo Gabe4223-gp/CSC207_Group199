@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.login.LoginState;
 import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
 import interface_adapter.note.SaveNoteController;
@@ -11,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class NoteView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -21,11 +23,13 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     final JButton save;
     final JButton newBtn;
     final JButton deleteBtn;
-    private final SaveNoteController noteController;
+    private JList fileList;
+    private JPanel fileListPanel;
+    private final SaveNoteController saveNoteController;
 
-    public NoteView(NoteViewModel noteViewModel, SaveNoteController noteController) {
+    public NoteView(NoteViewModel noteViewModel, SaveNoteController saveNoteController) {
         this.noteViewModel = noteViewModel;
-        this.noteController = noteController;
+        this.saveNoteController = saveNoteController;
 
         noteViewModel.addPropertyChangeListener(this);
         JLabel title = new JLabel(noteViewModel.TITLE);
@@ -50,7 +54,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                             NoteState currentNoteState = noteViewModel.getNoteState();
                             currentNoteState.setFilename(filenameInput.getText());
                             currentNoteState.setFile_txt(textArea.getText());
-
+                            saveNoteController.executeSaveNote(
+                                    currentNoteState.getUsername(),
+                                    currentNoteState.getFile_txt(),
+                                    currentNoteState.getFilename(),
+                                    LocalDateTime.now());
                         }
                     }
                 }
@@ -63,10 +71,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
         JPanel panel2 = new JPanel();
-        JPanel fileList = getBtnLst(noteViewModel.getNoteState().getUserFiles());
-
+        fileList = getBtnLst(noteViewModel.getNoteState().getUserFiles());
+        fileListPanel = new JPanel();
         textArea = new JTextArea(noteViewModel.getNoteState().getFile_txt());
-        panel2.add(fileList);
+        panel2.add(fileListPanel);
         panel2.add(textArea);
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
         this.add(title);
@@ -76,19 +84,13 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     @NotNull
-    private static JPanel getBtnLst(ArrayList<String> files) {
-        ArrayList<String> fileList = new ArrayList<>();
-        fileList.add("asf");
-        fileList.add("hello");
-        fileList.add("oh my");
+    private static JList getBtnLst(ArrayList<String> files) {
         DefaultListModel<String> jListModel = new DefaultListModel<>();
-        for(String s: fileList){
+        for(String s: files){
             jListModel.addElement(s);
         }
         JList<String> jList = new JList<>(jListModel);
-        JPanel retPanel = new JPanel();
-        retPanel.add(jList);
-        return retPanel;
+        return jList;
     }
 
 
@@ -99,6 +101,14 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        NoteState state = (NoteState) evt.getNewValue();
+         this.fileList = getBtnLst(state.getUserFiles());
+         fileListPanel.removeAll();
+         fileListPanel.add(this.fileList);
+         fileListPanel.updateUI();
+         this.textArea.setText(state.getFile_txt());
+         this.filenameInput.setText(state.getFilename());
+         this.validate();
+         this.repaint();
     }
 }

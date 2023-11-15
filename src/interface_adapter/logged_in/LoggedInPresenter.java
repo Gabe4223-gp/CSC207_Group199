@@ -7,6 +7,8 @@ import interface_adapter.note.NoteState;
 import interface_adapter.note.NoteViewModel;
 import use_case.logged_in.LoggedInOutputBoundary;
 
+import java.util.ArrayList;
+
 public class LoggedInPresenter implements LoggedInOutputBoundary {
 
     private final DrawNoteViewModel drawNoteViewModel;
@@ -24,11 +26,12 @@ public class LoggedInPresenter implements LoggedInOutputBoundary {
     }
 
     @Override
-    public void prepareTextNoteView(String username, String currentFilename, String filetxt) {
+    public void prepareTextNoteView(String username, String currentFilename, String filetxt, ArrayList<String> files) {
         NoteState textNoteState = textNoteViewModel.getNoteState();
         textNoteState.setUsername(username);
-        textNoteState.setUsername(currentFilename);
+        textNoteState.setFilename(currentFilename);
         textNoteState.setFile_txt(filetxt);
+        textNoteState.setUserFiles(files);
         this.textNoteViewModel.setNoteState(textNoteState);
         this.textNoteViewModel.firePropertyChange();
         this.viewManagerModel.setActiveView(textNoteViewModel.getViewName());

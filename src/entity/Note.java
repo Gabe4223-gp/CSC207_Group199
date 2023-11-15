@@ -1,9 +1,8 @@
 package entity;
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
-public class Note {
+public abstract class Note {
 
     private String fileName;
 

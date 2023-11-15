@@ -42,13 +42,11 @@ public class Main {
 
         //Data Access objects
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
-
         SignupUserDAO signupUserDAO = new SignupUserDAO();
         SaveNoteDAO saveNoteDAO = new SaveNoteDAO();
 
-        /*
-         *TODO: create data access objects
-         */
+
+
         LoginView loginView = LoginUseCaseFactory.createLoginView(viewManagerModel,
                 loginViewModel,
                 loggedInViewModel,

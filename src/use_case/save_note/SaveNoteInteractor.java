@@ -4,6 +4,8 @@ import data_access.SaveNoteDAO;
 import entity.Note;
 import entity.TextNote;
 
+import java.util.ArrayList;
+
 public class SaveNoteInteractor implements SaveNoteInputBoundary{
     SaveNoteOutputBoundary saveNotePresenter;
     private SaveNoteDAO saveNoteDAO;
@@ -20,10 +22,10 @@ public class SaveNoteInteractor implements SaveNoteInputBoundary{
         //SAVE NOTE DATA to file
         //get all user files
         //create saveNoteOutputData
-    }
+        ArrayList<String> files = new ArrayList<>();
+        SaveNoteOutputData saveNoteOutputData = new SaveNoteOutputData(thisNote.getFileName(),
+                thisNote.getFileTxt(), files, thisNote.getCreatedUser(), false);
 
-    @Override
-    public void makeFile(SaveNoteInputData saveNoteInputData) {
 
     }
 }

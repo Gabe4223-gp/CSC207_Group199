@@ -36,11 +36,12 @@ public class Main {
 
 
         DBConnector dbConnector = new DBConnector();
+        TextNoteWriter textNoteWriter = new TextNoteWriter();
 
         //Data Access objects
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
         SignupUserDAO signupUserDAO = new SignupUserDAO();
-        SaveNoteDAO saveNoteDAO = new SaveNoteDAO();
+        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriter);
         LoggedInDAO loggedInDAO = new LoggedInDAO();
 
 

@@ -3,6 +3,7 @@ package data_access;
 import entity.TextNote;
 import use_case.save_note.SaveNoteDataAccessInterface;
 
+import java.io.IOException;
 import java.util.ArrayList;
 //TODO: implement file writing in this class
 /**
@@ -10,9 +11,22 @@ import java.util.ArrayList;
  */
 public class SaveNoteDAO implements SaveNoteDataAccessInterface {
 
+    private final TextNoteWriter textNoteWriter;
+
+    public SaveNoteDAO(TextNoteWriter textNoteWriter){
+        this.textNoteWriter = textNoteWriter;
+    }
     @Override
     public boolean saveNote(TextNote textNote) {
-        return true;
+        try
+        {
+            this.textNoteWriter.writeDataToFile(textNote.getFileName(),
+                    textNote.getCreatedUser(),
+                    textNote.getFileTxt());
+            return true;
+        }catch (IOException e){
+            return false;
+        }
     }
 
     @Override

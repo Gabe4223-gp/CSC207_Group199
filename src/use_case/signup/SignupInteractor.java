@@ -20,13 +20,11 @@ public class SignupInteractor implements SignupInputBoundary {
             userPresenter.prepareFailView("User already exists.");
         }
         else {
-
             LocalDateTime now = LocalDateTime.now();
-            User user = new User();
+            User user = new User(signupInputData.getUsername(), signupInputData.getPassword());
             user.setUsername(signupInputData.getUsername());
             user.setPassword(signupInputData.getPassword());
             userDataAccessObject.save(user);
-
             SignupOutputData signupOutputData = new SignupOutputData(user.getUsername(), false);
             userPresenter.prepareSuccessView(signupOutputData);
         }

@@ -1,6 +1,6 @@
 package use_case.save_note;
 
 public interface SaveNoteOutputBoundary {
-    void prepareSuccessView(SaveNoteOutputData fileName);
-    void prepareFailView(String error);
+    void prepareSaveNoteSuccessView(SaveNoteOutputData fileName);
+    void prepareSaveNoteFailView(String error);
 }

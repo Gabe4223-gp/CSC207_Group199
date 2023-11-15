@@ -2,6 +2,9 @@ package use_case.save_note;
 
 import java.time.LocalDateTime;
 
+/**
+ * The data storage class for note view that saves the current data from the note view.
+ */
 public class SaveNoteInputData {
 
     final private String username;

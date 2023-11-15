@@ -1,9 +1,6 @@
 package app;
 
-import data_access.DBConnector;
-import data_access.LoginUserDAO;
-import data_access.SaveNoteDAO;
-import data_access.SignupUserDAO;
+import data_access.*;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.draw_note.DrawNoteViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
@@ -44,7 +41,7 @@ public class Main {
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
         SignupUserDAO signupUserDAO = new SignupUserDAO();
         SaveNoteDAO saveNoteDAO = new SaveNoteDAO();
-
+        LoggedInDAO loggedInDAO = new LoggedInDAO();
 
 
         LoginView loginView = LoginUseCaseFactory.createLoginView(viewManagerModel,
@@ -64,7 +61,8 @@ public class Main {
         LoggedInView loggedInView = LoginUseCaseFactory.createLoggedInView(loggedInViewModel,
                 viewManagerModel,
                 drawNoteViewModel,
-                noteViewModel);
+                noteViewModel,
+                loggedInDAO);
         views.add(loggedInView, loggedInView.viewName);
 
         NoteView noteView = NotesUseCaseFactory.createNoteView(noteViewModel,viewManagerModel, saveNoteDAO);

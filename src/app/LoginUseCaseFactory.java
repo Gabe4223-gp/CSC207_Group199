@@ -1,5 +1,6 @@
 package app;
 
+import data_access.LoggedInDAO;
 import data_access.LoginUserDAO;
 import data_access.SignupUserDAO;
 import entity.Note;
@@ -93,17 +94,23 @@ public class LoginUseCaseFactory {
     }
 
     public static LoggedInView createLoggedInView(LoggedInViewModel loggedInViewModel,
-                                           ViewManagerModel viewManagerModel,
-                                           DrawNoteViewModel drawNoteViewModel,
-                                           NoteViewModel noteViewModel){
-        LoggedInController loggedInController = createLoggedInController(viewManagerModel, noteViewModel, drawNoteViewModel);
+                                                  ViewManagerModel viewManagerModel,
+                                                  DrawNoteViewModel drawNoteViewModel,
+                                                  NoteViewModel noteViewModel,
+                                                  LoggedInDAO loggedInDAO){
+        LoggedInController loggedInController =
+                createLoggedInController(viewManagerModel, noteViewModel, drawNoteViewModel, loggedInDAO);
         return new LoggedInView(loggedInViewModel, loggedInController);
 
     }
     private static LoggedInController createLoggedInController(ViewManagerModel viewManagerModel,
-                                                               NoteViewModel noteViewModel, DrawNoteViewModel drawNoteViewModel){
-        LoggedInOutputBoundary loggedInOutputBoundary = new LoggedInPresenter(drawNoteViewModel, noteViewModel, viewManagerModel);
-        LoggedInInputBoundary loggedInInteractor = new LoggedInInteractor(loggedInOutputBoundary);
+                                                               NoteViewModel noteViewModel,
+                                                               DrawNoteViewModel drawNoteViewModel,
+                                                               LoggedInDAO loggedInDAO){
+        LoggedInOutputBoundary loggedInOutputBoundary =
+                new LoggedInPresenter(drawNoteViewModel, noteViewModel, viewManagerModel);
+        LoggedInInputBoundary loggedInInteractor =
+                new LoggedInInteractor(loggedInOutputBoundary, loggedInDAO);
         return new LoggedInController(loggedInInteractor);
     }
 }

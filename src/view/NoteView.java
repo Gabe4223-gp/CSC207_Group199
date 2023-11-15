@@ -81,6 +81,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         this.add(filenameInfo);
         this.add(buttons);
         this.add(panel2);
+        noteViewModel.firePropertyChange();
     }
 
     @NotNull
@@ -102,13 +103,11 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         NoteState state = (NoteState) evt.getNewValue();
-         this.fileList = getBtnLst(state.getUserFiles());
-         fileListPanel.removeAll();
-         fileListPanel.add(this.fileList);
-         fileListPanel.updateUI();
-         this.textArea.setText(state.getFile_txt());
-         this.filenameInput.setText(state.getFilename());
-         this.validate();
-         this.repaint();
+        this.fileList = getBtnLst(state.getUserFiles());
+        this.fileListPanel.removeAll();
+        this.fileListPanel.add(this.fileList);
+        this.fileListPanel.updateUI();
+        this.textArea.setText(state.getFile_txt());
+        this.filenameInput.setText(state.getFilename());
     }
 }

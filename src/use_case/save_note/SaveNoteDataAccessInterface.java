@@ -2,6 +2,8 @@ package use_case.save_note;
 
 import entity.TextNote;
 
+import java.util.ArrayList;
+
 
 /**
  * Interface for saving a TextNote
@@ -15,4 +17,5 @@ public interface SaveNoteDataAccessInterface {
      */
     boolean saveNote(TextNote textNote);
 
+    ArrayList<String> getAllUserFiles(String Username);
 }

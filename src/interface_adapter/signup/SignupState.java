@@ -7,6 +7,7 @@ public class SignupState {
     private String passwordError = null;
     private String repeatPassword = "";
     private String repeatPasswordError = null;
+    private String message = "";
 
     public SignupState(SignupState copy) {
         username = copy.username;
@@ -15,6 +16,7 @@ public class SignupState {
         passwordError = copy.passwordError;
         repeatPassword = copy.repeatPassword;
         repeatPasswordError = copy.repeatPasswordError;
+        message = copy.message;
     }
 
     public SignupState() {
@@ -30,10 +32,6 @@ public class SignupState {
 
     public String getPassword() {
         return password;
-    }
-
-    public String getPasswordError() {
-        return passwordError;
     }
 
     public String getRepeatPassword() {
@@ -56,10 +54,6 @@ public class SignupState {
         this.password = password;
     }
 
-    public void setPasswordError(String passwordError) {
-        this.passwordError = passwordError;
-    }
-
     public void setRepeatPassword(String repeatPassword) {
         this.repeatPassword = repeatPassword;
     }
@@ -67,5 +61,9 @@ public class SignupState {
     public void setRepeatPasswordError(String repeatPasswordError) {
         this.repeatPasswordError = repeatPasswordError;
     }
+
+    public void setSuccessMessage(String message){this.message = message;}
+
+    public String getSuccessMessage(){return message;}
 
 }

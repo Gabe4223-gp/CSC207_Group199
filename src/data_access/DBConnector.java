@@ -76,7 +76,6 @@ public class DBConnector {
             System.out.println(e);
             return false;
         }
-
     }
 
     public boolean existsByName(String username){

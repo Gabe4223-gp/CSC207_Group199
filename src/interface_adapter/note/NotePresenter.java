@@ -3,17 +3,22 @@ import interface_adapter.ViewManagerModel;
 import use_case.save_note.SaveNoteOutputBoundary;
 import use_case.save_note.SaveNoteOutputData;
 
+/**
+ * A Presenter Class for note view that is responsible for changing the view after a
+ * save, edit or delete action is performed by the User.
+ * Implements the SaveNoteOutputBoundary.
+ */
 public class NotePresenter implements SaveNoteOutputBoundary{
 
     private final NoteViewModel noteViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
     public NotePresenter(NoteViewModel noteViewModel, ViewManagerModel viewManagerModel) {
         this.noteViewModel = noteViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
     @Override
-    public void prepareSuccessView(SaveNoteOutputData saveNoteOutputData) {
+    public void prepareSaveNoteSuccessView(SaveNoteOutputData saveNoteOutputData) {
         NoteState noteState = noteViewModel.getNoteState();
         noteState.setFilename(saveNoteOutputData.getFileName());
         noteState.setFile_txt(saveNoteOutputData.getFile_txt());
@@ -27,7 +32,7 @@ public class NotePresenter implements SaveNoteOutputBoundary{
     }
 
     @Override
-    public void prepareFailView(String error) {
+    public void prepareSaveNoteFailView(String error) {
 
     }
 }

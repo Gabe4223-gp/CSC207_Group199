@@ -4,7 +4,7 @@ import entity.User;
 
 public interface LoginDataAccessInterface {
 
-    boolean checkLoginCredentials(String username, String password);
+    boolean checkLoginCredentials(User user);
 
-    boolean checkUserExists(String username);
+    boolean checkUserExists(User user);
 }

@@ -1,5 +1,7 @@
 package use_case.signup;
 
+import data_access.LoginUserDAO;
+import data_access.SignupUserDAO;
 import entity.User;
 
 
@@ -7,24 +9,22 @@ public class SignupInteractor implements SignupInputBoundary {
     final SignupDataAccessInterface userDataAccessObject;
     final SignupOutputBoundary userPresenter;
 
-    public SignupInteractor(SignupDataAccessInterface signupDataAccessInterface,
+    public SignupInteractor(SignupUserDAO signupUserDAO,
                             SignupOutputBoundary signupOutputBoundary) {
-        this.userDataAccessObject = signupDataAccessInterface;
+        this.userDataAccessObject = signupUserDAO;
         this.userPresenter = signupOutputBoundary;
     }
 
     @Override
     public void execute(SignupInputData signupInputData) {
-        if (userDataAccessObject.existsByName(signupInputData.getUsername())) {
+        if (this.userDataAccessObject.existsByName(signupInputData.getUsername())) {
             userPresenter.prepareFailView("User already exists.");
         }else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match.");
         }else {
 
-            User user = new User();
-            user.setUsername(signupInputData.getUsername());
-            user.setPassword(signupInputData.getPassword());
-            userDataAccessObject.save(user);
+            User user = new User(signupInputData.getUsername(), signupInputData.getPassword());
+            this.userDataAccessObject.save(user);
             userPresenter.prepareSuccessView("Successfully create a user");
         }
     }

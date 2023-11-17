@@ -38,12 +38,12 @@ public class Main {
         DBConnector dbConnector = new DBConnector();
         TextNoteWriter textNoteWriter = new TextNoteWriter();
 
-        //Data Access objects
+        //Data Access objectsx
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
-        SignupUserDAO signupUserDAO = new SignupUserDAO();
+
+        SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector);
         SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriter);
         LoggedInDAO loggedInDAO = new LoggedInDAO();
-
 
         LoginView loginView = LoginUseCaseFactory.createLoginView(viewManagerModel,
                 loginViewModel,

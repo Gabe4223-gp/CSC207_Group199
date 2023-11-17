@@ -5,7 +5,7 @@ import use_case.signup.SignupInputData;
 
 public class SignupController {
 
-    private SignupInputBoundary signupInteractor;
+    final SignupInputBoundary signupInteractor;
 
     public SignupController(SignupInputBoundary signupInteractor){
         this.signupInteractor = signupInteractor;

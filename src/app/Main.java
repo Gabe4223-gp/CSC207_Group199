@@ -41,10 +41,10 @@ public class Main {
 
         DBConnector dbConnector = new DBConnector();
 
-        //Data Access objects
+        //Data Access objectsx
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
 
-        SignupUserDAO signupUserDAO = new SignupUserDAO();
+        SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector);
 
         /*
          *TODO: create data access objects

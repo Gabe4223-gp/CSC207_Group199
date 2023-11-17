@@ -11,8 +11,8 @@ public class DBConnector {
         String username = "sql5659838";
         String password = "VesMSHc6rx";
         try {
-            connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();
+            this.connection = DriverManager.getConnection(url, username, password);
+            Statement statement = this.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Users");
 
             /*
@@ -77,6 +77,11 @@ public class DBConnector {
             return false;
         }
 
+    }
+
+    public boolean existsByName(String username){
+        JSONObject userObj = getUserObj(username);
+        return !(userObj == null);
     }
 
     public void DBClose() throws SQLException {

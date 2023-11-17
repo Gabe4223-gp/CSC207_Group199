@@ -11,7 +11,7 @@ public class SaveNoteController {
         this.saveNoteInteractor =saveNoteInteractor;
     }
 
-    public void execute(String username, String noteData, String fileName, LocalDateTime createdTime) {
+    public void executeSaveNote(String username, String noteData, String fileName, LocalDateTime createdTime) {
         SaveNoteInputData saveNoteInputData = new SaveNoteInputData(username, noteData, fileName, createdTime);
         saveNoteInteractor.saveFile(saveNoteInputData);
     }

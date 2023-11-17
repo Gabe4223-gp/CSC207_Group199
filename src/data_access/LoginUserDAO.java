@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.User;
 import use_case.login.LoginDataAccessInterface;
 
 public class LoginUserDAO implements LoginDataAccessInterface {
@@ -9,12 +10,12 @@ public class LoginUserDAO implements LoginDataAccessInterface {
     }
 
     @Override
-    public boolean checkLoginCredentials(String username, String password){
-        return this.dbConnector.checkLoginCredentials(username,password);
+    public boolean checkLoginCredentials(User user){
+        return this.dbConnector.checkLoginCredentials(user.getUsername(), user.getPassword());
     }
 
     @Override
-    public boolean checkUserExists(String username){
-        return this.dbConnector.getUserObj(username) != null;
+    public boolean checkUserExists(User user){
+        return this.dbConnector.getUserObj(user.getUsername()) != null;
     }
 }

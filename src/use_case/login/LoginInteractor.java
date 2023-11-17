@@ -1,6 +1,7 @@
 package use_case.login;
 
 import data_access.LoginUserDAO;
+import entity.User;
 
 public class LoginInteractor implements LoginInputBoundary {
 
@@ -13,13 +14,14 @@ public class LoginInteractor implements LoginInputBoundary {
     }
     @Override
     public void execute(LoginInputData loginInputData) {
+        User thisUser = new User(loginInputData.getUsername(), loginInputData.getPassword());
         boolean loginSuccess = this.loginUserDAO.
-                checkLoginCredentials(loginInputData.getUsername(), loginInputData.getPassword());
+                checkLoginCredentials(thisUser);
         if(loginSuccess){
-            LoginOutputData loginOutputData = new LoginOutputData(loginInputData.getUsername(),false);
+            LoginOutputData loginOutputData = new LoginOutputData(thisUser.getUsername(),false);
             loginPresenter.prepareSuccessView(loginOutputData);
         }else {
-            if (this.loginUserDAO.checkUserExists(loginInputData.getUsername())){
+            if (this.loginUserDAO.checkUserExists(thisUser)){
                 loginPresenter.preparePasswordFailView("Wrong Password");
             }else {
                 loginPresenter.prepareUsernameFailView("User does not exist");

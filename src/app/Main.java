@@ -1,14 +1,10 @@
 package app;
 
-import data_access.DBConnector;
-import data_access.LoginUserDAO;
-import data_access.SignupUserDAO;
+import data_access.*;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.draw_note.DrawNoteViewModel;
-import interface_adapter.logged_in.LoggedInController;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.note.NoteController;
 import interface_adapter.note.NoteViewModel;
 import interface_adapter.signup.SignupViewModel;
 import view.*;
@@ -40,16 +36,16 @@ public class Main {
 
 
         DBConnector dbConnector = new DBConnector();
+        TextNoteWriter textNoteWriter = new TextNoteWriter();
 
         //Data Access objects
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
-
         SignupUserDAO signupUserDAO = new SignupUserDAO();
+        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriter);
+        LoggedInDAO loggedInDAO = new LoggedInDAO();
 
-        /*
-         *TODO: create data access objects
-         */
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel,
+
+        LoginView loginView = LoginUseCaseFactory.createLoginView(viewManagerModel,
                 loginViewModel,
                 loggedInViewModel,
                 signupViewModel,
@@ -57,21 +53,20 @@ public class Main {
         views.add(loginView, loginView.viewName);
 
 
-
-        SignupView signupView = LoginUseCaseFactory.create(viewManagerModel,
+        SignupView signupView = LoginUseCaseFactory.createSignupView(viewManagerModel,
                 signupViewModel,
                 loginViewModel,
                 signupUserDAO);
         views.add(signupView, signupView.viewName);
 
-
         LoggedInView loggedInView = LoginUseCaseFactory.createLoggedInView(loggedInViewModel,
                 viewManagerModel,
                 drawNoteViewModel,
-                noteViewModel);
+                noteViewModel,
+                loggedInDAO);
         views.add(loggedInView, loggedInView.viewName);
 
-        NoteView noteView = new NoteView(noteViewModel, new NoteController());
+        NoteView noteView = NotesUseCaseFactory.createNoteView(noteViewModel,viewManagerModel, saveNoteDAO);
         views.add(noteView, noteView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);

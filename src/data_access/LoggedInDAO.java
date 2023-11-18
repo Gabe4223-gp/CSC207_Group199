@@ -1,27 +1,33 @@
 package data_access;
 
+import data_access.file_read_write.AllUserFilesDAO;
 import entity.TextNote;
-import entity.User;
 import use_case.logged_in.LoggedInDataAccessInterface;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class LoggedInDAO implements LoggedInDataAccessInterface {
-
+    private final AllUserFilesDAO allUserFilesDAO;
+    public LoggedInDAO(AllUserFilesDAO allUserFilesDAO){
+        this.allUserFilesDAO = allUserFilesDAO;
+    }
     @Override
-    public ArrayList<String> getUserFiles(String Username) {
-        //TODO: get all files for the user
-        ArrayList<String> files = new ArrayList<>();
-        files.add("sdjghfc");
-        files.add("sdkjghfh");
-        return files;
+    public ArrayList<String> getUserFiles(String username) {
+        return this.allUserFilesDAO.getAllUserFiles(username);
     }
 
     @Override
     public TextNote getTextNote(String fileName, String user) {
-        //TODO: create a new text note from the given filename
-        TextNote retNote = new TextNote(fileName, LocalDateTime.now(), user,"dshmgfcvhdjgfjahgsdf");
+        String fileData = "";
+        try{
+            fileData = allUserFilesDAO.getFileData(user, fileName);
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+
+        TextNote retNote = new TextNote(fileName, LocalDateTime.now(), user,fileData);
         return retNote;
     }
 }

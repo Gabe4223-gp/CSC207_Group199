@@ -17,5 +17,5 @@ public interface SaveNoteDataAccessInterface {
      */
     boolean saveNote(TextNote textNote);
 
-    ArrayList<String> getAllUserFiles(String Username);
+    ArrayList<String> getAllUserFiles(String username);
 }

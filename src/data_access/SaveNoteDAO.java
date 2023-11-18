@@ -1,26 +1,29 @@
 package data_access;
 
+import data_access.file_read_write.AllUserFilesDAO;
+import data_access.file_read_write.TextNoteWriterDAO;
 import entity.TextNote;
 import use_case.save_note.SaveNoteDataAccessInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
-//TODO: implement file writing in this class
 /**
  * Class to write the given TextNote to a file
  */
 public class SaveNoteDAO implements SaveNoteDataAccessInterface {
 
-    private final TextNoteWriter textNoteWriter;
+    private final TextNoteWriterDAO textNoteWriterDAO;
+    private final AllUserFilesDAO allUserFilesDAO;
 
-    public SaveNoteDAO(TextNoteWriter textNoteWriter){
-        this.textNoteWriter = textNoteWriter;
+    public SaveNoteDAO(TextNoteWriterDAO textNoteWriterDAO, AllUserFilesDAO allUserFilesDAO){
+        this.textNoteWriterDAO = textNoteWriterDAO;
+        this.allUserFilesDAO = allUserFilesDAO;
     }
     @Override
     public boolean saveNote(TextNote textNote) {
         try
         {
-            this.textNoteWriter.writeDataToFile(textNote.getFileName(),
+            this.textNoteWriterDAO.writeDataToFile(textNote.getFileName(),
                     textNote.getCreatedUser(),
                     textNote.getFileTxt());
             return true;
@@ -30,7 +33,7 @@ public class SaveNoteDAO implements SaveNoteDataAccessInterface {
     }
 
     @Override
-    public ArrayList<String> getAllUserFiles(String Username) {
-        return new ArrayList<>();
+    public ArrayList<String> getAllUserFiles(String username) {
+        return allUserFilesDAO.getAllUserFiles(username);
     }
 }

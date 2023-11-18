@@ -4,13 +4,12 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
 import use_case.signup.SignupOutputBoundary;
-import use_case.signup.SignupOutputData;
 
 
 public class SignupPresenter implements SignupOutputBoundary {
     private final SignupViewModel signupViewModel;
     private final LoginViewModel loginViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     public SignupPresenter(ViewManagerModel viewManagerModel,
                            SignupViewModel signupViewModel,
@@ -21,23 +20,30 @@ public class SignupPresenter implements SignupOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(SignupOutputData user) {
+    public void prepareSuccessView(String message) {
+        SignupState signupState = signupViewModel.getSignupState();
+        signupState.setSuccessMessage(message);
+        signupViewModel.firePropertyChange();
 
     }
 
     @Override
     public void prepareFailView(String error) {
+        SignupState signupState = signupViewModel.getSignupState();
+        signupState.setUsernameError(error);
+        signupViewModel.firePropertyChange();
 
     }
 
     @Override
     public void prepareLoginView() {
-    LoginState loginState = loginViewModel.getLoginState();
-    this.loginViewModel.setLoginState(loginState);
-    this.loginViewModel.firePropertyChange();
+        LoginViewModel loginViewModel1 = new LoginViewModel();
+        LoginState loginState = loginViewModel1.getLoginState();
+        this.loginViewModel.setLoginState(loginState);
+        this.loginViewModel.firePropertyChange();
 
-    this.viewManagerModel.setActiveView(loginViewModel.getViewName());
-    this.viewManagerModel.firePropertyChanged();
+        this.viewManagerModel.setActiveView(loginViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
     }
 }
 

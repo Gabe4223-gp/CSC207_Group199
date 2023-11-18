@@ -1,6 +1,8 @@
 package app;
 
 import data_access.*;
+import data_access.file_read_write.AllUserFilesDAO;
+import data_access.file_read_write.TextNoteWriterDAO;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.draw_note.DrawNoteViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
@@ -36,13 +38,14 @@ public class Main {
 
 
         DBConnector dbConnector = new DBConnector();
-        TextNoteWriter textNoteWriter = new TextNoteWriter();
+        TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
+        AllUserFilesDAO allUserFilesDAO = new AllUserFilesDAO();
 
         //Data Access objects
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
-        SignupUserDAO signupUserDAO = new SignupUserDAO();
-        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriter);
-        LoggedInDAO loggedInDAO = new LoggedInDAO();
+        SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector);
+        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO);
+        LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO);
 
 
         LoginView loginView = LoginUseCaseFactory.createLoginView(viewManagerModel,

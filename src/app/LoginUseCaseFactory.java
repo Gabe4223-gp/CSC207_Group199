@@ -50,12 +50,12 @@ public class LoginUseCaseFactory {
     private static SignupController createSignupUseCase(ViewManagerModel viewManagerModel,
                                                         SignupViewModel signupViewModel,
                                                         LoginViewModel loginViewModel,
-                                                        SignupUserDAO signupDataAccessInterface){
+                                                        SignupUserDAO signupUserDAO){
         SignupOutputBoundary signupOutputBoundary = new SignupPresenter(
                 viewManagerModel,signupViewModel,loginViewModel
         );
         SignupInputBoundary signupInterator = new SignupInteractor(
-                signupDataAccessInterface,signupOutputBoundary
+                signupUserDAO,signupOutputBoundary
         );
         return new SignupController(signupInterator);
     }

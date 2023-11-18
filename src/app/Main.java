@@ -38,7 +38,8 @@ public class Main {
 
 
         DBConnector dbConnector = new DBConnector();
-        TextNoteWriter textNoteWriter = new TextNoteWriter();
+        TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
+        AllUserFilesDAO allUserFilesDAO = new AllUserFilesDAO();
 
         //Data Access objects
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);

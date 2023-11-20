@@ -5,11 +5,15 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBConnector {
     private Connection connection;
-    private JSONArray allUsers = new JSONArray();
+    private final JSONArray allUsers = new JSONArray();
+    private Logger logger;
     public DBConnector(){
+        logger = Logger.getLogger("DBConnectorLog");
         String url = "jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5659838";
         String username = "sql5659838";
         String password = "VesMSHc6rx";
@@ -34,7 +38,7 @@ public class DBConnector {
             }
 
         }catch (Exception e){
-            System.out.println(e);
+            this.logger.log(Level.WARNING, e.getMessage());
         }
     }
     public JSONObject getUserObj(String username){
@@ -53,12 +57,7 @@ public class DBConnector {
         if(userObj == null){
             return false;
         }else {
-            if (userObj.get("Password").equals(password)){
-                return true;
-            }
-            else {
-                return false;
-            }
+            return userObj.get("Password").equals(password);
         }
     }
 
@@ -76,17 +75,17 @@ public class DBConnector {
             insertStatement.execute(sqlQuery);
             return true;
         }catch (Exception e){
-            System.out.println(e);
+            this.logger.log(Level.WARNING, e.getMessage());
             return false;
         }
     }
 
     public boolean existsByName(String username){
         JSONObject userObj = getUserObj(username);
-        return !(userObj == null);
+        return (userObj != null);
     }
 
-    public void DBClose() throws SQLException {
+    public void dbClose() throws SQLException {
         this.connection.close();
     }
 }

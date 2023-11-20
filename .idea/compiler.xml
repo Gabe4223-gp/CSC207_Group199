@@ -9,5 +9,8 @@
         <module name="NoDraw" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="grade-api" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

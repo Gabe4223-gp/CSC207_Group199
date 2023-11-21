@@ -1,15 +1,15 @@
-package use_case.save_note;
+package use_case;
 
 import java.util.ArrayList;
 
-public class SaveNoteOutputData {
+public class NoteOutputData {
     private final String fileName;
     private final String file_txt;
     private final ArrayList<String> userFiles;
     private final String username;
     private boolean useCaseFailed;
 
-    public SaveNoteOutputData(String fileName, String file_txt, ArrayList<String> userFiles, String username, boolean useCaseFailed) {
+    public NoteOutputData(String fileName, String file_txt, ArrayList<String> userFiles, String username, boolean useCaseFailed) {
         this.fileName = fileName;
         this.file_txt = file_txt;
         this.userFiles = userFiles;

@@ -23,7 +23,7 @@ public class LoggedInDAO implements LoggedInDataAccessInterface {
         String fileData = "";
         try{
             fileData = allUserFilesDAO.getFileData(user, fileName);
-        }catch (IOException e){
+        }catch (Exception e){
             System.out.println(e.getMessage());
         }
 

@@ -16,7 +16,7 @@ public class DeleteNoteDAO implements DeleteNoteDataAccessInterface {
     }
     @Override
     public boolean deleteNote(String username, String filename) {
-
+        return false;
     }
     public ArrayList<String> getUserFiles(String username){
         return this.allUserFilesDAO.getAllUserFiles(username);

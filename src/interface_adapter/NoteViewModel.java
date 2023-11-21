@@ -1,5 +1,6 @@
-package interface_adapter.note;
+package interface_adapter;
 
+import interface_adapter.NoteState;
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;

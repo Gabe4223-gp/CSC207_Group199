@@ -1,9 +1,9 @@
 package view;
 
-import interface_adapter.login.LoginState;
-import interface_adapter.note.NoteState;
-import interface_adapter.note.NoteViewModel;
-import interface_adapter.note.SaveNoteController;
+import interface_adapter.delete_note.DeleteNoteController;
+import interface_adapter.NoteState;
+import interface_adapter.NoteViewModel;
+import interface_adapter.save_note.SaveNoteController;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -23,13 +23,15 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     final JButton save;
     final JButton newBtn;
     final JButton deleteBtn;
-    private JList fileList;
+    private JList<String> fileList;
     private JPanel fileListPanel;
     private final SaveNoteController saveNoteController;
+    private final DeleteNoteController deleteNoteController;
 
-    public NoteView(NoteViewModel noteViewModel, SaveNoteController saveNoteController) {
+    public NoteView(NoteViewModel noteViewModel, SaveNoteController saveNoteController, DeleteNoteController deleteNoteController) {
         this.noteViewModel = noteViewModel;
         this.saveNoteController = saveNoteController;
+        this.deleteNoteController = deleteNoteController;
 
         noteViewModel.addPropertyChangeListener(this);
         JLabel title = new JLabel(noteViewModel.TITLE);
@@ -64,6 +66,21 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                 }
         );
 
+        deleteBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getSource().equals(deleteBtn)){
+                    NoteState currentNoteState = noteViewModel.getNoteState();
+                    currentNoteState.setFilename(filenameInput.getText());
+                    currentNoteState.setFilename(filenameInput.getText());
+                    currentNoteState.setFile_txt(textArea.getText());
+                    deleteNoteController.executeDeleteNote(
+                            currentNoteState.getUsername(),
+                            currentNoteState.getFilename()
+                    );
+                }
+            }
+        });
 
         buttons.add(save);
         buttons.add(newBtn);

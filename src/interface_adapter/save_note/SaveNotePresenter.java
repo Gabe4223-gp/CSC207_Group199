@@ -1,29 +1,31 @@
-package interface_adapter.note;
+package interface_adapter.save_note;
+import interface_adapter.NoteState;
+import interface_adapter.NoteViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.save_note.SaveNoteOutputBoundary;
-import use_case.save_note.SaveNoteOutputData;
+import use_case.NoteOutputData;
 
 /**
  * A Presenter Class for note view that is responsible for changing the view after a
  * save, edit or delete action is performed by the User.
  * Implements the SaveNoteOutputBoundary.
  */
-public class NotePresenter implements SaveNoteOutputBoundary{
+public class SaveNotePresenter implements SaveNoteOutputBoundary{
 
     private final NoteViewModel noteViewModel;
     private final ViewManagerModel viewManagerModel;
-    public NotePresenter(NoteViewModel noteViewModel, ViewManagerModel viewManagerModel) {
+    public SaveNotePresenter(NoteViewModel noteViewModel, ViewManagerModel viewManagerModel) {
         this.noteViewModel = noteViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
     @Override
-    public void prepareSaveNoteSuccessView(SaveNoteOutputData saveNoteOutputData) {
+    public void prepareSaveNoteSuccessView(NoteOutputData noteOutputData) {
         NoteState noteState = noteViewModel.getNoteState();
-        noteState.setFilename(saveNoteOutputData.getFileName());
-        noteState.setFile_txt(saveNoteOutputData.getFile_txt());
-        noteState.setUserFiles(saveNoteOutputData.getUserFiles());
-        noteState.setUsername(saveNoteOutputData.getUsername());
+        noteState.setFilename(noteOutputData.getFileName());
+        noteState.setFile_txt(noteOutputData.getFile_txt());
+        noteState.setUserFiles(noteOutputData.getUserFiles());
+        noteState.setUsername(noteOutputData.getUsername());
         this.noteViewModel.setNoteState(noteState);
         this.noteViewModel.firePropertyChange();
 

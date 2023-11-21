@@ -1,7 +1,5 @@
 package interface_adapter.logged_in;
 
-import interface_adapter.login.LoginState;
-
 public class LoggedInState {
 
     private String username = "";

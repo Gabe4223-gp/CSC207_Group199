@@ -23,7 +23,7 @@ public class SaveNotePresenter implements SaveNoteOutputBoundary{
     public void prepareSaveNoteSuccessView(NoteOutputData noteOutputData) {
         NoteState noteState = noteViewModel.getNoteState();
         noteState.setFilename(noteOutputData.getFileName());
-        noteState.setFile_txt(noteOutputData.getFile_txt());
+        noteState.setFileTxt(noteOutputData.getFile_txt());
         noteState.setUserFiles(noteOutputData.getUserFiles());
         noteState.setUsername(noteOutputData.getUsername());
         this.noteViewModel.setNoteState(noteState);
@@ -35,6 +35,6 @@ public class SaveNotePresenter implements SaveNoteOutputBoundary{
 
     @Override
     public void prepareSaveNoteFailView(String error) {
-
+        // TODO document why this method is empty
     }
 }

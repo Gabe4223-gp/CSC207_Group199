@@ -1,14 +1,11 @@
 package interface_adapter;
 
-import interface_adapter.NoteState;
-import interface_adapter.ViewModel;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class NoteViewModel extends ViewModel {
 
-    public String TITLE = "Notes";
+    public static final String TITLE = "Notes";
     public final String FILENAME_LBL = "Filename";
     public final String USER_FILES_LBL = "All files";
     public final String SAVE_BTN_LBL = "Save";

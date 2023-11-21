@@ -8,11 +8,11 @@ public class LoggedInController {
         this.loggedInInteractor = loggedInInteractor;
     }
 
-    public void text_note_execute(String username){
+    public void textNoteExecute(String username){
         loggedInInteractor.text_note_execute(username);
     }
 
-    public void draw_note_execute(){
+    public void drawNoteExecute(){
         loggedInInteractor.draw_note_execute();
     }
 }

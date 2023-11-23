@@ -1,8 +1,8 @@
 package view;
 
-import interface_adapter.delete_note.DeleteNoteController;
 import interface_adapter.NoteState;
 import interface_adapter.NoteViewModel;
+import interface_adapter.delete_note.DeleteNoteController;
 import interface_adapter.save_note.SaveNoteController;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,12 +19,12 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     public final String viewName = "notes";
     private final NoteViewModel noteViewModel;
     final JTextField filenameInput = new JTextField(15);
-    private JTextArea textArea;
+    private final JTextArea textArea;
     final JButton save;
     final JButton newBtn;
     final JButton deleteBtn;
     private JList<String> fileList;
-    private JPanel fileListPanel;
+    private final JPanel fileListPanel;
     private final SaveNoteController saveNoteController;
     private final DeleteNoteController deleteNoteController;
 
@@ -55,10 +55,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                         if(e.getSource().equals(save)){
                             NoteState currentNoteState = noteViewModel.getNoteState();
                             currentNoteState.setFilename(filenameInput.getText());
-                            currentNoteState.setFile_txt(textArea.getText());
+                            currentNoteState.setFileTxt(textArea.getText());
                             saveNoteController.executeSaveNote(
                                     currentNoteState.getUsername(),
-                                    currentNoteState.getFile_txt(),
+                                    currentNoteState.getFileTxt(),
                                     currentNoteState.getFilename(),
                                     LocalDateTime.now());
                         }
@@ -73,7 +73,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     NoteState currentNoteState = noteViewModel.getNoteState();
                     currentNoteState.setFilename(filenameInput.getText());
                     currentNoteState.setFilename(filenameInput.getText());
-                    currentNoteState.setFile_txt(textArea.getText());
+                    currentNoteState.setFileTxt(textArea.getText());
                     deleteNoteController.executeDeleteNote(
                             currentNoteState.getUsername(),
                             currentNoteState.getFilename()
@@ -90,7 +90,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         JPanel panel2 = new JPanel();
         fileList = getBtnLst(noteViewModel.getNoteState().getUserFiles());
         fileListPanel = new JPanel();
-        textArea = new JTextArea(noteViewModel.getNoteState().getFile_txt());
+        textArea = new JTextArea(noteViewModel.getNoteState().getFileTxt());
         panel2.add(fileListPanel);
         panel2.add(textArea);
         panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
@@ -102,19 +102,17 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     }
 
     @NotNull
-    private static JList getBtnLst(ArrayList<String> files) {
+    private static JList<String> getBtnLst(ArrayList<String> files) {
         DefaultListModel<String> jListModel = new DefaultListModel<>();
         for(String s: files){
             jListModel.addElement(s);
         }
-        JList<String> jList = new JList<>(jListModel);
-        return jList;
+        return new JList<>(jListModel);
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        // actionPerformed not used for this class
     }
 
     @Override
@@ -124,7 +122,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         this.fileListPanel.removeAll();
         this.fileListPanel.add(this.fileList);
         this.fileListPanel.updateUI();
-        this.textArea.setText(state.getFile_txt());
+        this.textArea.setText(state.getFileTxt());
         this.filenameInput.setText(state.getFilename());
     }
 }

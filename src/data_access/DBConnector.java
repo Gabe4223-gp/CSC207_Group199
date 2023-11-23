@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class DBConnector {
     private Connection connection;
     private final JSONArray allUsers = new JSONArray();
-    private Logger logger;
+    private final Logger logger;
     public DBConnector(){
         logger = Logger.getLogger("DBConnectorLog");
         String url = "jdbc:mysql://sql5.freemysqlhosting.net:3306/sql5659838";

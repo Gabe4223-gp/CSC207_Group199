@@ -70,7 +70,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        loginController.signup_view();
+                        loginController.signupView();
                         System.out.println("Clicked Sign Up");
                     }
                 }

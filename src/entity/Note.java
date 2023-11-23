@@ -10,7 +10,7 @@ public abstract class Note {
 
     private String username;
 
-    public Note(String fileName, LocalDateTime createdTime, String createdBy){
+    protected Note(String fileName, LocalDateTime createdTime, String createdBy){
         this.fileName = fileName;
         this.createdTime = createdTime;
         this.username = createdBy;

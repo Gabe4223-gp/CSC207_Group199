@@ -2,12 +2,12 @@ package app;
 
 import data_access.DeleteNoteDAO;
 import data_access.SaveNoteDAO;
+import interface_adapter.NoteViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.delete_note.DeleteNoteController;
 import interface_adapter.delete_note.DeleteNotePresenter;
-import interface_adapter.save_note.SaveNotePresenter;
-import interface_adapter.NoteViewModel;
 import interface_adapter.save_note.SaveNoteController;
+import interface_adapter.save_note.SaveNotePresenter;
 import use_case.delete_note.DeleteNoteInputBoundary;
 import use_case.delete_note.DeleteNoteInteractor;
 import use_case.delete_note.DeleteNoteOutputBoundary;

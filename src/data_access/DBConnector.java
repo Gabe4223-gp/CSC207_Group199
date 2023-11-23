@@ -21,11 +21,10 @@ public class DBConnector {
             this.connection = DriverManager.getConnection(url, username, password);
             Statement statement = this.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Users");
-
             /*
             * Convert the JDBC resultset to a JSONArray to be able to access data easily
             *
-            * */
+            */
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
             while (resultSet.next()){
                 int numColumns = resultSetMetaData.getColumnCount();
@@ -36,7 +35,6 @@ public class DBConnector {
                 }
                 allUsers.put(obj);
             }
-
         }catch (Exception e){
             this.logger.log(Level.WARNING, e.getMessage());
         }

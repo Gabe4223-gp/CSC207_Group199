@@ -3,8 +3,8 @@ package interface_adapter.logged_in;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.draw_note.DrawNoteViewModel;
 import interface_adapter.draw_note.DrawNoteState;
-import interface_adapter.note.NoteState;
-import interface_adapter.note.NoteViewModel;
+import interface_adapter.NoteState;
+import interface_adapter.NoteViewModel;
 import use_case.logged_in.LoggedInOutputBoundary;
 
 import java.util.ArrayList;

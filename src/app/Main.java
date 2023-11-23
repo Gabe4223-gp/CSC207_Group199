@@ -7,7 +7,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.draw_note.DrawNoteViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.note.NoteViewModel;
+import interface_adapter.NoteViewModel;
 import interface_adapter.signup.SignupViewModel;
 import view.*;
 
@@ -46,6 +46,7 @@ public class Main {
         SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector);
         SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO);
         LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO);
+        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO);
 
 
         LoginView loginView = LoginUseCaseFactory.createLoginView(viewManagerModel,
@@ -69,7 +70,7 @@ public class Main {
                 loggedInDAO);
         views.add(loggedInView, loggedInView.viewName);
 
-        NoteView noteView = NotesUseCaseFactory.createNoteView(noteViewModel,viewManagerModel, saveNoteDAO);
+        NoteView noteView = NotesUseCaseFactory.createNoteView(noteViewModel,viewManagerModel, saveNoteDAO, deleteNoteDAO);
         views.add(noteView, noteView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);

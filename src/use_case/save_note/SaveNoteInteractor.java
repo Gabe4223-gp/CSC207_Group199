@@ -1,6 +1,7 @@
 package use_case.save_note;
 
 import entity.TextNote;
+import use_case.NoteOutputData;
 
 import java.util.ArrayList;
 
@@ -25,16 +26,13 @@ public class SaveNoteInteractor implements SaveNoteInputBoundary{
         TextNote thisNote = new TextNote(saveNoteInputData.getFileName(),
                 saveNoteInputData.getCreatedTime(),
                 saveNoteInputData.getUsername(), saveNoteInputData.getNoteData());
-
         boolean saveSuccess = this.saveNoteDAO.saveNote(thisNote);
         ArrayList<String> files = this.saveNoteDAO.getAllUserFiles(thisNote.getCreatedUser());
         if (saveSuccess){
-            SaveNoteOutputData saveNoteOutputData = new SaveNoteOutputData(thisNote.getFileName(),
+            NoteOutputData noteOutputData = new NoteOutputData(thisNote.getFileName(),
                     thisNote.getFileTxt(), files, thisNote.getCreatedUser(), false);
-            this.saveNotePresenter.prepareSaveNoteSuccessView(saveNoteOutputData);
+            this.saveNotePresenter.prepareSaveNoteSuccessView(noteOutputData);
         }else {
-            SaveNoteOutputData saveNoteOutputData = new SaveNoteOutputData(thisNote.getFileName(),
-                    thisNote.getFileTxt(), files, thisNote.getCreatedUser(), true);
             this.saveNotePresenter.prepareSaveNoteFailView("Save Failed");
         }
     }

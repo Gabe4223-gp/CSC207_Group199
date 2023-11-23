@@ -8,8 +8,6 @@ import interface_adapter.select_note.SelectNoteController;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -94,11 +92,9 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         int index = fileList.getSelectedIndex();
-                        if (index != -1) {
-                            String filename = fileList.getSelectedValue();
-                            String username = noteViewModel.getNoteState().getUsername();
-                            selectNoteController.selectNote(filename, index, username);
-                        }
+                        String filename = fileList.getSelectedValue();
+                        String username = noteViewModel.getNoteState().getUsername();
+                        selectNoteController.selectNote(filename, index, username);
                     }
                 }
         );

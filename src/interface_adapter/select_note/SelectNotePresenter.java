@@ -6,7 +6,11 @@ import interface_adapter.ViewManagerModel;
 import use_case.select_note.SelectNoteOutputBoundary;
 import use_case.select_note.SelectNoteOutputData;
 
-
+/**
+ * A Presenter Class for note view that is responsible for changing the view after a
+ * save, edit, select or delete action is performed by the User.
+ * Implements the SelectNoteOutputBoundary.
+ */
 public class SelectNotePresenter implements SelectNoteOutputBoundary {
 
     private final NoteViewModel noteViewModel;
@@ -27,6 +31,7 @@ public class SelectNotePresenter implements SelectNoteOutputBoundary {
         NoteState noteState = noteViewModel.getNoteState();
         noteState.setFilename(selectNoteOutputData.getFilename());
         noteState.setFileTxt(selectNoteOutputData.getNoteData());
+        noteState.setError("");
         this.noteViewModel.setNoteState(noteState);
         this.noteViewModel.firePropertyChange();
 

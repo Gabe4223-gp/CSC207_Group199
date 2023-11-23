@@ -7,7 +7,7 @@ import use_case.NoteOutputData;
 
 /**
  * A Presenter Class for note view that is responsible for changing the view after a
- * save, edit or delete action is performed by the User.
+ * save, edit, select or delete action is performed by the User.
  * Implements the SaveNoteOutputBoundary.
  */
 public class SaveNotePresenter implements SaveNoteOutputBoundary{
@@ -35,6 +35,7 @@ public class SaveNotePresenter implements SaveNoteOutputBoundary{
 
     @Override
     public void prepareSaveNoteFailView(String error) {
-        // TODO document why this method is empty
+        // The note can always be saved to the database successfully and
+        // therefore the method for failed view is empty
     }
 }

@@ -16,8 +16,4 @@ public class SignupController {
         signupInteractor.execute(signupInputData);
     }
 
-    public void backToLogin(){
-        signupInteractor.back_to_login();
-    }
-
 }

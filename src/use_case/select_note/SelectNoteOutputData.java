@@ -1,5 +1,8 @@
 package use_case.select_note;
 
+/**
+ * The data storage class that saves the selected note from the database, filename and file text.
+ */
 public class SelectNoteOutputData {
     final private String filename;
     final private String note_data;

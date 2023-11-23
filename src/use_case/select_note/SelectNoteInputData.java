@@ -1,5 +1,8 @@
 package use_case.select_note;
 
+/**
+ * The data storage class for note view that saves the selected data from the note view.
+ */
 public class SelectNoteInputData {
     final private String filename;
     final private String username;

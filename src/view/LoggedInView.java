@@ -38,7 +38,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        loggedInController.text_note_execute(loggedInViewModel.getState().getUsername());
+                        loggedInController.textNoteExecute(loggedInViewModel.getState().getUsername());
                         System.out.println("note btn clicked");}
                 }
         );
@@ -46,7 +46,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        loggedInController.draw_note_execute();
+                        loggedInController.drawNoteExecute();
                         System.out.println("draw btn clicked");
                     }
                 }

@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class NoteState {
     private String username = "";
     private String filename = "";
-    private String file_txt = "";
+    private String fileTxt = "";
     private ArrayList<String> userFiles = new ArrayList<>();
 
     public NoteState(NoteState copy){
         this.username = copy.username;
         this.filename = copy.filename;
-        this.file_txt = copy.file_txt;
+        this.fileTxt = copy.fileTxt;
         this.userFiles = copy.userFiles;
     }
 
@@ -21,8 +21,8 @@ public class NoteState {
         return filename;
     }
 
-    public String getFile_txt() {
-        return file_txt;
+    public String getFileTxt() {
+        return fileTxt;
     }
 
     public ArrayList<String> getUserFiles() {
@@ -33,8 +33,8 @@ public class NoteState {
         this.filename = filename;
     }
 
-    public void setFile_txt(String file_txt) {
-        this.file_txt = file_txt;
+    public void setFileTxt(String fileTxt) {
+        this.fileTxt = fileTxt;
     }
 
     public void setUserFiles(ArrayList<String> userFiles) {

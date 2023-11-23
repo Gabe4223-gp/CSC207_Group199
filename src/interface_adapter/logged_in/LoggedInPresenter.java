@@ -30,7 +30,7 @@ public class LoggedInPresenter implements LoggedInOutputBoundary {
         NoteState textNoteState = textNoteViewModel.getNoteState();
         textNoteState.setUsername(username);
         textNoteState.setFilename(currentFilename);
-        textNoteState.setFile_txt(fileTxt);
+        textNoteState.setFileTxt(fileTxt);
         textNoteState.setUserFiles(files);
         this.textNoteViewModel.setNoteState(textNoteState);
         this.textNoteViewModel.firePropertyChange();

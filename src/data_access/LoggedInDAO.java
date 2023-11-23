@@ -3,8 +3,6 @@ package data_access;
 import data_access.file_read_write.AllUserFilesDAO;
 import entity.TextNote;
 import use_case.logged_in.LoggedInDataAccessInterface;
-
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -20,14 +18,12 @@ public class LoggedInDAO implements LoggedInDataAccessInterface {
 
     @Override
     public TextNote getTextNote(String fileName, String user) {
-        String fileData = "";
+        String fileData;
         try{
             fileData = allUserFilesDAO.getFileData(user, fileName);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+        }catch (Exception e){
+            fileData = "";
         }
-
-        TextNote retNote = new TextNote(fileName, LocalDateTime.now(), user,fileData);
-        return retNote;
+        return new TextNote(fileName, LocalDateTime.now(), user,fileData);
     }
 }

@@ -54,7 +54,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        signupController.back_to_login();
+                        signupController.backToLogin();
                         System.out.println("Back to log in");}
                 }
         );

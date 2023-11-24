@@ -1,5 +1,9 @@
 package use_case.select_note;
 
+import use_case.NoteOutputData;
+
+import java.util.ArrayList;
+
 /**
  * Select Note Use Case interactor to use the select note data access interface and tell the presenter to prepare success or
  * fail views.
@@ -29,8 +33,9 @@ public class SelectNoteInteractor implements SelectNoteInputBoundary{
         }
         else {
             String note_data = selectNoteDataAccessInterface.getSelectedNote(filename, index, username);
-            SelectNoteOutputData selectNoteOutputData = new SelectNoteOutputData(filename, note_data);
-            selectNotePresenter.prepareSelectSuccessfulView(selectNoteOutputData);
+            ArrayList<String> filelist = selectNoteDataAccessInterface.getAllFiles(username);
+            NoteOutputData noteOutputData = new NoteOutputData(filename, note_data, filelist, username, false );
+            selectNotePresenter.prepareSelectSuccessfulView(noteOutputData);
         }
     }
 }

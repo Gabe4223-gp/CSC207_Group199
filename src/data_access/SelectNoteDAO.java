@@ -19,4 +19,9 @@ public class SelectNoteDAO implements SelectNoteDataAccessInterface {
         ArrayList<String> Data = allUserFilesDAO.getAllUserFiles(username);
         return Data.get(index);
     }
+
+    @Override
+    public ArrayList<String> getAllFiles(String username) {
+        return allUserFilesDAO.getAllUserFiles(username);
+    }
 }

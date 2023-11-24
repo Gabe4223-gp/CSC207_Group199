@@ -30,7 +30,6 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final SaveNoteController saveNoteController;
     private final DeleteNoteController deleteNoteController;
     private final SelectNoteController selectNoteController;
-
     public NoteView(NoteViewModel noteViewModel, SaveNoteController saveNoteController, DeleteNoteController deleteNoteController, SelectNoteController selectNoteController) {
         this.noteViewModel = noteViewModel;
         this.saveNoteController = saveNoteController;

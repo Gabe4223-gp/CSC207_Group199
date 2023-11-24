@@ -1,41 +1,41 @@
-package interface_adapter.save_note;
+package interface_adapter.select_note;
+
 import interface_adapter.NoteState;
 import interface_adapter.NoteViewModel;
 import interface_adapter.ViewManagerModel;
-import use_case.save_note.SaveNoteOutputBoundary;
 import use_case.NoteOutputData;
+import use_case.select_note.SelectNoteOutputBoundary;
 
 /**
  * A Presenter Class for note view that is responsible for changing the view after a
  * save, edit, select or delete action is performed by the User.
- * Implements the SaveNoteOutputBoundary.
+ * Implements the SelectNoteOutputBoundary.
  */
-public class SaveNotePresenter implements SaveNoteOutputBoundary{
+public class SelectNotePresenter implements SelectNoteOutputBoundary {
 
     private final NoteViewModel noteViewModel;
     private final ViewManagerModel viewManagerModel;
-    public SaveNotePresenter(NoteViewModel noteViewModel, ViewManagerModel viewManagerModel) {
+    public SelectNotePresenter(NoteViewModel noteViewModel, ViewManagerModel viewManagerModel) {
         this.noteViewModel = noteViewModel;
         this.viewManagerModel = viewManagerModel;
     }
+    @Override
+    public void prepareSelectFailView(String error) {
+        NoteState noteState = noteViewModel.getNoteState();
+        noteState.setError(error);
+        noteViewModel.firePropertyChange();
+    }
 
     @Override
-    public void prepareSaveNoteSuccessView(NoteOutputData noteOutputData) {
+    public void prepareSelectSuccessfulView(NoteOutputData noteOutputData) {
         NoteState noteState = noteViewModel.getNoteState();
         noteState.setFilename(noteOutputData.getFileName());
         noteState.setFileTxt(noteOutputData.getFile_txt());
-        noteState.setUserFiles(noteOutputData.getUserFiles());
-        noteState.setUsername(noteOutputData.getUsername());
+        noteState.setError("");
         this.noteViewModel.setNoteState(noteState);
         this.noteViewModel.firePropertyChange();
 
         this.viewManagerModel.setActiveView(noteViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
-    }
-
-    @Override
-    public void prepareSaveNoteFailView(String error) {
-        // The note can always be saved to the database successfully and
-        // therefore the method for failed view is empty
     }
 }

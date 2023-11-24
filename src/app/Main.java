@@ -47,6 +47,7 @@ public class Main {
         SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO);
         LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO);
         DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO);
+        SelectNoteDAO selectNoteDAO = new SelectNoteDAO(allUserFilesDAO);
 
 
         LoginView loginView = LoginUseCaseFactory.createLoginView(viewManagerModel,
@@ -70,7 +71,7 @@ public class Main {
                 loggedInDAO);
         views.add(loggedInView, loggedInView.viewName);
 
-        NoteView noteView = NotesUseCaseFactory.createNoteView(noteViewModel,viewManagerModel, saveNoteDAO, deleteNoteDAO);
+        NoteView noteView = NotesUseCaseFactory.createNoteView(noteViewModel,viewManagerModel, saveNoteDAO, deleteNoteDAO, selectNoteDAO);
         views.add(noteView, noteView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);

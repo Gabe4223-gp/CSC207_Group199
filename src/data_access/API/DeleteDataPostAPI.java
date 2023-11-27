@@ -15,7 +15,7 @@ public class DeleteDataPostAPI extends DropBoxAPI {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.dropboxapi.com/2/files/delete_v2"))
-                .header("Authorization", "Bearer sl.BqOkyVZJOOt8aySCiTcunvi9NrA_88NfqOJw7fzF1RaK6GWaSJ3Zw_E7oe2vF5MqQgeAmsL2z9PciCSepia-FLVKYb-oPz48glcSoV0lHXGchLlYezWqU7SZSzTJgwvwC_zA7jdASjUBDI4YM6vCQDE")
+                .header("Authorization", "Bearer sl.Bqq-rMbDu9127dPnp1TuACKCB5NSOtoVcOSYT1A-ZcKIMB00AhnfEXWVjkLOtWZRXXx9Dd5_VaBAScvK14jU7OSCdxWAJzU0nJCSeqaWMNoheITdBG-TPrF6hkNImnDMnD-BsThIiQTZjafDl-33vB4")
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .build();

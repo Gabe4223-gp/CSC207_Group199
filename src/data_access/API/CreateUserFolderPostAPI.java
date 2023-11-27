@@ -16,7 +16,7 @@ public class CreateUserFolderPostAPI extends DropBoxAPI {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.dropboxapi.com/2/files/create_folder_v2"))
-                .header("Authorization", "Bearer sl.BqizVVT1RkFVdUJf9sEpfv-nsdEvxyqHODv10oxoMNwDdl6ed2K4vo0IRjFIHCjnxqH_7AYwwO1qu8PUTq-CQbdAIlt2BXbwGFQkn3Trllg5kYvCAgG80R9bv6OakCS1k6IXo3znoNawm3vRaoE-oZ0")
+                .header("Authorization", "Bearer sl.Bqq-rMbDu9127dPnp1TuACKCB5NSOtoVcOSYT1A-ZcKIMB00AhnfEXWVjkLOtWZRXXx9Dd5_VaBAScvK14jU7OSCdxWAJzU0nJCSeqaWMNoheITdBG-TPrF6hkNImnDMnD-BsThIiQTZjafDl-33vB4")
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .build();

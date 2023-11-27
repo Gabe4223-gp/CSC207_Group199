@@ -17,7 +17,7 @@ public class UploadUserFilePostAPI extends DropBoxAPI {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://content.dropboxapi.com/2/files/upload"))
-                .header("Authorization", "Bearer sl.BqS7NdIinYe3jAWStgz7TaKaHE9qWU1Oo5449PUI2OQgGhepcRS6ziaKjpSIpV94x5pH-tPClT40XOITQH7UhrDCkQOVapDkWj7-pa1iSN343YsqI5gh8hCLNI69ZyoFnRwcyZIeba3yCxfn4yuivog")
+                .header("Authorization", "Bearer sl.Bqq-rMbDu9127dPnp1TuACKCB5NSOtoVcOSYT1A-ZcKIMB00AhnfEXWVjkLOtWZRXXx9Dd5_VaBAScvK14jU7OSCdxWAJzU0nJCSeqaWMNoheITdBG-TPrF6hkNImnDMnD-BsThIiQTZjafDl-33vB4")
                 .header("Content-Type", "application/octet-stream")
                 .header("Dropbox-API-Arg", bodyText)
                 .POST(HttpRequest.BodyPublishers.ofString(textNote.getFileTxt()))

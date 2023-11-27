@@ -8,17 +8,22 @@ import java.util.ArrayList;
 public class DeleteNoteInteractor implements DeleteNoteInputBoundary {
     private DeleteNoteOutputBoundary deleteNotePresenter;
     private DeleteNoteDataAccessInterface deleteNoteDAO;
+    private DeleteFileAPIDataAccessInterface deleteFileAPIDAO;
 
-    public DeleteNoteInteractor(DeleteNoteOutputBoundary deleteNotePresenter, DeleteNoteDataAccessInterface deleteNoteDAO){
+    public DeleteNoteInteractor(DeleteNoteOutputBoundary deleteNotePresenter, DeleteNoteDataAccessInterface deleteNoteDAO,
+                                DeleteFileAPIDataAccessInterface deleteFileAPIDAO){
         this.deleteNoteDAO = deleteNoteDAO;
         this.deleteNotePresenter = deleteNotePresenter;
+        this.deleteFileAPIDAO = deleteFileAPIDAO;
     }
 
     @Override
     public void executeDeleteNote(DeleteNoteInputData deleteNoteInputData) {
         boolean deleteSuccess = this.deleteNoteDAO.deleteNote(deleteNoteInputData.getUsername(),
                 deleteNoteInputData.getFilename());
-        if(deleteSuccess){
+        boolean deleteAPISuccess = this.deleteFileAPIDAO.deleteUserFile(deleteNoteInputData.getUsername(),
+                deleteNoteInputData.getFilename());
+        if(deleteSuccess && deleteAPISuccess){
             ArrayList<String> userFiles = this.deleteNoteDAO.getUserFiles(deleteNoteInputData.getUsername());
             NoteOutputData noteOutputData;
             if(!userFiles.isEmpty()){

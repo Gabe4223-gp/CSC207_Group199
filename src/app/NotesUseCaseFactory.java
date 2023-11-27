@@ -51,7 +51,7 @@ public class NotesUseCaseFactory {
             DeleteNoteDAO deleteNoteDAO
     ){
         DeleteNoteOutputBoundary deleteNoteOutputBoundary = new DeleteNotePresenter(noteViewModel, viewManagerModel);
-        DeleteNoteInputBoundary deleteNoteInteractor = new DeleteNoteInteractor(deleteNoteOutputBoundary,deleteNoteDAO);
+        DeleteNoteInputBoundary deleteNoteInteractor = new DeleteNoteInteractor(deleteNoteOutputBoundary,deleteNoteDAO, deleteNoteDAO);
         return new DeleteNoteController(deleteNoteInteractor);
     }
 

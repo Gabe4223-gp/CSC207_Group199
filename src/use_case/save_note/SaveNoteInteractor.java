@@ -12,9 +12,12 @@ import java.util.ArrayList;
 public class SaveNoteInteractor implements SaveNoteInputBoundary{
     private final SaveNoteOutputBoundary saveNotePresenter;
     private final SaveNoteDataAccessInterface saveNoteDAO;
-    public SaveNoteInteractor(SaveNoteOutputBoundary saveNotePresenter, SaveNoteDataAccessInterface saveNoteDAO){
+    final UploadFileAPIDataAccessInterface saveAPIDAO;
+    public SaveNoteInteractor(SaveNoteOutputBoundary saveNotePresenter, SaveNoteDataAccessInterface saveNoteDAO,
+                              UploadFileAPIDataAccessInterface saveAPIDAO){
         this.saveNotePresenter = saveNotePresenter;
         this.saveNoteDAO = saveNoteDAO;
+        this.saveAPIDAO = saveAPIDAO;
     }
 
     /**
@@ -27,8 +30,9 @@ public class SaveNoteInteractor implements SaveNoteInputBoundary{
                 saveNoteInputData.getCreatedTime(),
                 saveNoteInputData.getUsername(), saveNoteInputData.getNoteData());
         boolean saveSuccess = this.saveNoteDAO.saveNote(thisNote);
+        boolean saveAPISuccess = this.saveAPIDAO.uploadUserFile(saveNoteInputData.getUsername(), thisNote);
         ArrayList<String> files = this.saveNoteDAO.getAllUserFiles(thisNote.getCreatedUser());
-        if (saveSuccess){
+        if (saveSuccess && saveAPISuccess){
             NoteOutputData noteOutputData = new NoteOutputData(thisNote.getFileName(),
                     thisNote.getFileTxt(), files, thisNote.getCreatedUser(), false);
             this.saveNotePresenter.prepareSaveNoteSuccessView(noteOutputData);

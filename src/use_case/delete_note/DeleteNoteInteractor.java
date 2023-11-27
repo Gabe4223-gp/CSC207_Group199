@@ -20,10 +20,17 @@ public class DeleteNoteInteractor implements DeleteNoteInputBoundary {
                 deleteNoteInputData.getFilename());
         if(deleteSuccess){
             ArrayList<String> userFiles = this.deleteNoteDAO.getUserFiles(deleteNoteInputData.getUsername());
-            String fileTxt = this.deleteNoteDAO.getFileData(deleteNoteInputData.getUsername(), deleteNoteInputData.getFilename());
-            NoteOutputData noteOutputData = new NoteOutputData(deleteNoteInputData.getFilename(),
-                    fileTxt,
-                    userFiles, deleteNoteInputData.getUsername(), false);
+            NoteOutputData noteOutputData;
+            if(!userFiles.isEmpty()){
+                String fileTxt = this.deleteNoteDAO.getFileData(deleteNoteInputData.getUsername(), userFiles.get(0));
+                noteOutputData = new NoteOutputData(userFiles.get(0),
+                        fileTxt,
+                        userFiles, deleteNoteInputData.getUsername(), false);
+            }else {
+                noteOutputData = new NoteOutputData("",
+                        "",
+                        new ArrayList<>(), deleteNoteInputData.getUsername(), false);
+            }
             this.deleteNotePresenter.prepareDeleteNoteSuccessView(noteOutputData);
         }else {
             this.deleteNotePresenter.prepareDeleteNoteFailView("Failed To delete:" + deleteNoteInputData.getFilename());

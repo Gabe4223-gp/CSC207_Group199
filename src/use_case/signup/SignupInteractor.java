@@ -1,26 +1,35 @@
 package use_case.signup;
 
-import data_access.LoginUserDAO;
-import data_access.SignupUserDAO;
 import entity.User;
 
+import java.time.LocalDateTime;
 
+/**
+ * Sign Up Use Case interactor to use the signup data access interface and tell the presenter to prepare success or
+ * fail views.
+ */
 public class SignupInteractor implements SignupInputBoundary {
     final SignupDataAccessInterface userDataAccessObject;
     final CreateUserAPIDataAccessInterface apiDataAccessInterface;
     final SignupOutputBoundary userPresenter;
 
-    public SignupInteractor(SignupUserDAO signupUserDAO,
-                            SignupOutputBoundary signupOutputBoundary) {
-        this.userDataAccessObject = signupUserDAO;
+    public SignupInteractor(SignupDataAccessInterface signupDataAccessInterface,
+                            SignupOutputBoundary signupOutputBoundary, CreateUserAPIDataAccessInterface signupAPIDAO) {
+        this.userDataAccessObject = signupDataAccessInterface;
         this.userPresenter = signupOutputBoundary;
-        this.apiDataAccessInterface = signupUserDAO;
+        this.apiDataAccessInterface = signupAPIDAO;
     }
 
+    /**
+     * Transfer the username, password, repeated password to database using the data access object, check whether
+     * the username is overlapped or passwords don't match
+     * prepare successful view or failed view according to above results
+     * @param signupInputData The input data from the controller to be used to save the user
+     */
     @Override
     public void execute(SignupInputData signupInputData) {
         boolean createUserAPI = this.apiDataAccessInterface.createUserFolder(signupInputData.getUsername());
-        if (this.userDataAccessObject.existsByName(signupInputData.getUsername())) {
+        if (this.userDataAccessObject.existsByName(signupInputData.getUsername().toLowerCase())) {
             userPresenter.prepareFailView("User already exists.");
         }else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match.");
@@ -28,14 +37,13 @@ public class SignupInteractor implements SignupInputBoundary {
             userPresenter.prepareFailView("Unable to generate user file.");
         }
         else {
-            User user = new User(signupInputData.getUsername(), signupInputData.getPassword());
+            User user = new User(signupInputData.getUsername().toLowerCase(), signupInputData.getPassword());
             this.userDataAccessObject.save(user);
-            userPresenter.prepareSuccessView("Successfully create a user");
+
+            LocalDateTime now = LocalDateTime.now();
+            SignupOutputData signupOutputData = new SignupOutputData(user.getUsername().toLowerCase(), now.toString());
+            userPresenter.prepareSuccessView(signupOutputData);
         }
     }
 
-    @Override
-    public void back_to_login() {
-        userPresenter.prepareLoginView();
-    }
 }

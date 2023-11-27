@@ -1,9 +1,10 @@
 package view;
 
+import interface_adapter.delete_note.DeleteNoteController;
 import interface_adapter.NoteState;
 import interface_adapter.NoteViewModel;
-import interface_adapter.delete_note.DeleteNoteController;
 import interface_adapter.save_note.SaveNoteController;
+import interface_adapter.select_note.SelectNoteController;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.beans.PropertyChangeListener;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class NoteView extends JPanel implements ActionListener, PropertyChangeListener {
+public class NoteView extends JPanel implements ActionListener, PropertyChangeListener{
     public final String viewName = "notes";
     private final NoteViewModel noteViewModel;
     final JTextField filenameInput = new JTextField(15);
@@ -23,15 +24,17 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     final JButton save;
     final JButton newBtn;
     final JButton deleteBtn;
+    final JButton select;
     private JList<String> fileList;
     private final JPanel fileListPanel;
     private final SaveNoteController saveNoteController;
     private final DeleteNoteController deleteNoteController;
-
-    public NoteView(NoteViewModel noteViewModel, SaveNoteController saveNoteController, DeleteNoteController deleteNoteController) {
+    private final SelectNoteController selectNoteController;
+    public NoteView(NoteViewModel noteViewModel, SaveNoteController saveNoteController, DeleteNoteController deleteNoteController, SelectNoteController selectNoteController) {
         this.noteViewModel = noteViewModel;
         this.saveNoteController = saveNoteController;
         this.deleteNoteController = deleteNoteController;
+        this.selectNoteController = selectNoteController;
 
         noteViewModel.addPropertyChangeListener(this);
         JLabel title = new JLabel(noteViewModel.TITLE);
@@ -44,6 +47,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         save = new JButton(noteViewModel.SAVE_BTN_LBL);
         newBtn = new JButton(noteViewModel.NEW_BTN_LBL);
         deleteBtn = new JButton(noteViewModel.DELETE_BTN_LBL);
+        select = new JButton(noteViewModel.SELECT_BTN_LBL);
 
         /*
         * Bind action listeners to the buttons
@@ -82,9 +86,22 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
             }
         });
 
+        select.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        int index = fileList.getSelectedIndex();
+                        String filename = fileList.getSelectedValue();
+                        String username = noteViewModel.getNoteState().getUsername();
+                        selectNoteController.selectNote(filename, index, username);
+                    }
+                }
+        );
+
         buttons.add(save);
         buttons.add(newBtn);
         buttons.add(deleteBtn);
+        buttons.add(select);
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
         JPanel panel2 = new JPanel();
@@ -110,6 +127,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         return new JList<>(jListModel);
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         // actionPerformed not used for this class
@@ -124,5 +142,10 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         this.fileListPanel.updateUI();
         this.textArea.setText(state.getFileTxt());
         this.filenameInput.setText(state.getFilename());
+
+        if (!state.getError().isEmpty()){
+            JOptionPane.showMessageDialog(this, state.getError());
+        }
     }
+
 }

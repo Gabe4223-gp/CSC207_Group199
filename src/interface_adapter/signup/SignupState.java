@@ -2,21 +2,15 @@ package interface_adapter.signup;
 
 public class SignupState {
     private String username = "";
-    private String usernameError = null;
     private String password = "";
-    private String passwordError = null;
     private String repeatPassword = "";
-    private String repeatPasswordError = null;
-    private String message = "";
+    private String error = "";
 
     public SignupState(SignupState copy) {
         username = copy.username;
-        usernameError = copy.usernameError;
         password = copy.password;
-        passwordError = copy.passwordError;
         repeatPassword = copy.repeatPassword;
-        repeatPasswordError = copy.repeatPasswordError;
-        message = copy.message;
+        error = copy.error;
     }
 
     public SignupState() {
@@ -24,10 +18,6 @@ public class SignupState {
 
     public String getUsername() {
         return username;
-    }
-
-    public String getUsernameError() {
-        return usernameError;
     }
 
     public String getPassword() {
@@ -38,16 +28,10 @@ public class SignupState {
         return repeatPassword;
     }
 
-    public String getRepeatPasswordError() {
-        return repeatPasswordError;
-    }
+    public String getError(){return error;}
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public void setUsernameError(String usernameError) {
-        this.usernameError = usernameError;
     }
 
     public void setPassword(String password) {
@@ -58,12 +42,6 @@ public class SignupState {
         this.repeatPassword = repeatPassword;
     }
 
-    public void setRepeatPasswordError(String repeatPasswordError) {
-        this.repeatPasswordError = repeatPasswordError;
-    }
-
-    public void setSuccessMessage(String message){this.message = message;}
-
-    public String getSuccessMessage(){return message;}
+   public void setError(String error){this.error = error;}
 
 }

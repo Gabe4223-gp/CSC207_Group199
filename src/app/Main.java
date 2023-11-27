@@ -4,6 +4,7 @@ import data_access.*;
 import data_access.API.CreateUserFolderPostAPI;
 import data_access.API.UploadUserFilePostAPI;
 import data_access.file_read_write.AllUserFilesDAO;
+import data_access.file_read_write.DeleteNoteWriterDAO;
 import data_access.file_read_write.TextNoteWriterDAO;
 import interface_adapter.NoteViewModel;
 import interface_adapter.ViewManagerModel;
@@ -42,6 +43,7 @@ public class Main {
         DBConnector dbConnector = new DBConnector();
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
         AllUserFilesDAO allUserFilesDAO = new AllUserFilesDAO();
+        DeleteNoteWriterDAO deleteNoteWriterDAO = new DeleteNoteWriterDAO();
         CreateUserFolderPostAPI createUserFolderPostAPI = new CreateUserFolderPostAPI();
         UploadUserFilePostAPI uploadUserFilePostAPI = new UploadUserFilePostAPI();
 
@@ -50,7 +52,8 @@ public class Main {
         SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector, createUserFolderPostAPI);
         SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO, uploadUserFilePostAPI);
         LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO);
-        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO);
+        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO, deleteNoteWriterDAO);
+        SelectNoteDAO selectNoteDAO = new SelectNoteDAO(allUserFilesDAO);
 
 
         LoginView loginView = LoginUseCaseFactory.createLoginView(viewManagerModel,
@@ -74,7 +77,7 @@ public class Main {
                 loggedInDAO);
         views.add(loggedInView, loggedInView.viewName);
 
-        NoteView noteView = NotesUseCaseFactory.createNoteView(noteViewModel,viewManagerModel, saveNoteDAO, deleteNoteDAO);
+        NoteView noteView = NotesUseCaseFactory.createNoteView(noteViewModel,viewManagerModel, saveNoteDAO, deleteNoteDAO, selectNoteDAO);
         views.add(noteView, noteView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);

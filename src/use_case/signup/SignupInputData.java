@@ -1,5 +1,9 @@
 package use_case.signup;
 
+/**
+ * The data storage class for signup view that saves the username, password, repeated password from
+ * signup view
+ */
 public class SignupInputData {
 
     final private String username;

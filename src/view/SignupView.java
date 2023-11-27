@@ -25,8 +25,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     private final JButton signUp;
 
-    private final JButton logIn;
-
     private final SignupController signupController;
 
     public SignupView(SignupController signupController, SignupViewModel signupViewModel) {
@@ -43,21 +41,11 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 new JLabel(SignupViewModel.REPEAT_LABEL), repeatPasswordInputField);
 
         JPanel buttons = new JPanel();
-        logIn = new JButton(SignupViewModel.LOGIN_BUTTON_LABEL);
         signUp = new JButton(SignupViewModel.SIGNUP_BUTTON_LABEL);
-        buttons.add(logIn);
         buttons.add(signUp);
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         buttons.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        logIn.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        signupController.backToLogin();
-                        System.out.println("Back to log in");}
-                }
-        );
 
         signUp.addActionListener(
                 new ActionListener() {
@@ -153,10 +141,8 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         SignupState state = (SignupState) evt.getNewValue();
-        if (state.getUsernameError() != null) {
-            JOptionPane.showMessageDialog(this, state.getUsernameError());
-        } else if (!state.getSuccessMessage().isEmpty()) {
-            JOptionPane.showMessageDialog(this, state.getSuccessMessage());
+        if (!state.getError().isEmpty()){
+            JOptionPane.showMessageDialog(this, state.getError());
         }
     }
 }

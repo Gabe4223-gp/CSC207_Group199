@@ -19,13 +19,12 @@ public class DownloadUserFileGetAPI extends DropBoxAPI {
             String body = requestBody + String.format("%s/%s\"}", username, file);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://content.dropboxapi.com/2/files/download"))
-                    .header("Authorization", "Bearer sl.BqhAJ_VCdKcbrgUdOiGT3q6YhtQxEfZzq_b4gQgOyka1_KjM28NAKNsJPKaxrecuBJRTqKDeuKQBDhadUOPI1iraLnOng8SRfB8BIu40kzZiTQaGy2WRNFfmBvf9IIslpv6UkgwfkYTpE65noY8VZrA")
+                    .header("Authorization", this.APIToken)
                     .header("Dropbox-API-Arg", body)
                     .build();
             try {
                 response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
                 fileData.add(response.body());
-                logger.log(Level.INFO, "%s file successfully downloaded.", username);
             } catch (IOException | InterruptedException e) {
                 logger.log(Level.WARNING, "Unsuccessful connection");
             }

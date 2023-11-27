@@ -2,6 +2,7 @@ package app;
 
 import data_access.*;
 import data_access.file_read_write.AllUserFilesDAO;
+import data_access.file_read_write.DeleteNoteWriterDAO;
 import data_access.file_read_write.TextNoteWriterDAO;
 import interface_adapter.NoteViewModel;
 import interface_adapter.ViewManagerModel;
@@ -40,13 +41,15 @@ public class Main {
         DBConnector dbConnector = new DBConnector();
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
         AllUserFilesDAO allUserFilesDAO = new AllUserFilesDAO();
+        DeleteNoteWriterDAO deleteNoteWriterDAO = new DeleteNoteWriterDAO();
 
         //Data Access objects
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
         SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector);
         SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO);
         LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO);
-        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO);
+        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO, deleteNoteWriterDAO);
+        SelectNoteDAO selectNoteDAO = new SelectNoteDAO(allUserFilesDAO);
 
 
         LoginView loginView = LoginUseCaseFactory.createLoginView(viewManagerModel,
@@ -70,7 +73,7 @@ public class Main {
                 loggedInDAO);
         views.add(loggedInView, loggedInView.viewName);
 
-        NoteView noteView = NotesUseCaseFactory.createNoteView(noteViewModel,viewManagerModel, saveNoteDAO, deleteNoteDAO);
+        NoteView noteView = NotesUseCaseFactory.createNoteView(noteViewModel,viewManagerModel, saveNoteDAO, deleteNoteDAO, selectNoteDAO);
         views.add(noteView, noteView.viewName);
 
         viewManagerModel.setActiveView(loginView.viewName);

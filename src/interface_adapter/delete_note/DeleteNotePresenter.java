@@ -1,7 +1,9 @@
 package interface_adapter.delete_note;
 
+import interface_adapter.NoteState;
 import interface_adapter.NoteViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.save_note.SaveNotePresenter;
 import use_case.NoteOutputData;
 import use_case.delete_note.DeleteNoteOutputBoundary;
 
@@ -16,7 +18,7 @@ public class DeleteNotePresenter implements DeleteNoteOutputBoundary {
 
     @Override
     public void prepareDeleteNoteSuccessView(NoteOutputData noteOutputData) {
-
+        SaveNotePresenter.prepareNoteViewSuccess(noteOutputData, noteViewModel, this.viewManagerModel);
     }
 
     @Override

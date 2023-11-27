@@ -2,12 +2,13 @@ package interface_adapter.save_note;
 import interface_adapter.NoteState;
 import interface_adapter.NoteViewModel;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.delete_note.DeleteNotePresenter;
 import use_case.save_note.SaveNoteOutputBoundary;
 import use_case.NoteOutputData;
 
 /**
  * A Presenter Class for note view that is responsible for changing the view after a
- * save, edit or delete action is performed by the User.
+ * save, edit, select or delete action is performed by the User.
  * Implements the SaveNoteOutputBoundary.
  */
 public class SaveNotePresenter implements SaveNoteOutputBoundary{
@@ -21,20 +22,25 @@ public class SaveNotePresenter implements SaveNoteOutputBoundary{
 
     @Override
     public void prepareSaveNoteSuccessView(NoteOutputData noteOutputData) {
+        prepareNoteViewSuccess(noteOutputData, noteViewModel, this.viewManagerModel);
+    }
+
+    public static void prepareNoteViewSuccess(NoteOutputData noteOutputData, NoteViewModel noteViewModel, ViewManagerModel viewManagerModel) {
         NoteState noteState = noteViewModel.getNoteState();
         noteState.setFilename(noteOutputData.getFileName());
         noteState.setFileTxt(noteOutputData.getFile_txt());
         noteState.setUserFiles(noteOutputData.getUserFiles());
         noteState.setUsername(noteOutputData.getUsername());
-        this.noteViewModel.setNoteState(noteState);
-        this.noteViewModel.firePropertyChange();
+        noteViewModel.setNoteState(noteState);
+        noteViewModel.firePropertyChange();
 
-        this.viewManagerModel.setActiveView(noteViewModel.getViewName());
-        this.viewManagerModel.firePropertyChanged();
+        viewManagerModel.setActiveView(noteViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void prepareSaveNoteFailView(String error) {
-        // TODO document why this method is empty
+        // The note can always be saved to the database successfully and
+        // therefore the method for failed view is empty
     }
 }

@@ -2,18 +2,24 @@ package app;
 
 import data_access.DeleteNoteDAO;
 import data_access.SaveNoteDAO;
+import data_access.SelectNoteDAO;
 import interface_adapter.NoteViewModel;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.delete_note.DeleteNoteController;
 import interface_adapter.delete_note.DeleteNotePresenter;
 import interface_adapter.save_note.SaveNoteController;
 import interface_adapter.save_note.SaveNotePresenter;
+import interface_adapter.select_note.SelectNoteController;
+import interface_adapter.select_note.SelectNotePresenter;
 import use_case.delete_note.DeleteNoteInputBoundary;
 import use_case.delete_note.DeleteNoteInteractor;
 import use_case.delete_note.DeleteNoteOutputBoundary;
 import use_case.save_note.SaveNoteInputBoundary;
 import use_case.save_note.SaveNoteInteractor;
 import use_case.save_note.SaveNoteOutputBoundary;
+import use_case.select_note.SelectNoteInputBoundary;
+import use_case.select_note.SelectNoteInteractor;
+import use_case.select_note.SelectNoteOutputBoundary;
 import view.NoteView;
 
 public class NotesUseCaseFactory {
@@ -22,10 +28,11 @@ public class NotesUseCaseFactory {
     public static NoteView createNoteView(NoteViewModel noteViewModel,
                                           ViewManagerModel viewManagerModel,
                                           SaveNoteDAO saveNoteDAO,
-                                          DeleteNoteDAO deleteNoteDAO){
+                                          DeleteNoteDAO deleteNoteDAO, SelectNoteDAO selectNoteDAO){
         return new NoteView(noteViewModel,
                 createSaveNoteUseCase(viewManagerModel, noteViewModel,saveNoteDAO),
-                createDeleteNoteUseCase(viewManagerModel,noteViewModel, deleteNoteDAO));
+                createDeleteNoteUseCase(viewManagerModel,noteViewModel, deleteNoteDAO),
+                createSelectNoteUseCase(viewManagerModel,noteViewModel,selectNoteDAO));
     }
 
     private static SaveNoteController createSaveNoteUseCase(
@@ -46,5 +53,15 @@ public class NotesUseCaseFactory {
         DeleteNoteOutputBoundary deleteNoteOutputBoundary = new DeleteNotePresenter(noteViewModel, viewManagerModel);
         DeleteNoteInputBoundary deleteNoteInteractor = new DeleteNoteInteractor(deleteNoteOutputBoundary,deleteNoteDAO);
         return new DeleteNoteController(deleteNoteInteractor);
+    }
+
+    public static SelectNoteController createSelectNoteUseCase(
+            ViewManagerModel viewManagerModel,
+            NoteViewModel noteViewModel,
+            SelectNoteDAO selectNoteDAO
+    ){
+        SelectNoteOutputBoundary selectNoteOutputBoundary = new SelectNotePresenter(noteViewModel, viewManagerModel);
+        SelectNoteInputBoundary selectNoteInteractor = new SelectNoteInteractor(selectNoteDAO, selectNoteOutputBoundary);
+        return new SelectNoteController(selectNoteInteractor);
     }
 }

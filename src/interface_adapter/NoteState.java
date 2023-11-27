@@ -6,6 +6,7 @@ public class NoteState {
     private String username = "";
     private String filename = "";
     private String fileTxt = "";
+    private String error = "";
     private ArrayList<String> userFiles = new ArrayList<>();
 
     public NoteState(NoteState copy){
@@ -48,4 +49,8 @@ public class NoteState {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public void setError(String error){this.error = error;}
+
+    public String getError(){return this.error;}
 }

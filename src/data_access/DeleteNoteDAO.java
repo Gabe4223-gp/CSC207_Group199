@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class DeleteNoteDAO implements DeleteNoteDataAccessInterface, DeleteFileAPIDataAccessInterface {
 
-    private AllUserFilesDAO allUserFilesDAO;
-    private DeleteNoteWriterDAO deleteNoteWriterDAO;
-    private DeleteDataPostAPI deleteDataPostAPI;
+    private final AllUserFilesDAO allUserFilesDAO;
+    private final DeleteNoteWriterDAO deleteNoteWriterDAO;
+    private final DeleteDataPostAPI deleteDataPostAPI;
     public DeleteNoteDAO(AllUserFilesDAO allUserFilesDAO, DeleteNoteWriterDAO deleteNoteWriterDAO, DeleteDataPostAPI deleteDataPostAPI){
         this.allUserFilesDAO = allUserFilesDAO;
         this.deleteNoteWriterDAO = deleteNoteWriterDAO;

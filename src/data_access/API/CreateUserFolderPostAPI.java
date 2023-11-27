@@ -1,7 +1,5 @@
 package data_access.API;
 
-import use_case.signup.SignupDataAccessInterface;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;

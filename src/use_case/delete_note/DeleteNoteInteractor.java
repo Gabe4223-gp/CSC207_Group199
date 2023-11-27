@@ -1,14 +1,12 @@
 package use_case.delete_note;
 
-import data_access.DeleteNoteDAO;
 import use_case.NoteOutputData;
-
 import java.util.ArrayList;
 
 public class DeleteNoteInteractor implements DeleteNoteInputBoundary {
-    private DeleteNoteOutputBoundary deleteNotePresenter;
-    private DeleteNoteDataAccessInterface deleteNoteDAO;
-    private DeleteFileAPIDataAccessInterface deleteFileAPIDAO;
+    private final DeleteNoteOutputBoundary deleteNotePresenter;
+    private final DeleteNoteDataAccessInterface deleteNoteDAO;
+    private final DeleteFileAPIDataAccessInterface deleteFileAPIDAO;
 
     public DeleteNoteInteractor(DeleteNoteOutputBoundary deleteNotePresenter, DeleteNoteDataAccessInterface deleteNoteDAO,
                                 DeleteFileAPIDataAccessInterface deleteFileAPIDAO){

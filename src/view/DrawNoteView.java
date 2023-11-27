@@ -3,7 +3,7 @@ package view;
 import interface_adapter.draw_note.DrawNoteState;
 import interface_adapter.draw_note.DrawNoteViewModel;
 import interface_adapter.draw_note.SaveDrawingController;
-import interface_adapter.note.NoteState;
+import interface_adapter.draw_note.DrawNoteState;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -101,7 +101,7 @@ public class DrawNoteView extends JPanel implements ActionListener, PropertyChan
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        NoteState state = (NoteState) evt.getNewValue();
+        DrawNoteState state = (DrawNoteState) evt.getNewValue();
         this.fileList = getBtnLst(state.getUserFiles());
         this.fileListPanel.removeAll();
         this.fileListPanel.add(this.fileList);

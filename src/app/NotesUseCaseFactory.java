@@ -34,7 +34,7 @@ public class NotesUseCaseFactory {
             SaveNoteDAO saveNoteDAO
     ){
         SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveNotePresenter(noteViewModel,viewManagerModel);
-        SaveNoteInputBoundary saveNoteInteractor = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO);
+        SaveNoteInputBoundary saveNoteInteractor = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO, saveNoteDAO);
         return new SaveNoteController(saveNoteInteractor);
     }
 

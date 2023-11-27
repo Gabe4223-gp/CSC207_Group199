@@ -1,33 +1,32 @@
 package data_access.API;
 
+import data_access.file_read_write.FileAccessDAO;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.logging.Level;
 
-public class DeleteDataPostAPI {
-    public static void main(String[] args) {
-        ////sample usage without access to User Data file, can delete entire folder or single file
-        String username = "temp_user";
-        String filename = "temp_file";
-        String requestBody = String.format("{\"path\": \"/NoDraw_folder/%s/%s.txt\"}", username, filename);
+public class DeleteDataPostAPI extends DropBoxAPI {
+    public boolean deleteUserFile(String username, String filename) {
+        String body = requestBody + String.format("%s/%s.txt\"}", username, filename);
 
-        //TODO: Note token lasts only 4 hrs.
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.dropboxapi.com/2/files/delete_v2"))
                 .header("Authorization", "Bearer sl.BqOkyVZJOOt8aySCiTcunvi9NrA_88NfqOJw7fzF1RaK6GWaSJ3Zw_E7oe2vF5MqQgeAmsL2z9PciCSepia-FLVKYb-oPz48glcSoV0lHXGchLlYezWqU7SZSzTJgwvwC_zA7jdASjUBDI4YM6vCQDE")
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                .POST(HttpRequest.BodyPublishers.ofString(body))
                 .build();
-        HttpResponse<String> response = null;
+        HttpResponse<?> response = null;
         try {
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.discarding());
+            logger.log(Level.INFO, "%s folder successfully deleted.", username);
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, e.getMessage());
         }
-        System.out.println(response.body());
+        assert response != null;
+        return response.statusCode() == 200;
     }
 }
-
-//Response reference in case needed to change: https://openjdk.org/groups/net/httpclient/recipes.html

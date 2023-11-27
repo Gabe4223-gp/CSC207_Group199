@@ -2,6 +2,7 @@ package app;
 
 import data_access.*;
 import data_access.API.CreateUserFolderPostAPI;
+import data_access.API.UploadUserFilePostAPI;
 import data_access.file_read_write.AllUserFilesDAO;
 import data_access.file_read_write.TextNoteWriterDAO;
 import interface_adapter.NoteViewModel;
@@ -42,11 +43,12 @@ public class Main {
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
         AllUserFilesDAO allUserFilesDAO = new AllUserFilesDAO();
         CreateUserFolderPostAPI createUserFolderPostAPI = new CreateUserFolderPostAPI();
+        UploadUserFilePostAPI uploadUserFilePostAPI = new UploadUserFilePostAPI();
 
         //Data Access objects
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
         SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector, createUserFolderPostAPI);
-        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO);
+        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO, uploadUserFilePostAPI);
         LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO);
         DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO);
 

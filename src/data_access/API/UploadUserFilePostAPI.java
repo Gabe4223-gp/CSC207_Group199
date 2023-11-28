@@ -15,7 +15,7 @@ public class UploadUserFilePostAPI extends DropBoxAPI {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://content.dropboxapi.com/2/files/upload"))
-                .header("Authorization", "Bearer sl.Bqq-rMbDu9127dPnp1TuACKCB5NSOtoVcOSYT1A-ZcKIMB00AhnfEXWVjkLOtWZRXXx9Dd5_VaBAScvK14jU7OSCdxWAJzU0nJCSeqaWMNoheITdBG-TPrF6hkNImnDMnD-BsThIiQTZjafDl-33vB4")
+                .header("Authorization", this.APIToken)
                 .header("Content-Type", "application/octet-stream")
                 .header("Dropbox-API-Arg", bodyText)
                 .POST(HttpRequest.BodyPublishers.ofString(textNote.getFileTxt()))
@@ -23,7 +23,6 @@ public class UploadUserFilePostAPI extends DropBoxAPI {
         HttpResponse<?> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.discarding());
-            logger.log(Level.INFO, "%s file successfully uploaded.", username);
         } catch (IOException | InterruptedException e) {
             logger.log(Level.WARNING, "Unsuccessful connection");
         }

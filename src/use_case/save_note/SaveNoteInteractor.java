@@ -32,7 +32,7 @@ public class SaveNoteInteractor implements SaveNoteInputBoundary{
         boolean saveSuccess = this.saveNoteDAO.saveNote(thisNote);
         boolean saveAPISuccess = this.saveAPIDAO.uploadUserFile(saveNoteInputData.getUsername(), thisNote);
         ArrayList<String> files = this.saveNoteDAO.getAllUserFiles(thisNote.getCreatedUser());
-        if (saveSuccess && saveAPISuccess){
+        if (saveSuccess){
             NoteOutputData noteOutputData = new NoteOutputData(thisNote.getFileName(),
                     thisNote.getFileTxt(), files, thisNote.getCreatedUser(), false);
             this.saveNotePresenter.prepareSaveNoteSuccessView(noteOutputData);

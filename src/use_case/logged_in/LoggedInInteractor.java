@@ -14,6 +14,7 @@ public class LoggedInInteractor implements LoggedInInputBoundary{
 
     private final LoggedInOutputBoundary loggedInPresenter;
     private final LoggedInDataAccessInterface loggedInDAO;
+
     public LoggedInInteractor(LoggedInOutputBoundary loggedInOutputBoundary, LoggedInDataAccessInterface loggedInDAO) {
         this.loggedInPresenter = loggedInOutputBoundary;
         this.loggedInDAO = loggedInDAO;

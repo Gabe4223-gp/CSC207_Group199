@@ -1,12 +1,17 @@
 package data_access_tests;
+
+import data_access.DeleteNoteDAO;
 import data_access.SaveNoteDAO;
 import data_access.file_read_write.AllUserFilesDAO;
+import data_access.file_read_write.DeleteNoteWriterDAO;
 import data_access.file_read_write.FileAccessDAO;
 import data_access.file_read_write.TextNoteWriterDAO;
 import entity.TextNote;
 import entity.TextNoteFactory;
 import org.apache.commons.io.FileUtils;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.io.File;
@@ -14,39 +19,33 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class SaveNoteDAOTests {
+public class DeleteNoteDAOTests {
+    private DeleteNoteDAO deleteNoteDAO;
     private SaveNoteDAO saveNoteDAO;
     private AllUserFilesDAO allUserFilesDAO;
     private final String testUser = "Test User";
     private TextNote textNote;
+
     @Before
-    public void init() {
+    public void init(){
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
+        DeleteNoteWriterDAO deleteNoteWriterDAO = new DeleteNoteWriterDAO();
         allUserFilesDAO = new AllUserFilesDAO();
         textNote = TextNoteFactory.createTextNote("TestFile",
                 LocalDateTime.now(),
                 testUser, "Test Data");
         saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO);
-    }
-    @Test
-    public void testSaveNoteReturnsTrue(){
-        assertTrue(saveNoteDAO.saveNote(textNote));
-    }
-    @Test
-    public void testFileExistsAfterSave(){
-        saveNoteDAO.saveNote(textNote);
-        File f = new File(FileAccessDAO.ROOT_DIR+testUser+ File.separator + textNote.getFileName() + ".txt");
-        assertTrue(f.exists());
-    }
-    @Test
-    public void testFileDataSaves(){
-        saveNoteDAO.saveNote(textNote);
-        String fileTxt = allUserFilesDAO.getFileData(testUser, textNote.getFileName());
-        assertEquals(textNote.getFileTxt(), fileTxt);
+        deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO, deleteNoteWriterDAO);
     }
 
     @Test
-    public void testMultipleFilesSave(){
+    public void testDeleteFileReturnsTrue(){
+        saveNoteDAO.saveNote(textNote);
+        assertTrue(deleteNoteDAO.deleteNote(testUser, textNote.getFileName()));
+    }
+
+    @Test
+    public void testDeleteOneFile(){
         TextNote textNote1 = TextNoteFactory.createTextNote("TestFile1",
                 LocalDateTime.now(),
                 testUser, "Test Data1");
@@ -60,10 +59,11 @@ public class SaveNoteDAOTests {
         fileList.add("TestFile");
         fileList.add("TestFile1");
         fileList.add("TestFile2");
-
-        ArrayList userFiles = saveNoteDAO.getAllUserFiles(testUser);
-        assertEquals(fileList, userFiles);
+        deleteNoteDAO.deleteNote(testUser, "TestFile1");
+        ArrayList userFiles = allUserFilesDAO.getAllUserFiles(testUser);
+        assertFalse(userFiles.contains("TestFile1"));
     }
+
     @After
     public void deleteTestFiles(){
         String root = FileAccessDAO.ROOT_DIR;

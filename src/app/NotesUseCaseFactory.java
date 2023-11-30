@@ -35,7 +35,7 @@ public class NotesUseCaseFactory {
                 createSelectNoteUseCase(viewManagerModel,noteViewModel,selectNoteDAO));
     }
 
-    private static SaveNoteController createSaveNoteUseCase(
+    public static SaveNoteController createSaveNoteUseCase(
             ViewManagerModel viewManagerModel,
             NoteViewModel noteViewModel,
             SaveNoteDAO saveNoteDAO

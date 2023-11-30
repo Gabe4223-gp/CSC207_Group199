@@ -151,23 +151,4 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     public JButton getSave() {
         return save;
     }
-
-    public JButton getDeleteBtn() {
-        return deleteBtn;
-    }
-
-    public NoteViewModel getNoteViewModel() {
-        return noteViewModel;
-    }
-    public JTextArea getTextArea() {
-        return textArea;
-    }
-
-    public JList<String> getFileList() {
-        return fileList;
-    }
-
-    public JTextField getFilenameInput() {
-        return filenameInput;
-    }
 }

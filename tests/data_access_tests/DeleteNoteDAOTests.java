@@ -60,7 +60,7 @@ public class DeleteNoteDAOTests {
         fileList.add("TestFile1");
         fileList.add("TestFile2");
         deleteNoteDAO.deleteNote(testUser, "TestFile1");
-        ArrayList userFiles = allUserFilesDAO.getAllUserFiles(testUser);
+        ArrayList<String> userFiles = allUserFilesDAO.getAllUserFiles(testUser);
         assertFalse(userFiles.contains("TestFile1"));
     }
 

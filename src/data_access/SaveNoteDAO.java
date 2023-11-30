@@ -1,5 +1,4 @@
 package data_access;
-
 import data_access.file_read_write.AllUserFilesDAO;
 import data_access.file_read_write.TextNoteWriterDAO;
 import entity.TextNote;

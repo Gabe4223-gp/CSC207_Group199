@@ -61,7 +61,7 @@ public class SaveNoteDAOTests {
         fileList.add("TestFile1");
         fileList.add("TestFile2");
 
-        ArrayList userFiles = saveNoteDAO.getAllUserFiles(testUser);
+        ArrayList<String> userFiles = saveNoteDAO.getAllUserFiles(testUser);
         assertEquals(fileList, userFiles);
     }
     @After

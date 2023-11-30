@@ -1,6 +1,4 @@
 package use_case_tests;
-import app.Main;
-import app.NotesUseCaseFactory;
 import data_access.SaveNoteDAO;
 import data_access.file_read_write.AllUserFilesDAO;
 import data_access.file_read_write.FileAccessDAO;
@@ -10,15 +8,11 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.save_note.SaveNotePresenter;
 import org.apache.commons.io.FileUtils;
 import org.junit.*;
-import use_case.NoteOutputData;
-import use_case.save_note.SaveNoteInputBoundary;
 import use_case.save_note.SaveNoteInputData;
 import use_case.save_note.SaveNoteInteractor;
 import use_case.save_note.SaveNoteOutputBoundary;
-import use_case.signup.SignupOutputBoundary;
 
 import static org.junit.Assert.*;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;

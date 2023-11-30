@@ -21,7 +21,7 @@ public class DeleteNoteInteractor implements DeleteNoteInputBoundary {
                 deleteNoteInputData.getFilename());
         boolean deleteAPISuccess = this.deleteFileAPIDAO.deleteUserFile(deleteNoteInputData.getUsername(),
                 deleteNoteInputData.getFilename());
-        if(deleteSuccess && deleteAPISuccess){
+        if(deleteSuccess){
             ArrayList<String> userFiles = this.deleteNoteDAO.getUserFiles(deleteNoteInputData.getUsername());
             NoteOutputData noteOutputData;
             if(!userFiles.isEmpty()){

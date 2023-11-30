@@ -32,10 +32,7 @@ public class SignupInteractor implements SignupInputBoundary {
         if (this.userDataAccessObject.existsByName(signupInputData.getUsername().toLowerCase())) {
             userPresenter.prepareFailView("User already exists.");
         }else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {
-            userPresenter.prepareFailView("Passwords don't match.");
-        }else if (!createUserAPI){
-            userPresenter.prepareFailView("Unable to generate user file.");
-        }
+            userPresenter.prepareFailView("Passwords don't match.");}
         else {
             User user = new User(signupInputData.getUsername().toLowerCase(), signupInputData.getPassword());
             this.userDataAccessObject.save(user);

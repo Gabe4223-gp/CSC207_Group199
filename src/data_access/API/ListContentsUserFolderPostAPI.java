@@ -19,14 +19,13 @@ public class ListContentsUserFolderPostAPI extends DropBoxAPI {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.dropboxapi.com/2/files/list_folder"))
-                .header("Authorization", "Bearer sl.BqhAJ_VCdKcbrgUdOiGT3q6YhtQxEfZzq_b4gQgOyka1_KjM28NAKNsJPKaxrecuBJRTqKDeuKQBDhadUOPI1iraLnOng8SRfB8BIu40kzZiTQaGy2WRNFfmBvf9IIslpv6UkgwfkYTpE65noY8VZrA")
+                .header("Authorization", this.APIToken)
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .build();
         HttpResponse<String> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            logger.log(Level.INFO, "%s folder successfully created.", username);
         } catch (IOException | InterruptedException e) {
             logger.log(Level.WARNING, "Unsuccessful connection");
         }

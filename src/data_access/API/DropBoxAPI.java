@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public abstract class DropBoxAPI {
     public String requestBody;
     public Logger logger;
-    public String APIToken = "Bearer sl.BqtQ_1DsOpfKtW0fE7-0pzCOLztdFicieH8kwKMRNsvcVeZD-yQRNRTRAb1wsE0jARh7v0JEWYEcDtNHxUzzNguPFV_llnkJNONI04JblgMgfkVtOWtV6DCBsyzyFMUzUuyJ3AS2Mmrdj2sI8B3Sfx4";
+    public String APIToken = "Bearer sl.Bq3b-ggyXotr6NnKZBSnuDlmrjc_UWaD8RxRO2w46q1otAIFvlIRXnzWlU5FjgtVypb-d6BJdUGNKLTkl8nwghQAGGsAQu34Co0ZX6PEQnPWwWGAXl8O_h9d0sPpkxCz18s1IQ-vvpEsWKy4C5aOlbE";
     protected DropBoxAPI(){
         requestBody = "{\"path\": \"/NoDraw_folder/";
         logger = Logger.getLogger("APIConnectionLog");

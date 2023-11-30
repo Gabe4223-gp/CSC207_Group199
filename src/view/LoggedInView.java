@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "logged in";
@@ -38,7 +39,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        loggedInController.textNoteExecute(loggedInViewModel.getState().getUsername());
+                        try {
+                            loggedInController.textNoteExecute(loggedInViewModel.getState().getUsername());
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
                         System.out.println("note btn clicked");}
                 }
         );

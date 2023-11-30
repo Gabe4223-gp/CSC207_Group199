@@ -21,7 +21,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     private final NoteViewModel noteViewModel;
     final JTextField filenameInput = new JTextField(15);
     private final JTextArea textArea;
-    final JButton save;
+    private final JButton save;
     final JButton newBtn;
     final JButton deleteBtn;
     final JButton select;
@@ -37,7 +37,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         this.selectNoteController = selectNoteController;
 
         noteViewModel.addPropertyChangeListener(this);
-        JLabel title = new JLabel(noteViewModel.TITLE);
+        JLabel title = new JLabel(NoteViewModel.TITLE);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         filenameInput.setText(noteViewModel.getNoteState().getFilename());
         LabelTextPanel filenameInfo = new LabelTextPanel(
@@ -148,4 +148,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         }
     }
 
+    public JButton getSave() {
+        return save;
+    }
 }

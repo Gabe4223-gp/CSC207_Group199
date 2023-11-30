@@ -1,10 +1,6 @@
 package data_access.file_read_write;
-
-import data_access.file_read_write.FileAccessDAO;
-
 import java.io.*;
 import java.util.logging.Level;
-
 public class TextNoteWriterDAO extends FileAccessDAO {
     public TextNoteWriterDAO(){
         super();

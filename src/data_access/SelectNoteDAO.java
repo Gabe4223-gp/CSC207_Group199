@@ -1,9 +1,7 @@
 package data_access;
 import data_access.file_read_write.AllUserFilesDAO;
-import data_access.file_read_write.FileAccessDAO;
 import use_case.select_note.SelectNoteDataAccessInterface;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class SelectNoteDAO implements SelectNoteDataAccessInterface {
@@ -15,9 +13,8 @@ public class SelectNoteDAO implements SelectNoteDataAccessInterface {
     }
 
     @Override
-    public String getSelectedNote(String filename, Integer index, String username) {
-        ArrayList<String> Data = allUserFilesDAO.getAllUserFiles(username);
-        return Data.get(index);
+    public String getSelectedNote(String filename, String username) {
+        return allUserFilesDAO.getFileData(username,filename);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package use_case.save_note;
 
 import entity.TextNote;
+import entity.TextNoteFactory;
 import use_case.NoteOutputData;
 
 import java.util.ArrayList;
@@ -23,9 +24,11 @@ public class SaveNoteInteractor implements SaveNoteInputBoundary{
      */
     @Override
     public void saveFile(SaveNoteInputData saveNoteInputData) {
-        TextNote thisNote = new TextNote(saveNoteInputData.getFileName(),
+        TextNote thisNote = TextNoteFactory.createTextNote(
+                saveNoteInputData.getFileName(),
                 saveNoteInputData.getCreatedTime(),
-                saveNoteInputData.getUsername(), saveNoteInputData.getNoteData());
+                saveNoteInputData.getUsername(),
+                saveNoteInputData.getNoteData());
         boolean saveSuccess = this.saveNoteDAO.saveNote(thisNote);
         ArrayList<String> files = this.saveNoteDAO.getAllUserFiles(thisNote.getCreatedUser());
         if (saveSuccess){

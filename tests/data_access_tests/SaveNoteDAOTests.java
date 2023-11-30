@@ -1,4 +1,5 @@
 package data_access_tests;
+import data_access.API.UploadUserFilePostAPI;
 import data_access.SaveNoteDAO;
 import data_access.file_read_write.AllUserFilesDAO;
 import data_access.file_read_write.FileAccessDAO;
@@ -26,7 +27,7 @@ public class SaveNoteDAOTests {
         textNote = TextNoteFactory.createTextNote("TestFile",
                 LocalDateTime.now(),
                 testUser, "Test Data");
-        saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO);
+        saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO, new UploadUserFilePostAPI());
     }
     @Test
     public void testSaveNoteReturnsTrue(){

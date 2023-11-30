@@ -1,4 +1,6 @@
 import app.NotesUseCaseFactory;
+import data_access.API.DeleteDataPostAPI;
+import data_access.API.UploadUserFilePostAPI;
 import data_access.DeleteNoteDAO;
 import data_access.SaveNoteDAO;
 import data_access.SelectNoteDAO;
@@ -39,7 +41,7 @@ public class NotesViewTests {
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
         allUserFilesDAO = new AllUserFilesDAO();
         DeleteNoteWriterDAO deleteNoteWriterDAO = new DeleteNoteWriterDAO();
-        saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO,allUserFilesDAO);
+        saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO,allUserFilesDAO, new UploadUserFilePostAPI());
         TextNote textNote = TextNoteFactory.createTextNote("TestFile",
                 LocalDateTime.now(),
                 "TestUser", "Test Data");
@@ -52,7 +54,7 @@ public class NotesViewTests {
         saveNoteDAO.saveNote(textNote1);
         saveNoteDAO.saveNote(textNote2);
         saveNoteDAO.saveNote(textNote);
-        deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO,deleteNoteWriterDAO);
+        deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO,deleteNoteWriterDAO, new DeleteDataPostAPI());
         selectNoteDAO = new SelectNoteDAO(allUserFilesDAO);
         ArrayList<String> fileList = new ArrayList<>();
         fileList.add("TestFile");

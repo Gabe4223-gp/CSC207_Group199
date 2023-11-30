@@ -1,4 +1,5 @@
 package use_case_tests;
+import data_access.API.UploadUserFilePostAPI;
 import data_access.SaveNoteDAO;
 import data_access.file_read_write.AllUserFilesDAO;
 import data_access.file_read_write.FileAccessDAO;
@@ -23,9 +24,9 @@ public class SaveNoteUseCaseTests {
     public void init(){
         NoteViewModel noteViewModel = new NoteViewModel();
         ViewManagerModel viewManagerModel = new ViewManagerModel();
-        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(new TextNoteWriterDAO(), new AllUserFilesDAO());
+        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(new TextNoteWriterDAO(), new AllUserFilesDAO(), new UploadUserFilePostAPI());
         SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveNotePresenter(noteViewModel,viewManagerModel);
-        saveNoteInteractor = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO);
+        saveNoteInteractor = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO, saveNoteDAO);
     }
     @Test
     public void testSaveNoteUseCasePass(){

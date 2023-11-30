@@ -1,6 +1,8 @@
 package factory_tests;
 
 import app.NotesUseCaseFactory;
+import data_access.API.DeleteDataPostAPI;
+import data_access.API.UploadUserFilePostAPI;
 import data_access.DeleteNoteDAO;
 import data_access.SaveNoteDAO;
 import data_access.SelectNoteDAO;
@@ -37,13 +39,14 @@ public class NotesUseCaseFactoryTests {
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
         AllUserFilesDAO allUserFilesDAO = new AllUserFilesDAO();
         DeleteNoteWriterDAO deleteNoteWriterDAO = new DeleteNoteWriterDAO();
-        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO,allUserFilesDAO);
-        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO,deleteNoteWriterDAO);
+        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO,allUserFilesDAO, new UploadUserFilePostAPI());
+        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO,deleteNoteWriterDAO, new DeleteDataPostAPI());
         SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveNotePresenter(noteViewModel,viewManagerModel);
-        SaveNoteInputBoundary saveNoteInputBoundary = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO);
+        SaveNoteInputBoundary saveNoteInputBoundary = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO, saveNoteDAO);
         SaveNoteController saveNoteController = new SaveNoteController(saveNoteInputBoundary);
         DeleteNoteOutputBoundary deleteNoteOutputBoundary = new DeleteNotePresenter(noteViewModel, viewManagerModel);
-        DeleteNoteInputBoundary deleteNoteInputBoundary = new DeleteNoteInteractor(deleteNoteOutputBoundary,deleteNoteDAO);
+        DeleteNoteInputBoundary deleteNoteInputBoundary = new DeleteNoteInteractor(deleteNoteOutputBoundary,deleteNoteDAO,
+                deleteNoteDAO);
         DeleteNoteController deleteNoteController = new DeleteNoteController(deleteNoteInputBoundary);
         SelectNoteDAO selectNoteDAO = new SelectNoteDAO(allUserFilesDAO);
         SelectNoteOutputBoundary selectNoteOutputBoundary = new SelectNotePresenter(noteViewModel,viewManagerModel);

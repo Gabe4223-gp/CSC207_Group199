@@ -32,9 +32,9 @@ public class SelectNoteInteractor implements SelectNoteInputBoundary{
             selectNotePresenter.prepareSelectFailView("Please select a note");
         }
         else {
-            String note_data = selectNoteDataAccessInterface.getSelectedNote(filename, index, username);
-            ArrayList<String> filelist = selectNoteDataAccessInterface.getAllFiles(username);
-            NoteOutputData noteOutputData = new NoteOutputData(filename, note_data, filelist, username, false );
+            String noteData = selectNoteDataAccessInterface.getSelectedNote(filename, username);
+            ArrayList<String> fileList = selectNoteDataAccessInterface.getAllFiles(username);
+            NoteOutputData noteOutputData = new NoteOutputData(filename, noteData, fileList, username, false );
             selectNotePresenter.prepareSelectSuccessfulView(noteOutputData);
         }
     }

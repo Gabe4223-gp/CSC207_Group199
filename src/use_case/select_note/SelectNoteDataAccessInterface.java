@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Interface for selecting a TextNote
  */
 public interface SelectNoteDataAccessInterface {
-    String getSelectedNote(String filename, Integer index, String username);
+    String getSelectedNote(String filename, String username);
 
     ArrayList<String> getAllFiles(String username);
 }

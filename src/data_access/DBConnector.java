@@ -86,4 +86,8 @@ public class DBConnector {
     public void dbClose() throws SQLException {
         this.connection.close();
     }
+
+    public Connection getConnection() {
+        return connection;
+    }
 }

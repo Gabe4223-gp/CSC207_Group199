@@ -69,4 +69,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     public void propertyChange(PropertyChangeEvent evt) {
 
     }
+
+    public JButton getNoteBtn() {
+        return noteBtn;
+    }
 }

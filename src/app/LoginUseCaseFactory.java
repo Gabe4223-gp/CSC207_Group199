@@ -52,7 +52,7 @@ public class LoginUseCaseFactory {
                 viewManagerModel,signupViewModel,loginViewModel
         );
         SignupInputBoundary signupInterator = new SignupInteractor(
-                signupUserDAO,signupOutputBoundary,signupUserDAO
+                signupUserDAO,signupOutputBoundary
         );
         return new SignupController(signupInterator);
     }

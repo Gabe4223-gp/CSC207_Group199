@@ -2,10 +2,9 @@ package data_access;
 
 import data_access.API.CreateUserFolderPostAPI;
 import entity.User;
-import use_case.signup.CreateUserAPIDataAccessInterface;
 import use_case.signup.SignupDataAccessInterface;
 
-public class SignupUserDAO implements SignupDataAccessInterface, CreateUserAPIDataAccessInterface {
+public class SignupUserDAO implements SignupDataAccessInterface {
     private final DBConnector dbConnector;
     private final CreateUserFolderPostAPI createUserFolderPostAPI;
 

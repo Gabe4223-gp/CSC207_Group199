@@ -26,7 +26,7 @@ public class SaveNoteUseCaseTests {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         SaveNoteDAO saveNoteDAO = new SaveNoteDAO(new TextNoteWriterDAO(), new AllUserFilesDAO(), new UploadUserFilePostAPI());
         SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveNotePresenter(noteViewModel,viewManagerModel);
-        saveNoteInteractor = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO, saveNoteDAO);
+        saveNoteInteractor = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO);
     }
 
     @Test

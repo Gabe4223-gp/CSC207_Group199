@@ -1,4 +1,6 @@
 import app.LoginUseCaseFactory;
+import data_access.API.DownloadUserFileGetAPI;
+import data_access.API.ListContentsUserFolderPostAPI;
 import data_access.API.UploadUserFilePostAPI;
 import data_access.LoggedInDAO;
 import data_access.SaveNoteDAO;
@@ -25,6 +27,9 @@ public class LoggedInViewTests {
     private LoggedInView loggedInView;
     private LoggedInViewModel loggedInViewModel;
     private AllUserFilesDAO allUserFilesDAO;
+    private TextNoteWriterDAO textNoteWriterDAO;
+    private DownloadUserFileGetAPI downloadUserFileGetAPI;
+    private ListContentsUserFolderPostAPI listContentsUserFolderPostAPI;
     private SaveNoteDAO saveNoteDAO;
     private NoteViewModel noteViewModel;
 
@@ -47,7 +52,10 @@ public class LoggedInViewTests {
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         DrawNoteViewModel drawNoteViewModel = new DrawNoteViewModel();
         allUserFilesDAO = new AllUserFilesDAO();
-        LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO);
+        textNoteWriterDAO = new TextNoteWriterDAO();
+        downloadUserFileGetAPI = new DownloadUserFileGetAPI();
+        listContentsUserFolderPostAPI = new ListContentsUserFolderPostAPI();
+        LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO, textNoteWriterDAO, downloadUserFileGetAPI, listContentsUserFolderPostAPI);
         noteViewModel = new NoteViewModel();
         NoteState noteState = new NoteState();
         noteState.setUsername("TestUser");

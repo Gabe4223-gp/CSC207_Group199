@@ -9,7 +9,7 @@ import data_access.file_read_write.DeleteNoteWriterDAO;
 import data_access.file_read_write.FileAccessDAO;
 import data_access.file_read_write.TextNoteWriterDAO;
 import entity.TextNote;
-import entity.TextNoteFactory;
+import entity.TextNoteBuilder;
 import interface_adapter.NoteState;
 import interface_adapter.NoteViewModel;
 import interface_adapter.ViewManagerModel;
@@ -42,13 +42,13 @@ public class NotesViewTests {
         allUserFilesDAO = new AllUserFilesDAO();
         DeleteNoteWriterDAO deleteNoteWriterDAO = new DeleteNoteWriterDAO();
         saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO,allUserFilesDAO, new UploadUserFilePostAPI());
-        TextNote textNote = TextNoteFactory.createTextNote("TestFile",
+        TextNote textNote = TextNoteBuilder.createTextNote("TestFile",
                 LocalDateTime.now(),
                 "TestUser", "Test Data");
-        TextNote textNote1 = TextNoteFactory.createTextNote("TestFile1",
+        TextNote textNote1 = TextNoteBuilder.createTextNote("TestFile1",
                 LocalDateTime.now(),
                 "TestUser", "Test Data1");
-        TextNote textNote2 = TextNoteFactory.createTextNote("TestFile2",
+        TextNote textNote2 = TextNoteBuilder.createTextNote("TestFile2",
                 LocalDateTime.now(),
                 "TestUser", "Test Data2");
         saveNoteDAO.saveNote(textNote1);

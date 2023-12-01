@@ -22,9 +22,9 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     final JTextField filenameInput = new JTextField(15);
     private final JTextArea textArea;
     private final JButton save;
-    final JButton newBtn;
-    final JButton deleteBtn;
-    final JButton select;
+    private final JButton newBtn;
+    private final JButton deleteBtn;
+    private final JButton select;
     private JList<String> fileList;
     private final JPanel fileListPanel;
     private final SaveNoteController saveNoteController;

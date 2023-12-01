@@ -59,13 +59,6 @@ public class DBConnectorTests {
 
     @After
     public void clearDatabase(){
-        try{
-            Statement insertStatement = dbConnector.getConnection().createStatement();
-            String sqlQuery = "DELETE FROM `Users` WHERE Users.Username = \"TestUser\"";
-            insertStatement.execute(sqlQuery);
-            dbConnector.dbClose();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
+        dbConnector.deleteUser("TestUser");
     }
 }

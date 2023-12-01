@@ -1,5 +1,6 @@
 package use_case_tests;
 
+import data_access.API.DeleteDataPostAPI;
 import data_access.API.UploadUserFilePostAPI;
 import data_access.SaveNoteDAO;
 import data_access.SelectNoteDAO;
@@ -40,12 +41,14 @@ public class SelectNoteUseCaseTests {
     private NoteViewModel noteViewModel;
 
     private SelectNoteController selectNoteController;
+    private DeleteDataPostAPI deleteDataPostAPI;
 
     @Before
     public void init(){
         noteViewModel = new NoteViewModel();
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         selectNoteDAO = new SelectNoteDAO(new AllUserFilesDAO());
+        deleteDataPostAPI = new DeleteDataPostAPI();
         SelectNoteOutputBoundary selectNoteOutputBoundary = new SelectNotePresenter(noteViewModel,viewManagerModel);
         selectNoteInteractor= new SelectNoteInteractor(selectNoteDAO, selectNoteOutputBoundary);
         selectNoteController = new SelectNoteController(selectNoteInteractor);
@@ -115,6 +118,7 @@ public class SelectNoteUseCaseTests {
                 throw new RuntimeException(e);
             }
         }
+        deleteDataPostAPI.deleteUser("TestUser");
     }
 }
 

@@ -8,9 +8,7 @@ import java.net.http.HttpResponse;
 import java.util.logging.Level;
 
 public class DeleteDataPostAPI extends DropBoxAPI {
-    public boolean deleteUserFile(String username, String filename) {
-        String body = requestBody + String.format("%s/%s.txt\"}", username, filename);
-
+    private boolean HttpRequest(String body) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.dropboxapi.com/2/files/delete_v2"))
                 .header("Authorization", this.APIToken)
@@ -25,5 +23,13 @@ public class DeleteDataPostAPI extends DropBoxAPI {
         }
         assert response != null;
         return response.statusCode() == 200;
+    }
+    public boolean deleteUserFile(String username, String filename) {
+        String body = requestBody + String.format("%s/%s.txt\"}", username, filename);
+        return HttpRequest(body);
+    }
+    public boolean deleteUser(String username) {
+        String body = requestBody + String.format("%s\"}", username);
+        return HttpRequest(body);
     }
 }

@@ -1,4 +1,5 @@
 package use_case_tests;
+import data_access.API.DeleteDataPostAPI;
 import data_access.API.UploadUserFilePostAPI;
 import data_access.SaveNoteDAO;
 import data_access.file_read_write.AllUserFilesDAO;
@@ -20,8 +21,10 @@ import java.time.LocalDateTime;
 
 public class SaveNoteUseCaseTests {
     private SaveNoteInteractor saveNoteInteractor;
+    private DeleteDataPostAPI deleteDataPostAPI;
     @Before
     public void init(){
+        deleteDataPostAPI = new DeleteDataPostAPI();
         NoteViewModel noteViewModel = new NoteViewModel();
         ViewManagerModel viewManagerModel = new ViewManagerModel();
         SaveNoteDAO saveNoteDAO = new SaveNoteDAO(new TextNoteWriterDAO(), new AllUserFilesDAO(), new UploadUserFilePostAPI());
@@ -62,5 +65,6 @@ public class SaveNoteUseCaseTests {
                 throw new RuntimeException(e);
             }
         }
+        deleteDataPostAPI.deleteUser("TestUser");
     }
 }

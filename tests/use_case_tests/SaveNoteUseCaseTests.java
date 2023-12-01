@@ -28,6 +28,7 @@ public class SaveNoteUseCaseTests {
         SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveNotePresenter(noteViewModel,viewManagerModel);
         saveNoteInteractor = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO, saveNoteDAO);
     }
+
     @Test
     public void testSaveNoteUseCasePass(){
         SaveNoteInputData saveNoteInputData = new SaveNoteInputData("TestUser",
@@ -49,6 +50,7 @@ public class SaveNoteUseCaseTests {
         File f = new File(FileAccessDAO.ROOT_DIR + "TestUser" + File.separator + "TestFile" + ".txt");
         assertFalse(f.exists());
     }
+
     @After
     public void deleteTestFiles(){
         String root = FileAccessDAO.ROOT_DIR;

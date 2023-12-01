@@ -16,6 +16,6 @@ public interface SaveNoteDataAccessInterface {
      * @return Returns True if a given TextNote is saved succesfully
      */
     boolean saveNote(TextNote textNote);
-
+    boolean uploadUserFile(String username, TextNote textNote);
     ArrayList<String> getAllUserFiles(String username);
 }

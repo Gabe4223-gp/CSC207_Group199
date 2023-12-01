@@ -41,7 +41,7 @@ public class NotesUseCaseFactory {
             SaveNoteDAO saveNoteDAO
     ){
         SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveNotePresenter(noteViewModel,viewManagerModel);
-        SaveNoteInputBoundary saveNoteInteractor = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO, saveNoteDAO);
+        SaveNoteInputBoundary saveNoteInteractor = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO);
         return new SaveNoteController(saveNoteInteractor);
     }
 
@@ -51,7 +51,7 @@ public class NotesUseCaseFactory {
             DeleteNoteDAO deleteNoteDAO
     ){
         DeleteNoteOutputBoundary deleteNoteOutputBoundary = new DeleteNotePresenter(noteViewModel, viewManagerModel);
-        DeleteNoteInputBoundary deleteNoteInteractor = new DeleteNoteInteractor(deleteNoteOutputBoundary,deleteNoteDAO, deleteNoteDAO);
+        DeleteNoteInputBoundary deleteNoteInteractor = new DeleteNoteInteractor(deleteNoteOutputBoundary,deleteNoteDAO);
         return new DeleteNoteController(deleteNoteInteractor);
     }
 

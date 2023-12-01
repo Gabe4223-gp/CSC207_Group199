@@ -3,12 +3,11 @@ package data_access;
 import data_access.API.DeleteDataPostAPI;
 import data_access.file_read_write.AllUserFilesDAO;
 import data_access.file_read_write.DeleteNoteWriterDAO;
-import use_case.delete_note.DeleteFileAPIDataAccessInterface;
 import use_case.delete_note.DeleteNoteDataAccessInterface;
 
 import java.util.ArrayList;
 
-public class DeleteNoteDAO implements DeleteNoteDataAccessInterface, DeleteFileAPIDataAccessInterface {
+public class DeleteNoteDAO implements DeleteNoteDataAccessInterface {
 
     private final AllUserFilesDAO allUserFilesDAO;
     private final DeleteNoteWriterDAO deleteNoteWriterDAO;

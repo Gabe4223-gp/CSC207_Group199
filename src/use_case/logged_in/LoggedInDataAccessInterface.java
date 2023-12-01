@@ -10,5 +10,5 @@ public interface LoggedInDataAccessInterface {
     ArrayList<String> downloadUserFile(String username);
     ArrayList<String> listContentsUserFolder(String username);
     TextNote getTextNote(String fileName, String username);
-    void writeDataToFile(String filename, String username, String filedata) throws IOException;
+    void writeDataToFile(String filename, String username, String filedata);
 }

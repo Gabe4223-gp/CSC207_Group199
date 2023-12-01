@@ -5,14 +5,13 @@ import data_access.file_read_write.AllUserFilesDAO;
 import data_access.file_read_write.TextNoteWriterDAO;
 import entity.TextNote;
 import use_case.save_note.SaveNoteDataAccessInterface;
-import use_case.save_note.UploadFileAPIDataAccessInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
 /**
  * Class to write the given TextNote to a file
  */
-public class SaveNoteDAO implements SaveNoteDataAccessInterface, UploadFileAPIDataAccessInterface {
+public class SaveNoteDAO implements SaveNoteDataAccessInterface {
 
     private final TextNoteWriterDAO textNoteWriterDAO;
     private final AllUserFilesDAO allUserFilesDAO;

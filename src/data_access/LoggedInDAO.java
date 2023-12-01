@@ -28,8 +28,12 @@ public class LoggedInDAO implements LoggedInDataAccessInterface {
         return this.allUserFilesDAO.getAllUserFiles(username);
     }
     @Override
-    public void writeDataToFile(String filename, String username, String filedata) throws IOException {
-        this.textNoteWriterDAO.writeDataToFile(filename, username, filedata);
+    public void writeDataToFile(String filename, String username, String filedata){
+        try {
+            this.textNoteWriterDAO.writeDataToFile(filename, username, filedata);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
     @Override
     public TextNote getTextNote(String fileName, String user) {

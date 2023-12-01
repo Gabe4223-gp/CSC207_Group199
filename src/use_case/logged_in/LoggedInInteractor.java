@@ -23,12 +23,12 @@ public class LoggedInInteractor implements LoggedInInputBoundary{
 
 
     @Override
-    public void text_note_execute(String username) throws IOException {
+    public void text_note_execute(String username) {
         ArrayList<String> downloadFileData = this.loggedInDAO.downloadUserFile(username);
         ArrayList<String> downloadFileNames = this.loggedInDAO.listContentsUserFolder(username);
         for (int file = 0; file < downloadFileNames.size(); file++) {
             String filename = downloadFileNames.get(file);
-            this.loggedInDAO.writeDataToFile(filename.substring(0, filename.length() - 4), username, downloadFileData.get(file));
+                this.loggedInDAO.writeDataToFile(filename.substring(0, filename.length() - 4), username, downloadFileData.get(file));
         }
         //Test Data
         ArrayList<String> files = loggedInDAO.getUserFiles(username);

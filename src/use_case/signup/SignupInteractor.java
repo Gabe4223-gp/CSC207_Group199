@@ -10,14 +10,12 @@ import java.time.LocalDateTime;
  */
 public class SignupInteractor implements SignupInputBoundary {
     final SignupDataAccessInterface userDataAccessObject;
-    final CreateUserAPIDataAccessInterface apiDataAccessInterface;
     final SignupOutputBoundary userPresenter;
 
     public SignupInteractor(SignupDataAccessInterface signupDataAccessInterface,
-                            SignupOutputBoundary signupOutputBoundary, CreateUserAPIDataAccessInterface signupAPIDAO) {
+                            SignupOutputBoundary signupOutputBoundary) {
         this.userDataAccessObject = signupDataAccessInterface;
         this.userPresenter = signupOutputBoundary;
-        this.apiDataAccessInterface = signupAPIDAO;
     }
 
     /**
@@ -28,7 +26,7 @@ public class SignupInteractor implements SignupInputBoundary {
      */
     @Override
     public void execute(SignupInputData signupInputData) {
-        boolean createUserAPI = this.apiDataAccessInterface.createUserFolder(signupInputData.getUsername());
+        boolean createUserAPI = this.userDataAccessObject.createUserFolder(signupInputData.getUsername());
         if (this.userDataAccessObject.existsByName(signupInputData.getUsername().toLowerCase())) {
             userPresenter.prepareFailView("User already exists.");
         }else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {

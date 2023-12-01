@@ -85,8 +85,19 @@ public class NotesViewTests {
         File f = new File(FileAccessDAO.ROOT_DIR + "TestUser" + File.separator + "TestFile2" + ".txt");
         assertTrue(f.exists());
     }
+
+    @Test
+    public void testDeleteBtnDeletes(){
+        noteView.getDeleteBtn().doClick();
+        assertFalse(noteViewModel.getNoteState().getUserFiles().contains("TestFile"));
+    }
+
     @After
     public void deleteTestFiles(){
+        deleteTestFilesHelper();
+    }
+
+    public static void deleteTestFilesHelper(){
         String root = FileAccessDAO.ROOT_DIR;
         File f = new File(root + "TestUser");
         if (f.exists()){

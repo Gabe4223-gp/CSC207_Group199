@@ -1,4 +1,4 @@
-package selectnote_tests;
+package use_case_tests;
 
 import data_access.API.UploadUserFilePostAPI;
 import data_access.SaveNoteDAO;

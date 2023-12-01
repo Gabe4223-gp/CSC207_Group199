@@ -94,6 +94,10 @@ public class NotesViewTests {
 
     @After
     public void deleteTestFiles(){
+        deleteTestFilesHelper();
+    }
+
+    public static void deleteTestFilesHelper(){
         String root = FileAccessDAO.ROOT_DIR;
         File f = new File(root + "TestUser");
         if (f.exists()){

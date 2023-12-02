@@ -83,6 +83,16 @@ public class DBConnector {
         return (userObj != null);
     }
 
+    public void deleteUser(String username){
+        try{
+            Statement insertStatement = this.connection.createStatement();
+            String sqlQuery = "DELETE FROM `Users` WHERE Users.Username = \"" + username + "\" ";
+            insertStatement.execute(sqlQuery);
+        }catch (Exception e){
+            this.logger.log(Level.WARNING, e.getMessage());
+        }
+    }
+
     public void dbClose() throws SQLException {
         this.connection.close();
     }

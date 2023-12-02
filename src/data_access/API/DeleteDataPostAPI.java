@@ -28,8 +28,8 @@ public class DeleteDataPostAPI extends DropBoxAPI {
         String body = requestBody + String.format("%s/%s.txt\"}", username, filename);
         return HttpRequest(body);
     }
-    public boolean deleteUser(String username) {
+    public void deleteUser(String username) {
         String body = requestBody + String.format("%s\"}", username);
-        return HttpRequest(body);
+        HttpRequest(body);
     }
 }

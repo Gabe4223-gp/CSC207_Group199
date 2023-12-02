@@ -2,6 +2,7 @@ package use_case.login;
 
 import data_access.LoginUserDAO;
 import entity.User;
+import entity.UserFactory;
 
 public class LoginInteractor implements LoginInputBoundary {
 
@@ -14,7 +15,7 @@ public class LoginInteractor implements LoginInputBoundary {
     }
     @Override
     public void execute(LoginInputData loginInputData) {
-        User thisUser = new User(loginInputData.getUsername(), loginInputData.getPassword());
+        User thisUser = UserFactory.createUser(loginInputData.getUsername(), loginInputData.getPassword());
         boolean loginSuccess = this.loginUserDAO.
                 checkLoginCredentials(thisUser);
         if(loginSuccess){

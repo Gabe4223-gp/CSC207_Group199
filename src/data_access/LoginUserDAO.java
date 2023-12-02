@@ -1,7 +1,6 @@
 package data_access;
 
 import entity.User;
-import entity.UserFactory;
 import use_case.login.LoginDataAccessInterface;
 
 public class LoginUserDAO implements LoginDataAccessInterface {

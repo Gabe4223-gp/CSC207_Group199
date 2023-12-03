@@ -19,11 +19,11 @@ public class DownloadUserFileGetAPI extends DropBoxAPI {
      */
     public ArrayList<String> downloadUserFile(String username) {
 
-        ListContentsUserFolderPostAPI user_files = APIFactory.getFilesAPI();
+        ListContentsUserFolderPostAPI user_files = new ListContentsUserFolderPostAPI();
         ArrayList<String> files = user_files.listContentsUserFolder(username);
         ArrayList<String> fileData = new ArrayList<>();
         for (String file : files) {
-            String body = requestBody + String.format("%s/%s\"}", username, file);
+            String body = this.getRequestBody() + String.format("%s/%s\"}", username, file);
             fileData.add(HttpRequest(body));
         }
         return fileData;
@@ -42,7 +42,7 @@ public class DownloadUserFileGetAPI extends DropBoxAPI {
         HttpResponse<String> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {logger.log(Level.WARNING, "Unsuccessful connection");}
+        } catch (IOException | InterruptedException e) {this.getLogger().log(Level.WARNING, "Unsuccessful connection");}
         assert response != null;
         return response.body();
     }

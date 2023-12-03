@@ -21,7 +21,7 @@ public class UploadUserFilePostAPI extends DropBoxAPI {
     public boolean uploadUserFile(String username, TextNote textNote) {
         if (textNote.getFileName().isEmpty() || !username.equals(textNote.getCreatedUser())) {return false;}
 
-        String bodyText = requestBody + String.format("%s/%s.txt\", \"mode\": {\".tag\": \"overwrite\"},\"autorename\": false, \"mute\": false}", username, textNote.getFileName());
+        String bodyText = this.getRequestBody() + String.format("%s/%s.txt\", \"mode\": {\".tag\": \"overwrite\"},\"autorename\": false, \"mute\": false}", username, textNote.getFileName());
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://content.dropboxapi.com/2/files/upload"))
@@ -33,7 +33,7 @@ public class UploadUserFilePostAPI extends DropBoxAPI {
         HttpResponse<?> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.discarding());
-        } catch (IOException | InterruptedException e) {logger.log(Level.WARNING, "Unsuccessful connection");}
+        } catch (IOException | InterruptedException e) {this.getLogger().log(Level.WARNING, "Unsuccessful connection");}
         assert response != null;
         return response.statusCode() == 200;
     }

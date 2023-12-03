@@ -22,7 +22,7 @@ public class CreateUserFolderPostAPI extends DropBoxAPI {
      * @return whether a new user directory is created (True) or not (False).
      */
     public boolean createUserFolder(String username) {
-        String body = requestBody + String.format("%s\", \"autorename\": false}", username);
+        String body = this.getRequestBody() + String.format("%s\", \"autorename\": false}", username);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.dropboxapi.com/2/files/create_folder_v2"))
@@ -33,7 +33,7 @@ public class CreateUserFolderPostAPI extends DropBoxAPI {
         HttpResponse<?> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.discarding());
-        } catch (IOException | InterruptedException e) {logger.log(Level.WARNING, e.getMessage());}
+        } catch (IOException | InterruptedException e) {this.getLogger().log(Level.WARNING, e.getMessage());}
         assert response != null;
         return response.statusCode() == 200;
     }

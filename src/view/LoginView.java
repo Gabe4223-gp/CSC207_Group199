@@ -142,4 +142,11 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         }
         return true;
     }
+
+    public JButton getLoginButton(){return logIn;}
+
+    public JButton getSignUpButton(){return signUp;}
+
+    public void setUsernameInput(String username){this.usernameInput.setText(username);};
+    public void setPasswordInput(String password){this.passwordInput.setText(password);}
 }

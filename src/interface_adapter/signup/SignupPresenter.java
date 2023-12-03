@@ -28,7 +28,11 @@ public class SignupPresenter implements SignupOutputBoundary {
         this.loginViewModel = loginViewModel;
     }
 
-
+    /**
+     *Method used to prepare successful view when someone creates a user
+     * and automatically switch to login view
+     * @param signupOutputData the output data, usernmae and creation time
+     */
     @Override
     public void prepareSuccessView(SignupOutputData signupOutputData) {
         LocalDateTime responseTime = LocalDateTime.parse(signupOutputData.getCreationTime());
@@ -45,6 +49,11 @@ public class SignupPresenter implements SignupOutputBoundary {
 
     }
 
+    /**
+     *Method used to prepare failed view when someone fail to create a user
+     * and signup view is fired to show message
+     * @param error the string that describes where is wrong
+     */
     @Override
     public void prepareFailView(String error) {
         SignupState signupState = signupViewModel.getSignupState();

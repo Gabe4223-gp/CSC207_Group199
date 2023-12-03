@@ -15,9 +15,21 @@ public class SelectNoteInputData {
         this.index = index;
     }
 
+    /**
+     *Method used to get filename
+     * @return filename
+     */
     public String getFilename(){return this.filename;}
 
+    /**
+     *Method used to get username
+     * @return username
+     */
     public String getUsername(){return this.username;}
 
+    /**
+     *Method used to get index of the file in the arraylist
+     * @return index of the file in the arraylist
+     */
     public Integer getIndex(){return this.index;}
 }

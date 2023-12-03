@@ -20,7 +20,7 @@ public class SelectNoteInteractor implements SelectNoteInputBoundary{
 
     /**
      * Transfer the filename, index and username using the data access object to fetch the text note date,
-     * prepare successful view or failed view according to index
+     * prepare successful view or failed view according to index and username
      * @param selectNoteInputData The input data from the controller to be used to fetch the file
      */
     @Override

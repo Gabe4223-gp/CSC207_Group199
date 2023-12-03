@@ -1,5 +1,6 @@
 package data_access_tests;
 
+import data_access.API.APIFactory;
 import data_access.API.UploadUserFilePostAPI;
 import data_access.SaveNoteDAO;
 import data_access.SelectNoteDAO;
@@ -32,7 +33,8 @@ public class SelectNoteDAOTests {
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
         textNote = TextNoteFactory.createTextNote("TestFile", LocalDateTime.now(),
                 testUser, "TestData");
-        saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO, new UploadUserFilePostAPI());
+        UploadUserFilePostAPI uploadAPI = APIFactory.uploadAPI();
+        saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO, uploadAPI);
         selectNoteDAO = new SelectNoteDAO(allUserFilesDAO);
     }
 

@@ -1,5 +1,6 @@
 package data_access_tests;
 
+import data_access.API.APIFactory;
 import data_access.API.DeleteDataPostAPI;
 import data_access.API.UploadUserFilePostAPI;
 import data_access.DeleteNoteDAO;
@@ -36,8 +37,10 @@ public class DeleteNoteDAOTests {
         textNote = TextNoteFactory.createTextNote("TestFile",
                 LocalDateTime.now(),
                 testUser, "Test Data");
-        saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO, new UploadUserFilePostAPI());
-        deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO, deleteNoteWriterDAO, new DeleteDataPostAPI());
+        UploadUserFilePostAPI uploadAPI = APIFactory.uploadAPI();
+        DeleteDataPostAPI deleteAPI = APIFactory.deleteAPI();
+        saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO, uploadAPI);
+        deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO, deleteNoteWriterDAO, deleteAPI);
     }
 
     @Test

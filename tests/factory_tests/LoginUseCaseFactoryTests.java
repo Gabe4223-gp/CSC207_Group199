@@ -44,10 +44,13 @@ public class LoginUseCaseFactoryTests {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         AllUserFilesDAO allUserFilesDAO = new AllUserFilesDAO();
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
-        LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO, textNoteWriterDAO, new DownloadUserFileGetAPI(), new ListContentsUserFolderPostAPI());
+        DownloadUserFileGetAPI downloadAPI = APIFactory.downloadFilesAPI();
+        ListContentsUserFolderPostAPI getFilesAPI = APIFactory.getFilesAPI();
+        CreateUserFolderPostAPI createAPI = APIFactory.createUserAPI();
+        LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO, textNoteWriterDAO, downloadAPI, getFilesAPI);
         DBConnector dbConnector = new DBConnector();
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
-        SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector, new CreateUserFolderPostAPI());
+        SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector, createAPI);
         LoggedInOutputBoundary loggedInOutputBoundary = new LoggedInPresenter(drawNoteViewModel, noteViewModel, viewManagerModel);
         LoggedInInputBoundary loggedInInputBoundary = new LoggedInInteractor(loggedInOutputBoundary, loggedInDAO);
         LoggedInController loggedInController = new LoggedInController(loggedInInputBoundary);

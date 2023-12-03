@@ -1,6 +1,7 @@
 package factory_tests;
 
 import app.NotesUseCaseFactory;
+import data_access.API.APIFactory;
 import data_access.API.DeleteDataPostAPI;
 import data_access.API.UploadUserFilePostAPI;
 import data_access.DeleteNoteDAO;
@@ -39,8 +40,10 @@ public class NotesUseCaseFactoryTests {
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
         AllUserFilesDAO allUserFilesDAO = new AllUserFilesDAO();
         DeleteNoteWriterDAO deleteNoteWriterDAO = new DeleteNoteWriterDAO();
-        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO,allUserFilesDAO, new UploadUserFilePostAPI());
-        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO,deleteNoteWriterDAO, new DeleteDataPostAPI());
+        UploadUserFilePostAPI uploadAPI = APIFactory.uploadAPI();
+        DeleteDataPostAPI deleteAPI = APIFactory.deleteAPI();
+        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO,allUserFilesDAO, uploadAPI);
+        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO,deleteNoteWriterDAO, deleteAPI);
         SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveNotePresenter(noteViewModel,viewManagerModel);
         SaveNoteInputBoundary saveNoteInputBoundary = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO);
         SaveNoteController saveNoteController = new SaveNoteController(saveNoteInputBoundary);

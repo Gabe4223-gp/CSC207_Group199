@@ -16,7 +16,8 @@ import view.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class Main {
+public class
+Main {
     public static void main(String[] args) {
 
 
@@ -44,19 +45,20 @@ public class Main {
         AllUserFilesDAO allUserFilesDAO = new AllUserFilesDAO();
         DeleteNoteWriterDAO deleteNoteWriterDAO = new DeleteNoteWriterDAO();
 
-        //API Access objects
-        CreateUserFolderPostAPI createUserFolderPostAPI = new CreateUserFolderPostAPI();
-        UploadUserFilePostAPI uploadUserFilePostAPI = new UploadUserFilePostAPI();
-        DeleteDataPostAPI deleteDataPostAPI = new DeleteDataPostAPI();
-        DownloadUserFileGetAPI downloadUserFileGetAPI = new DownloadUserFileGetAPI();
-        ListContentsUserFolderPostAPI listContentsUserFolderPostAPI = new ListContentsUserFolderPostAPI();
+        //API
+        CreateUserFolderPostAPI createUserAPI = APIFactory.createUserAPI();
+        UploadUserFilePostAPI uploadAPI = APIFactory.uploadAPI();
+        DeleteDataPostAPI deleteAPI = APIFactory.deleteAPI();
+        DownloadUserFileGetAPI downloadFilesAPI = APIFactory.downloadFilesAPI();
+        ListContentsUserFolderPostAPI getFilesAPI = APIFactory.getFilesAPI();
+
 
         //Data Access objects
         LoginUserDAO loginUserDAO = new LoginUserDAO(dbConnector);
-        SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector, createUserFolderPostAPI);
-        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO, uploadUserFilePostAPI);
-        LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO, textNoteWriterDAO, downloadUserFileGetAPI, listContentsUserFolderPostAPI);
-        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO, deleteNoteWriterDAO, deleteDataPostAPI);
+        SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector, createUserAPI);
+        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO, uploadAPI);
+        LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO, textNoteWriterDAO, downloadFilesAPI, getFilesAPI);
+        DeleteNoteDAO deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO, deleteNoteWriterDAO, deleteAPI);
         SelectNoteDAO selectNoteDAO = new SelectNoteDAO(allUserFilesDAO);
 
 

@@ -20,7 +20,7 @@ public class DownloadUserFileAPITest {
     private CreateUserFolderPostAPI createUserFolderPostAPI;
     private UploadUserFilePostAPI uploadUserFilePostAPI;
     private DeleteDataPostAPI deleteDataPostAPI;
-    private TextNote textNote;
+
     @Before
     public void init() {
         downloadUserFileGetAPI = APIFactory.downloadFilesAPI();
@@ -39,7 +39,7 @@ public class DownloadUserFileAPITest {
     public void testDownloadUserFilePass(){
         User newUser1 = UserFactory.createUser("qwerty", "uiop");
         createUserFolderPostAPI.createUserFolder(newUser1.getUsername());
-        textNote = TextNoteFactory.createTextNote("testFile1", LocalDateTime.now(),
+        TextNote textNote = TextNoteFactory.createTextNote("testFile1", LocalDateTime.now(),
                 newUser1.getUsername(), "testData1");
         uploadUserFilePostAPI.uploadUserFile(newUser1.getUsername(), textNote);
         textNote = TextNoteFactory.createTextNote("testFile2", LocalDateTime.now(),

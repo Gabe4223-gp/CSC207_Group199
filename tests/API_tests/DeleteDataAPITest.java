@@ -21,7 +21,6 @@ public class DeleteDataAPITest {
     private DeleteDataPostAPI deleteDataPostAPI;
     private CreateUserFolderPostAPI createUserFolderPostAPI;
     private UploadUserFilePostAPI uploadUserFilePostAPI;
-    private TextNote textNote;
     String user = "userTest2";
     String filename = "userFileTest";
     String fileTxt = "test data";
@@ -50,7 +49,7 @@ public class DeleteDataAPITest {
     public void testDeleteUserFilePass() {
         User newUser1 = UserFactory.createUser("qwerty", "uiop");
         createUserFolderPostAPI.createUserFolder(newUser1.getUsername());
-        textNote = TextNoteFactory.createTextNote(filename, LocalDateTime.now(),
+        TextNote textNote = TextNoteFactory.createTextNote(filename, LocalDateTime.now(),
                 newUser1.getUsername(), fileTxt);
         uploadUserFilePostAPI.uploadUserFile(newUser1.getUsername(), textNote);
         assertTrue(deleteDataPostAPI.deleteUserFile(newUser1.getUsername(), filename));

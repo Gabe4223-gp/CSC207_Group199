@@ -21,7 +21,7 @@ public class ListContentsUserFolderPostAPI extends DropBoxAPI {
     public ArrayList<String> listContentsUserFolder(String username){
 
         ArrayList<String> userFiles = new ArrayList<>();
-        String body = requestBody + String.format("%s\", \"recursive\": false, \"include_media_info\": false, \"include_deleted\": false, \"include_has_explicit_shared_members\": false, \"include_mounted_folders\": true, \"include_non_downloadable_files\": true}", username);
+        String body = this.getRequestBody() + String.format("%s\", \"recursive\": false, \"include_media_info\": false, \"include_deleted\": false, \"include_has_explicit_shared_members\": false, \"include_mounted_folders\": true, \"include_non_downloadable_files\": true}", username);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://api.dropboxapi.com/2/files/list_folder"))
@@ -32,7 +32,7 @@ public class ListContentsUserFolderPostAPI extends DropBoxAPI {
         HttpResponse<String> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {logger.log(Level.WARNING, "Unsuccessful connection");}
+        } catch (IOException | InterruptedException e) {this.getLogger().log(Level.WARNING, "Unsuccessful connection");}
         assert response != null;
         String result = response.body();
         String[] temp_list = result.trim().split("\"");

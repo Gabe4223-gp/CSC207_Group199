@@ -5,6 +5,7 @@ import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,9 +23,9 @@ public class DBConnector {
             Statement statement = this.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Users");
             /*
-            * Convert the JDBC resultset to a JSONArray to be able to access data easily
-            *
-            */
+             * Convert the JDBC resultset to a JSONArray to be able to access data easily
+             *
+             */
             ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
             while (resultSet.next()){
                 int numColumns = resultSetMetaData.getColumnCount();
@@ -38,6 +39,7 @@ public class DBConnector {
         }catch (Exception e){
             this.logger.log(Level.WARNING, e.getMessage());
         }
+
     }
     public JSONObject getUserObj(String username){
         for(Object obj: this.allUsers){
@@ -51,6 +53,7 @@ public class DBConnector {
     }
 
     public boolean checkLoginCredentials(String username, String password){
+
         JSONObject userObj = getUserObj(username);
         if(userObj == null){
             return false;
@@ -71,6 +74,11 @@ public class DBConnector {
                     password + "', " +
                     "CURRENT_TIMESTAMP())";
             insertStatement.execute(sqlQuery);
+            JSONObject thisUser = new JSONObject();
+            thisUser.put("Created_On", LocalDateTime.now());
+            thisUser.put("Username",username);
+            thisUser.put("Password", password);
+            this.allUsers.put(thisUser);
             return true;
         }catch (Exception e){
             this.logger.log(Level.WARNING, e.getMessage());
@@ -100,4 +108,5 @@ public class DBConnector {
     public Connection getConnection() {
         return connection;
     }
+
 }

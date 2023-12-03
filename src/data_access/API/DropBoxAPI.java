@@ -8,20 +8,26 @@ public abstract class DropBoxAPI {
     /**
      * String containing initial path for all http requestBody used in Http request.
      */
-    public String requestBody;
+    private String requestBody;
     /**
      * Logger logs messages for all Exceptions in Dropbox API calls.
      */
-    public Logger logger;
+    private Logger logger;
     /**
      * String containing the access token for all Dropbox API calls.
      */
-    public String APIToken = "Bearer sl.BrAZ6fPAfUm5bDj_N4E2Nd_tEPHfToW0e5zRj1q0kWmYUlgPKfxu0RCZMBG3o8buAMtT3mNnE2xOzQhFmF-2399R04tDdbEaSNPOw8_ojmcuoHU0pKeNwRDe1DcQXEZJrOmRzVK21o4wyoo5KXKWNiU";
+    public static String APIToken = "Bearer sl.BrANuOZZgE2mblQrd605UubXyCjKJmWOOk6cTwQ1x5mR8nluGAit8U1humb7ohAZKQCSKtUcilaUihnAU1YSFSaXB_ePVmItMl3Cm8HzELZy4DtBe5pg7Z5nznSWujXRpzTHQsBotxBGfGGaDSheTK4";
     /**
      * Class to initialize request body and logger for use in all API subclasses.
      */
     protected DropBoxAPI(){
         requestBody = "{\"path\": \"/NoDraw_folder/";
         logger = Logger.getLogger("APIConnectionLog");
+    }
+    public Logger getLogger() {
+        return logger;
+    }
+    public String getRequestBody() {
+        return requestBody;
     }
 }

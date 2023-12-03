@@ -7,9 +7,7 @@ import entity.User;
 import entity.UserFactory;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,20 +25,6 @@ public class CreateUserFolderAPITest {
         createUserFolderPostAPI = APIFactory.createUserAPI();
         deleteDataPostAPI = APIFactory.deleteAPI();
     }
-    /**
-    * Rule to expect no exception from CreateUserFolderPostAPI by default.
-     */
-    /*
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
-    @Test
-    public void testCatchException() {
-        expectedException.expect(Exception.class);
-        createUserFolderPostAPI.requestBody = "{\"path\": \"/FakeFolder/";
-        createUserFolderPostAPI.createUserFolder("c");
-    }
-
-     */
     @Test
     public void testCreateUserFolderPass() {
         User newUser1 = UserFactory.createUser("qwerty", "uiop");

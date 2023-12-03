@@ -7,8 +7,16 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.logging.Level;
-
+/**
+ * Download Dropbox Http endpoint to download user files in the users NoDraw dropbox account.
+ * Class is a subclass of the DropBoxAPI file
+ */
 public class DownloadUserFileGetAPI extends DropBoxAPI {
+    /**
+     * Downloads all files within the user Dropbox directory.
+     * @param username A string containing the user username to use in downloading files within the users directory.
+     * @return an ArrayList containing the data of all files in users directory.
+     */
     public ArrayList<String> downloadUserFile(String username) {
 
         ListContentsUserFolderPostAPI user_files = APIFactory.getFilesAPI();
@@ -20,6 +28,11 @@ public class DownloadUserFileGetAPI extends DropBoxAPI {
         }
         return fileData;
     }
+    /**
+     * Private Http Request to send a download request using the Dropbox download endpoint.
+     * @param body A string containing the path for HttpRequest
+     * @return a string containing the data of a specified file.
+     */
     private String HttpRequest(String body) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://content.dropboxapi.com/2/files/download"))

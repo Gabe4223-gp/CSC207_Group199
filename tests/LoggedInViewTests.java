@@ -1,4 +1,5 @@
 import app.LoginUseCaseFactory;
+import data_access.API.APIFactory;
 import data_access.API.DownloadUserFileGetAPI;
 import data_access.API.ListContentsUserFolderPostAPI;
 import data_access.API.UploadUserFilePostAPI;
@@ -35,10 +36,11 @@ public class LoggedInViewTests {
 
     @Before
     public void init(){
+        UploadUserFilePostAPI uploadAPI = APIFactory.uploadAPI();
         saveNoteDAO = new SaveNoteDAO(
                 new TextNoteWriterDAO(),
                 allUserFilesDAO,
-                new UploadUserFilePostAPI());
+                uploadAPI);
         TextNote testNote1 = new TextNote("TestFile1", LocalDateTime.now(), "TestUser", "TestData");
         TextNote testNote2 = new TextNote("TestFile2", LocalDateTime.now(), "TestUser", "TestData");
         TextNote testNote3 = new TextNote("TestFile3", LocalDateTime.now(), "TestUser", "TestData");
@@ -53,8 +55,8 @@ public class LoggedInViewTests {
         DrawNoteViewModel drawNoteViewModel = new DrawNoteViewModel();
         allUserFilesDAO = new AllUserFilesDAO();
         textNoteWriterDAO = new TextNoteWriterDAO();
-        downloadUserFileGetAPI = new DownloadUserFileGetAPI();
-        listContentsUserFolderPostAPI = new ListContentsUserFolderPostAPI();
+        downloadUserFileGetAPI = APIFactory.downloadFilesAPI();
+        listContentsUserFolderPostAPI = APIFactory.getFilesAPI();
         LoggedInDAO loggedInDAO = new LoggedInDAO(allUserFilesDAO, textNoteWriterDAO, downloadUserFileGetAPI, listContentsUserFolderPostAPI);
         noteViewModel = new NoteViewModel();
         NoteState noteState = new NoteState();

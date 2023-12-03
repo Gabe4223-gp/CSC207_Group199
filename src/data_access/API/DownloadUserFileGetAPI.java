@@ -11,24 +11,26 @@ import java.util.logging.Level;
 public class DownloadUserFileGetAPI extends DropBoxAPI {
     public ArrayList<String> downloadUserFile(String username) {
 
-        ListContentsUserFolderPostAPI user_files = new ListContentsUserFolderPostAPI();
+        ListContentsUserFolderPostAPI user_files = APIFactory.getFilesAPI();
         ArrayList<String> files = user_files.listContentsUserFolder(username);
         ArrayList<String> fileData = new ArrayList<>();
-        HttpResponse<String> response;
         for (String file : files) {
             String body = requestBody + String.format("%s/%s\"}", username, file);
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://content.dropboxapi.com/2/files/download"))
-                    .header("Authorization", this.APIToken)
-                    .header("Dropbox-API-Arg", body)
-                    .build();
-            try {
-                response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-                fileData.add(response.body());
-            } catch (IOException | InterruptedException e) {
-                logger.log(Level.WARNING, "Unsuccessful connection");
-            }
+            fileData.add(HttpRequest(body));
         }
         return fileData;
+    }
+    private String HttpRequest(String body) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://content.dropboxapi.com/2/files/download"))
+                .header("Authorization", this.APIToken)
+                .header("Dropbox-API-Arg", body)
+                .build();
+        HttpResponse<String> response = null;
+        try {
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {logger.log(Level.WARNING, "Unsuccessful connection");}
+        assert response != null;
+        return response.body();
     }
 }

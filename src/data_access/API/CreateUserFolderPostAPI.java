@@ -21,9 +21,7 @@ public class CreateUserFolderPostAPI extends DropBoxAPI {
         HttpResponse<?> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.discarding());
-        } catch (IOException | InterruptedException e) {
-            logger.log(Level.WARNING, e.getMessage());
-        }
+        } catch (IOException | InterruptedException e) {logger.log(Level.WARNING, e.getMessage());}
         assert response != null;
         return response.statusCode() == 200;
     }

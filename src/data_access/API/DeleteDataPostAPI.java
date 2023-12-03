@@ -18,9 +18,7 @@ public class DeleteDataPostAPI extends DropBoxAPI {
         HttpResponse<?> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.discarding());
-        } catch (IOException | InterruptedException e) {
-            logger.log(Level.WARNING, e.getMessage());
-        }
+        } catch (IOException | InterruptedException e) {logger.log(Level.WARNING, e.getMessage());}
         assert response != null;
         return response.statusCode() == 200;
     }
@@ -28,8 +26,8 @@ public class DeleteDataPostAPI extends DropBoxAPI {
         String body = requestBody + String.format("%s/%s.txt\"}", username, filename);
         return HttpRequest(body);
     }
-    public void deleteUser(String username) {
+    public boolean deleteUser(String username) {
         String body = requestBody + String.format("%s\"}", username);
-        HttpRequest(body);
+        return HttpRequest(body);
     }
 }

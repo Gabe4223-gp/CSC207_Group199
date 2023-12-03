@@ -26,9 +26,7 @@ public class ListContentsUserFolderPostAPI extends DropBoxAPI {
         HttpResponse<String> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
-            logger.log(Level.WARNING, "Unsuccessful connection");
-        }
+        } catch (IOException | InterruptedException e) {logger.log(Level.WARNING, "Unsuccessful connection");}
         assert response != null;
         String result = response.body();
         String[] temp_list = result.trim().split("\"");

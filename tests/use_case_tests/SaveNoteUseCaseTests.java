@@ -1,4 +1,5 @@
 package use_case_tests;
+import data_access.API.APIFactory;
 import data_access.API.DeleteDataPostAPI;
 import data_access.API.UploadUserFilePostAPI;
 import data_access.SaveNoteDAO;
@@ -24,10 +25,11 @@ public class SaveNoteUseCaseTests {
     private DeleteDataPostAPI deleteDataPostAPI;
     @Before
     public void init(){
-        deleteDataPostAPI = new DeleteDataPostAPI();
+        deleteDataPostAPI = APIFactory.deleteAPI();
+        UploadUserFilePostAPI uploadAPI = APIFactory.uploadAPI();
         NoteViewModel noteViewModel = new NoteViewModel();
         ViewManagerModel viewManagerModel = new ViewManagerModel();
-        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(new TextNoteWriterDAO(), new AllUserFilesDAO(), new UploadUserFilePostAPI());
+        SaveNoteDAO saveNoteDAO = new SaveNoteDAO(new TextNoteWriterDAO(), new AllUserFilesDAO(), uploadAPI);
         SaveNoteOutputBoundary saveNoteOutputBoundary = new SaveNotePresenter(noteViewModel,viewManagerModel);
         saveNoteInteractor = new SaveNoteInteractor(saveNoteOutputBoundary, saveNoteDAO);
     }

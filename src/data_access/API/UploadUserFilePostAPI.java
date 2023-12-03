@@ -10,6 +10,7 @@ import entity.TextNote;
 
 public class UploadUserFilePostAPI extends DropBoxAPI {
     public boolean uploadUserFile(String username, TextNote textNote) {
+        if (textNote.getFileName().isEmpty() || !username.equals(textNote.getCreatedUser())) {return false;}
 
         String bodyText = requestBody + String.format("%s/%s.txt\", \"mode\": {\".tag\": \"overwrite\"},\"autorename\": false, \"mute\": false}", username, textNote.getFileName());
 
@@ -23,9 +24,7 @@ public class UploadUserFilePostAPI extends DropBoxAPI {
         HttpResponse<?> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.discarding());
-        } catch (IOException | InterruptedException e) {
-            logger.log(Level.WARNING, "Unsuccessful connection");
-        }
+        } catch (IOException | InterruptedException e) {logger.log(Level.WARNING, "Unsuccessful connection");}
         assert response != null;
         return response.statusCode() == 200;
     }

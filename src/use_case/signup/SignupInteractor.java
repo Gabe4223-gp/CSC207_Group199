@@ -30,12 +30,12 @@ public class SignupInteractor implements SignupInputBoundary {
      */
     @Override
     public void execute(SignupInputData signupInputData) {
-        boolean createUserAPI = this.userDataAccessObject.createUserFolder(signupInputData.getUsername());
         if (this.userDataAccessObject.existsByName(signupInputData.getUsername())) {
             userPresenter.prepareFailView("User already exists.");
         }else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match.");}
         else {
+            boolean createUserAPI = this.userDataAccessObject.createUserFolder(signupInputData.getUsername());
             User user = UserFactory.createUser(signupInputData.getUsername(), signupInputData.getPassword());
             this.userDataAccessObject.save(user);
             LocalDateTime now = LocalDateTime.now();

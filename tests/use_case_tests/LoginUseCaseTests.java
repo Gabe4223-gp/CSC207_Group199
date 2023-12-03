@@ -4,6 +4,7 @@ import data_access.DBConnector;
 import data_access.LoginUserDAO;
 import data_access.file_read_write.FileAccessDAO;
 import entity.User;
+import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginController;
@@ -44,7 +45,7 @@ public class LoginUseCaseTests {
     public void testLoginUseCasePass() throws SQLException {
         dbConnector.dbClose();
         DBConnector dbConnector = new DBConnector();
-        User user = new User(testUser, testPassword);
+        User user = UserFactory.createUser(testUser, testPassword);
         loginController.execute(user.getUsername(), user.getPassword());
         assertTrue(dbConnector.checkLoginCredentials(user.getUsername(), user.getPassword()));
     }
@@ -57,7 +58,7 @@ public class LoginUseCaseTests {
     public void testLoginUseCaseUsernameFailed() throws SQLException {
         dbConnector.dbClose();
         DBConnector dbConnector = new DBConnector();
-        User user = new User(testUser, testPassword);
+        User user = UserFactory.createUser(testUser, testPassword);
         LoginInputData loginInputData = new LoginInputData("otherUser", user.getPassword());
         loginInteractor.execute(loginInputData);
         assertFalse(dbConnector.checkLoginCredentials("otherUser", user.getPassword()));
@@ -66,7 +67,7 @@ public class LoginUseCaseTests {
     public void testLoginUseCasePasswordFailed() throws SQLException {
         dbConnector.dbClose();
         DBConnector dbConnector = new DBConnector();
-        User user = new User(testUser, testPassword);
+        User user = UserFactory.createUser(testUser, testPassword);
         LoginInputData loginInputData = new LoginInputData(user.getUsername(), "otherPassword");
         loginInteractor.execute(loginInputData);
         assertFalse(dbConnector.checkLoginCredentials(user.getUsername(), "otherPassword"));

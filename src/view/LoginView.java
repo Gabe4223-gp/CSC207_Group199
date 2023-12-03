@@ -11,6 +11,11 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * The initial view of the user upon running the NoDraw app. The login user interface allows the user to
+ * interact with the login view, with the option to insert username and password information, go to the signup view,
+ * and login to the user account. Login view implements ActionListener and PropertyChangeListener.
+ */
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "log in";
@@ -25,7 +30,13 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     final JButton signUp;
 
     private final LoginController loginController;
-
+    /**
+     * Initializes the login view, contains action events for the login button, which invokes the login usecase,
+     * and the signup button, which takes the user the signup view.
+     * @param loginViewModel is responsible handling and managing the logic displayed by the login view.
+     * @param controller is responsible for taking in the username and password input data
+     * from the login state using the login view and invoking the login interactor.
+     */
     public LoginView(LoginViewModel loginViewModel, LoginController controller) {
         this.loginViewModel = loginViewModel;
         this.loginController = controller;
@@ -82,12 +93,20 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         this.add(passwordErrorField);
         this.add(buttons);
     }
-
+    /**
+     * Method is invoked automatically whenever the login component is clicked.
+     * @param e is the action upon click.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
+    /**
+     * It enables automatic UI updates when properties in the login view model change by raising the PropertyChanged event.
+     * @param evt A PropertyChangeEvent object describing the event source
+     *          and the property that has changed.
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         LoginState state = (LoginState) evt.getNewValue();
@@ -101,7 +120,10 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         }
 
     }
-
+    /**
+     * Method check if the username input is valid and not empty.
+     * @return whether the user entered a valid username.
+     */
     private boolean checkUsername(){
         if(usernameInput.getText().isEmpty()){
             JOptionPane.showMessageDialog(this,"Please enter a valid username");
@@ -109,6 +131,10 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         }
         return true;
     }
+    /**
+     * Method check if the password input is valid and not empty.
+     * @return whether the user entered a valid password.
+     */
     private boolean checkPassword(){
         if(passwordInput.getText().isEmpty()){
             JOptionPane.showMessageDialog(this,"Please enter password");

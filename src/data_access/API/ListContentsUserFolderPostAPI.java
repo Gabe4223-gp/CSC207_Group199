@@ -1,7 +1,5 @@
 package data_access.API;
 
-import data_access.file_read_write.FileAccessDAO;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -10,8 +8,16 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.lang.String;
 import java.util.logging.Level;
-
+/**
+ * List folder Dropbox Http endpoint to get all user file names in the users NoDraw dropbox account.
+ * Class is a subclass of the DropBoxAPI file
+ */
 public class ListContentsUserFolderPostAPI extends DropBoxAPI {
+    /**
+     * List all the files in a user directory given their username in the NoDraw Dropbox account.
+     * @param username A string containing the user username to use in getting files within user directory.
+     * @return an ArrayList containing all the names of files within the users directory.
+     */
     public ArrayList<String> listContentsUserFolder(String username){
 
         ArrayList<String> userFiles = new ArrayList<>();
@@ -26,9 +32,7 @@ public class ListContentsUserFolderPostAPI extends DropBoxAPI {
         HttpResponse<String> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
-            logger.log(Level.WARNING, "Unsuccessful connection");
-        }
+        } catch (IOException | InterruptedException e) {logger.log(Level.WARNING, "Unsuccessful connection");}
         assert response != null;
         String result = response.body();
         String[] temp_list = result.trim().split("\"");

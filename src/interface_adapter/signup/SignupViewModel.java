@@ -4,7 +4,10 @@ import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-
+/**
+ A class stores the state of view and can be updated by presenter to
+ *change the view
+ */
 public class SignupViewModel extends ViewModel {
 
     public static final String TITLE = "Sign up";

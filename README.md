@@ -13,14 +13,16 @@ https://utoronto-my.sharepoint.com/:p:/g/personal/reeshav_kumar_mail_utoronto_ca
 ## Package Organization
 Our code is divided into several packages adhering to clean architecture:
 
-Package entity contains all entity level classes
-Package database contains all database and API related classes
-Package use_cases contains all use case level classes
-Package controllers contains all controller classes
-Package presenter contains all presenter classes
-Package UI contains all UI level classes
-Package Exception contains all exceptions
-Package base contains Main class
+* Package `app` contains main, login, and signup classes.
+* Package `entity` contains all entity level classes
+* Package `data_access` contains all database and API related classes
+* Package `use_cases` contains all use case level classes
+* Package `interface` contains all interface adapter classes
+* Package `view` contains all UI level classes
+
+## Tests
+We have implemented the following tests, which account for over 90% of the entire codebase.
+
 
 ## Compiling
 This project requires a JDK ≥ version 17. OpenJDK 20 is recommended.
@@ -68,8 +70,8 @@ To facilitate sharing with others or archiving purposes the application will pro
 
 The ultimate goal of this integrated notetaking and drawing application is to provide users with a comprehensive and flexible tool that enhances their productivity, creativity, and organization, empowering them to effectively capture and visualize their ideas and thoughts.
 
--Fruityvice API documentation link (tentative, API may be subject to change):
-[https://dev.evernote.com/doc/#reference](https://www.fruityvice.com/doc/index.html)
+-DropBox API
+-JDBC Connector
 
 -Screenshot in hoppscotch.io
 ![image](https://github.com/FionaYYX/CSC207_Group199/assets/69075231/dcf7352c-827c-40b8-8c8d-4307ce0643c8)

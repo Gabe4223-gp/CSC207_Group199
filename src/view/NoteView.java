@@ -48,18 +48,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         newBtn = new JButton(noteViewModel.NEW_BTN_LBL);
         deleteBtn = new JButton(noteViewModel.DELETE_BTN_LBL);
         select = new JButton(noteViewModel.SELECT_BTN_LBL);
-
-        newBtn.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if(e.getSource().equals(newBtn)){
-                            filenameInput.setText("");
-                            textArea.setText("");
-                        }
-                    }
-                }
-        );
+        
         /*
         * Bind action listeners to the buttons
         * */
@@ -105,6 +94,17 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                         String filename = fileList.getSelectedValue();
                         String username = noteViewModel.getNoteState().getUsername();
                         selectNoteController.selectNote(filename, index, username);
+                    }
+                }
+        );
+        newBtn.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(e.getSource().equals(newBtn)){
+                            filenameInput.setText("");
+                            textArea.setText("");
+                        }
                     }
                 }
         );

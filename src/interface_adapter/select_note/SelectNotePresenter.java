@@ -19,6 +19,12 @@ public class SelectNotePresenter implements SelectNoteOutputBoundary {
         this.noteViewModel = noteViewModel;
         this.viewManagerModel = viewManagerModel;
     }
+
+    /**
+     *A method used to prepare failed view by showing error message
+     * on the vire
+     * @param error a string message shows where is wrong in the process
+     */
     @Override
     public void prepareSelectFailView(String error) {
         NoteState noteState = noteViewModel.getNoteState();
@@ -26,6 +32,11 @@ public class SelectNotePresenter implements SelectNoteOutputBoundary {
         noteViewModel.firePropertyChange();
     }
 
+    /**
+     *A method used to prepare successful view by showing selected filename
+     * and selected text and set error to empty
+     * @param noteOutputData output data with filename and text
+     */
     @Override
     public void prepareSelectSuccessfulView(NoteOutputData noteOutputData) {
         NoteState noteState = noteViewModel.getNoteState();

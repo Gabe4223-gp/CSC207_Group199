@@ -1,17 +1,33 @@
 package data_access.API;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.logging.Logger;
-
+/**
+ * Abstract class API is the parent class for all Dropbox API endpoints.
+ */
 public abstract class DropBoxAPI {
-    public String requestBody;
-    public Logger logger;
-    public String APIToken = "Bearer sl.Bq6hTBIi25Xd0FCRkSBGb5PTIYbtiowMkxPaot_P0fsDVV4OP9vufBPS4pfaTJwNlhpbq7tDQC9XkpGedLQCI1jsUl9AMbWkdUV6KcOlmh0HDvU7YIn1MuV8RPR9WDXVRyCiAFWi1saSP3f5n-QDX-I";
+    /**
+     * String containing initial path for all http requestBody used in Http request.
+     */
+    private String requestBody;
+    /**
+     * Logger logs messages for all Exceptions in Dropbox API calls.
+     */
+    private Logger logger;
+    /**
+     * String containing the access token for all Dropbox API calls.
+     */
+    public static String APIToken = "Bearer sl.BrANuOZZgE2mblQrd605UubXyCjKJmWOOk6cTwQ1x5mR8nluGAit8U1humb7ohAZKQCSKtUcilaUihnAU1YSFSaXB_ePVmItMl3Cm8HzELZy4DtBe5pg7Z5nznSWujXRpzTHQsBotxBGfGGaDSheTK4";
+    /**
+     * Class to initialize request body and logger for use in all API subclasses.
+     */
     protected DropBoxAPI(){
         requestBody = "{\"path\": \"/NoDraw_folder/";
         logger = Logger.getLogger("APIConnectionLog");
+    }
+    public Logger getLogger() {
+        return logger;
+    }
+    public String getRequestBody() {
+        return requestBody;
     }
 }

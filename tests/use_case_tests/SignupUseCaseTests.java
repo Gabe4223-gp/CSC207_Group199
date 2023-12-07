@@ -1,6 +1,8 @@
 package use_case_tests;
 
+import data_access.API.APIFactory;
 import data_access.API.CreateUserFolderPostAPI;
+import data_access.API.DeleteDataPostAPI;
 import data_access.DBConnector;
 
 import data_access.SignupUserDAO;
@@ -33,10 +35,13 @@ public class SignupUseCaseTests {
     private SignupViewModel signupViewModel = new SignupViewModel();
 
     private SignupOutputBoundary signupOutputBoundary = new SignupPresenter(new ViewManagerModel(), signupViewModel, new LoginViewModel());
+    private DeleteDataPostAPI deleteDataPostAPI;
     @Before
     public void init() {
-        SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector, new CreateUserFolderPostAPI());
+        CreateUserFolderPostAPI createAPI = APIFactory.createUserAPI();
+        SignupUserDAO signupUserDAO = new SignupUserDAO(dbConnector, createAPI);
         signupInteractor = new SignupInteractor(signupUserDAO, signupOutputBoundary);
+        deleteDataPostAPI = APIFactory.deleteAPI();
     }
 
     @Test
@@ -67,5 +72,7 @@ public class SignupUseCaseTests {
     public void clearDatabase(){
         dbConnector.deleteUser("newUser");
         dbConnector.deleteUser("newUser2");
+        deleteDataPostAPI.deleteUser("newUser");
+        deleteDataPostAPI.deleteUser("newUser2");
     }
 }

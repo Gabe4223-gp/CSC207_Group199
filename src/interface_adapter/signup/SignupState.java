@@ -1,5 +1,8 @@
 package interface_adapter.signup;
 
+/**
+ *A class used to record the state of signup, like username and error
+ */
 public class SignupState {
     private String username = "";
     private String password = "";

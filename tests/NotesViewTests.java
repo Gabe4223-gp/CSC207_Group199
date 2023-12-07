@@ -1,4 +1,5 @@
 import app.NotesUseCaseFactory;
+import data_access.API.APIFactory;
 import data_access.API.DeleteDataPostAPI;
 import data_access.API.UploadUserFilePostAPI;
 import data_access.DeleteNoteDAO;
@@ -9,7 +10,7 @@ import data_access.file_read_write.DeleteNoteWriterDAO;
 import data_access.file_read_write.FileAccessDAO;
 import data_access.file_read_write.TextNoteWriterDAO;
 import entity.TextNote;
-import entity.TextNoteBuilder;
+import entity.TextNoteFactory;
 import interface_adapter.NoteState;
 import interface_adapter.NoteViewModel;
 import interface_adapter.ViewManagerModel;
@@ -41,20 +42,22 @@ public class NotesViewTests {
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
         allUserFilesDAO = new AllUserFilesDAO();
         DeleteNoteWriterDAO deleteNoteWriterDAO = new DeleteNoteWriterDAO();
-        saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO,allUserFilesDAO, new UploadUserFilePostAPI());
-        TextNote textNote = TextNoteBuilder.createTextNote("TestFile",
+        UploadUserFilePostAPI uploadAPI = APIFactory.uploadAPI();
+        DeleteDataPostAPI deleteAPI = APIFactory.deleteAPI();
+        saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO,allUserFilesDAO, uploadAPI);
+        TextNote textNote = TextNoteFactory.createTextNote("TestFile",
                 LocalDateTime.now(),
                 "TestUser", "Test Data");
-        TextNote textNote1 = TextNoteBuilder.createTextNote("TestFile1",
+        TextNote textNote1 = TextNoteFactory.createTextNote("TestFile1",
                 LocalDateTime.now(),
                 "TestUser", "Test Data1");
-        TextNote textNote2 = TextNoteBuilder.createTextNote("TestFile2",
+        TextNote textNote2 = TextNoteFactory.createTextNote("TestFile2",
                 LocalDateTime.now(),
                 "TestUser", "Test Data2");
         saveNoteDAO.saveNote(textNote1);
         saveNoteDAO.saveNote(textNote2);
         saveNoteDAO.saveNote(textNote);
-        deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO,deleteNoteWriterDAO, new DeleteDataPostAPI());
+        deleteNoteDAO = new DeleteNoteDAO(allUserFilesDAO,deleteNoteWriterDAO, deleteAPI);
         selectNoteDAO = new SelectNoteDAO(allUserFilesDAO);
         ArrayList<String> fileList = new ArrayList<>();
         fileList.add("TestFile");

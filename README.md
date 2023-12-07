@@ -77,6 +77,7 @@ The ultimate goal of this integrated notetaking and drawing application is to pr
 
 
 -JDBC Connector
+
 ![image](https://github.com/Gabe4223-gp/CSC207_Group199/assets/69075231/0080f845-0ea4-4b49-bab9-1e44b7e7cfb4)
 
 

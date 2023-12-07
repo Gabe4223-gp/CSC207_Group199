@@ -22,6 +22,8 @@ Our code is divided into several packages adhering to clean architecture:
 
 ## Tests
 We have implemented the following tests, which account for over 90% of the entire codebase.
+![image](https://github.com/Gabe4223-gp/CSC207_Group199/assets/69075231/0f6a3754-cb17-4db8-b986-82658117b127)
+
 
 
 ## Compiling
@@ -71,11 +73,11 @@ To facilitate sharing with others or archiving purposes the application will pro
 The ultimate goal of this integrated notetaking and drawing application is to provide users with a comprehensive and flexible tool that enhances their productivity, creativity, and organization, empowering them to effectively capture and visualize their ideas and thoughts.
 
 -DropBox API
+![image](https://github.com/Gabe4223-gp/CSC207_Group199/assets/69075231/50403671-4cbc-4f42-a831-f52f26a5dd34)
+
+
 -JDBC Connector
 
--Screenshot in hoppscotch.io
-![image](https://github.com/FionaYYX/CSC207_Group199/assets/69075231/dcf7352c-827c-40b8-8c8d-4307ce0643c8)
+![image](https://github.com/Gabe4223-gp/CSC207_Group199/assets/69075231/0080f845-0ea4-4b49-bab9-1e44b7e7cfb4)
 
--Output in java
-![image](https://github.com/FionaYYX/CSC207_Group199/assets/69075231/b6bff36f-ed2d-4057-a94d-8562c42171c2)
 

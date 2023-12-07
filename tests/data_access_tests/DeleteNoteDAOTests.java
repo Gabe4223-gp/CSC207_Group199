@@ -10,7 +10,7 @@ import data_access.file_read_write.DeleteNoteWriterDAO;
 import data_access.file_read_write.FileAccessDAO;
 import data_access.file_read_write.TextNoteWriterDAO;
 import entity.TextNote;
-import entity.TextNoteFactory;
+import entity.TextNoteBuilder;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +34,7 @@ public class DeleteNoteDAOTests {
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
         DeleteNoteWriterDAO deleteNoteWriterDAO = new DeleteNoteWriterDAO();
         allUserFilesDAO = new AllUserFilesDAO();
-        textNote = TextNoteFactory.createTextNote("TestFile",
+        textNote = TextNoteBuilder.createTextNote("TestFile",
                 LocalDateTime.now(),
                 testUser, "Test Data");
         UploadUserFilePostAPI uploadAPI = APIFactory.uploadAPI();
@@ -51,10 +51,10 @@ public class DeleteNoteDAOTests {
 
     @Test
     public void testDeleteOneFile(){
-        TextNote textNote1 = TextNoteFactory.createTextNote("TestFile1",
+        TextNote textNote1 = TextNoteBuilder.createTextNote("TestFile1",
                 LocalDateTime.now(),
                 testUser, "Test Data1");
-        TextNote textNote2 = TextNoteFactory.createTextNote("TestFile2",
+        TextNote textNote2 = TextNoteBuilder.createTextNote("TestFile2",
                 LocalDateTime.now(),
                 testUser, "Test Data2");
         saveNoteDAO.saveNote(textNote1);

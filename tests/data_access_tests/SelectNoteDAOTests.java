@@ -8,7 +8,7 @@ import data_access.file_read_write.AllUserFilesDAO;
 import data_access.file_read_write.FileAccessDAO;
 import data_access.file_read_write.TextNoteWriterDAO;
 import entity.TextNote;
-import entity.TextNoteFactory;
+import entity.TextNoteBuilder;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -31,7 +31,7 @@ public class SelectNoteDAOTests {
     public void init(){
         allUserFilesDAO = new AllUserFilesDAO();
         TextNoteWriterDAO textNoteWriterDAO = new TextNoteWriterDAO();
-        textNote = TextNoteFactory.createTextNote("TestFile", LocalDateTime.now(),
+        textNote = TextNoteBuilder.createTextNote("TestFile", LocalDateTime.now(),
                 testUser, "TestData");
         UploadUserFilePostAPI uploadAPI = APIFactory.uploadAPI();
         saveNoteDAO = new SaveNoteDAO(textNoteWriterDAO, allUserFilesDAO, uploadAPI);
@@ -46,10 +46,10 @@ public class SelectNoteDAOTests {
 
     @Test
     public void testSelectNoteSuccess(){
-        TextNote textNote1 = TextNoteFactory.createTextNote("TestFile1",
+        TextNote textNote1 = TextNoteBuilder.createTextNote("TestFile1",
                 LocalDateTime.now(),
                 testUser, "TestData1");
-        TextNote textNote2 = TextNoteFactory.createTextNote("TestFile2",
+        TextNote textNote2 = TextNoteBuilder.createTextNote("TestFile2",
                 LocalDateTime.now(),
                 testUser, "TestData2");
         saveNoteDAO.saveNote(textNote1);

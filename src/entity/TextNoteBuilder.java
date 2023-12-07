@@ -2,9 +2,9 @@ package entity;
 
 import java.time.LocalDateTime;
 
-public class TextNoteFactory {
+public class TextNoteBuilder {
 
-    private TextNoteFactory(){}
+    private TextNoteBuilder(){}
     public static TextNote createTextNote(String fileName, LocalDateTime createdTime, String username, String fileTxt){
         return new TextNote(fileName,createdTime,username,fileTxt);
     }

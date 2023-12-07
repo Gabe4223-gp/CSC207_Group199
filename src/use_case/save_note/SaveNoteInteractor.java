@@ -1,7 +1,7 @@
 package use_case.save_note;
 
 import entity.TextNote;
-import entity.TextNoteFactory;
+import entity.TextNoteBuilder;
 import use_case.NoteOutputData;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class SaveNoteInteractor implements SaveNoteInputBoundary{
      */
     @Override
     public void saveFile(SaveNoteInputData saveNoteInputData) {
-        TextNote thisNote = TextNoteFactory.createTextNote(
+        TextNote thisNote = TextNoteBuilder.createTextNote(
                 saveNoteInputData.getFileName(),
                 saveNoteInputData.getCreatedTime(),
                 saveNoteInputData.getUsername(),

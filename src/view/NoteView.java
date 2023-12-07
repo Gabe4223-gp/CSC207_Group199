@@ -22,9 +22,9 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
     final JTextField filenameInput = new JTextField(15);
     private final JTextArea textArea;
     private final JButton save;
-    final JButton newBtn;
-    final JButton deleteBtn;
-    final JButton select;
+    private final JButton newBtn;
+    private final JButton deleteBtn;
+    private final JButton select;
     private JList<String> fileList;
     private final JPanel fileListPanel;
     private final SaveNoteController saveNoteController;
@@ -48,7 +48,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
         newBtn = new JButton(noteViewModel.NEW_BTN_LBL);
         deleteBtn = new JButton(noteViewModel.DELETE_BTN_LBL);
         select = new JButton(noteViewModel.SELECT_BTN_LBL);
-
+        
         /*
         * Bind action listeners to the buttons
         * */
@@ -56,7 +56,7 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(e.getSource().equals(save)){
+                        if(e.getSource().equals(save) && !filenameInput.getText().isEmpty()){
                             NoteState currentNoteState = noteViewModel.getNoteState();
                             currentNoteState.setFilename(filenameInput.getText());
                             currentNoteState.setFileTxt(textArea.getText());
@@ -94,6 +94,17 @@ public class NoteView extends JPanel implements ActionListener, PropertyChangeLi
                         String filename = fileList.getSelectedValue();
                         String username = noteViewModel.getNoteState().getUsername();
                         selectNoteController.selectNote(filename, index, username);
+                    }
+                }
+        );
+        newBtn.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(e.getSource().equals(newBtn)){
+                            filenameInput.setText("");
+                            textArea.setText("");
+                        }
                     }
                 }
         );

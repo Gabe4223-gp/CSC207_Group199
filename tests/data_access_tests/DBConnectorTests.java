@@ -1,15 +1,11 @@
 package data_access_tests;
 
 import data_access.DBConnector;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
 
 import static org.junit.Assert.*;
 

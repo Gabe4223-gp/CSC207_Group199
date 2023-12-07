@@ -22,8 +22,8 @@ Main {
 
 
         JFrame noDrawApp = new JFrame("NoDraw");
-        noDrawApp.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+        noDrawApp.addWindowListener(new WindowEventHandler());
+        noDrawApp.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         CardLayout cardLayout = new CardLayout();
 
         JPanel views = new JPanel(cardLayout);
